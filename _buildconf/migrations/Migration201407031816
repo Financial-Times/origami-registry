@@ -1,0 +1,20 @@
+<?php
+/**
+ * Capture whether components have JS and CSS entry points, and when repo was last discovered
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201407031816 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+ALTER TABLE `components` ADD `datetime_last_discovered` TIMESTAMP  NULL AFTER `host_type`;
+ALTER TABLE `componentversions` ADD `has_js` TINYINT(1)  UNSIGNED  NULL  DEFAULT '0'  AFTER `ci_status`;
+ALTER TABLE `componentversions` ADD `has_css` TINYINT(1)  UNSIGNED  NULL  DEFAULT '0'  AFTER `has_js`;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+	{% if validationerrors %}
+
+		<p>The source of this demo cannot be loaded due to the following errors:</p>
+		<ul>
+		{% for error in validationerrors %}
+			<li><strong>Line {{ error.line }}:</strong> {{ error.message }}</li>
+		{% endfor %}
+		</ul>
+
+	{% else %}
+
+		<form method="post" action="http://jsbin.com" id="frm">
+			<input type="hidden" name="html" value="{{code|replace({"\n": '\n'})}}" />
+		</form>
+		<script>document.getElementById('frm').submit();</script>
+
+	{% endif %}
+</body>
+</html>

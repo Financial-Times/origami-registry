@@ -1,0 +1,19 @@
+<?php
+/**
+ * Add more granular demos
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201405121825 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+ALTER TABLE `demos` ADD `description` TEXT  NULL  AFTER `path`;
+ALTER TABLE `demos` ADD `expanded` TINYINT(1)  UNSIGNED  NOT NULL  DEFAULT '1'  AFTER `description`;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}

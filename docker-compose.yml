@@ -1,0 +1,32 @@
+# This defines the containers for development.  Running `docker-compose build` then
+# `docker-compose up` should bring the application up with an attached database.
+# See the `docker-compose` docs for information regarding usage.
+#
+# Currently we deploy to Heroku, which instead uses the Procfile and environment
+# configured in Heroku UI to set up the app environment
+
+web:
+    build: .
+    working_dir: /app/user
+    volumes:
+        - ./app:/app/user/app
+        - ./public:/app/user/public
+    # For dev, use the start.sh script - this wraps running the migrations
+    # with starting the apache process
+    command: './start.sh'
+    ports:
+        - "3000:3000"
+    # Set up links (with hostnames) to the `db` process.
+    links:
+        - db
+        - db:dbread
+        - db:dbmaster
+    env_file: .env
+
+db:
+    image: mysql
+    # Expose the ports of the database externally so we can connect a
+    # different client to it easily
+    ports:
+        - "3306:3306"
+    env_file: .env

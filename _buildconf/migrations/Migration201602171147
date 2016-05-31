@@ -1,0 +1,25 @@
+<?php
+/**
+ * Add a recent commit count to each component to enable activity-based sorting
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201602171147 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+ALTER TABLE `componentversions` ADD `bundlesize_js` INT(10)  UNSIGNED  NULL  DEFAULT NULL  AFTER `has_css`;
+ALTER TABLE `componentversions` ADD `bundlesize_css` INT(10)  UNSIGNED  NULL  DEFAULT NULL  AFTER `bundlesize_js`;
+ALTER TABLE `demos` ADD `name` VARCHAR(50)  NULL  DEFAULT NULL  AFTER `title`;
+ALTER TABLE `demos` ADD UNIQUE INDEX `name` (`name`, `componentversion_id`);
+
+REPLACE INTO `meta` (`meta_key`, `meta_value`, `updated`)
+VALUES
+    ('module_sources', '{\n    \"sources\": [\n        {\n            \"name\": \"Financial-Times at github.com\",\n            \"healthCheck\": \"https://github.com/Financial-Times/o-colors.git\",\n            \"templates\": [\n                \"https://github.com/Financial-Times/{{package}}.git\",\n                \"https://github.com/ftlabs/{{package}}.git\"\n            ],\n            \"api\": {\n                \"host\": \"api.github.com\",\n                \"users\": [\n                    \"ftlabs\",\n                    \"Financial-Times\"\n                ],\n                \"type\": \"GitHub\"\n            }\n        }\n    ]\n}', '2015-09-02 20:05:22');
+
+SQL;
+		$this->executeSql($sql);
+	}
+}

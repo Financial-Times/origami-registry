@@ -1,0 +1,8 @@
+{
+  "name": "Origami Registry",
+  "description": "The Origami component and service registry",
+  "image": "heroku/php",
+  "addons": [
+    "cleardb:punch"
+  ]
+}

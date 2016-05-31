@@ -1,0 +1,18 @@
+<?php
+/**
+ * Add meta table for recording status info, mainly for health check
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201403191749 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+ALTER TABLE `componentversions` ADD `ci_status` VARCHAR(10)  NULL  DEFAULT NULL  AFTER `support_status`;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}

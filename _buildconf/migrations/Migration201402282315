@@ -1,0 +1,18 @@
+<?php
+/**
+ * Fix too-short support field
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201402282315 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+ALTER TABLE `componentversions` CHANGE `support` `support` VARCHAR(255)  CHARACTER SET utf8  COLLATE utf8_unicode_ci  NULL  DEFAULT NULL;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}
