@@ -1,0 +1,49 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Origami Registry update daemon
+ *
+ * @codingstandard ftlabs-phpcs
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+require_once __DIR__ . '/../global.php';
+
+$app = new ServicesContainer();
+Model::useDI($app);
+
+use \Origami\RepositoryDiscovery;
+use \Psr\Log\LogLevel;
+
+
+$app->db_read->setReconnectOnFail();
+$app->db_write->setReconnectOnFail();
+
+$app->logger->setHandlerMinSeverity('stop', LogLevel::EMERGENCY);
+
+// Clean up any previous scripts that terminated without finishing
+$app->db_write->query('DELETE FROM meta WHERE meta_key=%s and updated < (NOW() - INTERVAL 1 DAY)', 'cron_running_host');
+
+$module_sources = $app->db_read->querySingle("SELECT meta_value FROM meta WHERE meta_key=%s", 'module_sources');
+$module_sources = @json_decode($module_sources);
+if (!$module_sources) {
+	$app->logger->notice('Unable to decode module sources JSON.  Check module_sources meta value in DB', array('json_last_error'=>json_last_error()));
+} else {
+
+	// Run no more than one discovery process at a time, across all servers on the same environment
+	$blocker = $app->db_write->query('INSERT IGNORE INTO meta SET meta_value=%s, meta_key=%s, updated=NOW()', trim(`hostname`), 'cron_running_host');
+	if ($blocker->getAffectedRows()) {
+		$app->db_write->query('REPLACE INTO meta SET meta_value=UNIX_TIMESTAMP(), meta_key=%s, updated=NOW()', 'cron_last_start');
+
+		try {
+			RepositoryDiscovery::search($module_sources, $app);
+			$app->db_write->query('REPLACE INTO meta SET meta_value=UNIX_TIMESTAMP(), meta_key=%s, updated=NOW()', 'cron_last_complete');
+		} catch (\FTLabs\MySqlQueryException $e) {
+			$app->logger->alert($e->getMessage());
+		}
+
+		$app->db_write->query('DELETE FROM meta WHERE meta_key=%s', 'cron_running_host');
+    } else {
+        $app->logger->notice("Discovery script is already running");
+    }
+}

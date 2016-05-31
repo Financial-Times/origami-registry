@@ -1,0 +1,31 @@
+<?php
+/**
+ * Base Migration, creates the database schema
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201402212330 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+CREATE TABLE `demos` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `componentversion_id` int(11) unsigned DEFAULT NULL,
+  `title` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`,`componentversion_id`),
+  KEY `componentversion_id` (`componentversion_id`),
+  CONSTRAINT `demos_ibfk_1` FOREIGN KEY (`componentversion_id`) REFERENCES `componentversions` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `components` DROP `support_status`;
+
+ALTER TABLE `componentversions` ADD `support_status` VARCHAR(30)  NULL  DEFAULT NULL  AFTER `readme_gfm`;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}

@@ -1,0 +1,23 @@
+<?php
+/**
+ * Add meta table for recording status info, mainly for health check
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201403171910 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+CREATE TABLE `meta` (
+  `meta_key` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `meta_value` text COLLATE utf8_unicode_ci,
+  `updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`meta_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}

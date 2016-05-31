@@ -1,0 +1,33 @@
+{
+	"name": "ftlabs/origami-registry",
+	"repositories": [
+		{"type": "vcs", "url": "https://github.com/triblondon/Pimple.git"},
+		{"type": "composer", "url": "http://composer.labs.ft.com"}
+	],
+	"require": {
+		"ftlabs/migrations": "dev-master",
+		"ftlabs/exception": "1.*",
+		"ftlabs/logger": "~1.10",
+		"ftlabs/http": "1.*",
+		"ftlabs/mysql": "~5.4.1",
+		"ftlabs/php-router": "dev-master",
+		"erusev/parsedown": "*",
+		"pimple/pimple": "dev-master",
+		"twig/twig": "1.*",
+		"masterminds/html5": "2",
+		"vierbergenlars/php-semver": "^3.0.0",
+		"ext-mbstring": "*",
+		"beberlei/metrics": "^2.0"
+	},
+	"require-dev": {
+		"heroku/heroku-buildpack-php": "*"
+	},
+	"autoload": {
+		"psr-0": {
+			"": "app/classes/"
+		}
+	},
+	"config": {
+		"secure-http": false
+	}
+}

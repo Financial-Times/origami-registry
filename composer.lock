@@ -1,0 +1,622 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "2b58732dbdbf589b1f41e2997be5b669",
+    "content-hash": "4ca18988c2fb03b0ac48e13e0e209195",
+    "packages": [
+        {
+            "name": "beberlei/metrics",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beberlei/metrics.git",
+                "reference": "f3204c0cba1f409c41eefc21fecd084b24e9ccd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beberlei/metrics/zipball/f3204c0cba1f409c41eefc21fecd084b24e9ccd4",
+                "reference": "f3204c0cba1f409c41eefc21fecd084b24e9ccd4",
+                "shasum": ""
+            },
+            "require": {
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "corley/influxdb-sdk": "^0.5.1",
+                "doctrine/dbal": "~2.0",
+                "kriswallsmith/buzz": "*",
+                "okitsu/zabbix-sender": "*@dev",
+                "symfony/config": "~2.3",
+                "symfony/dependency-injection": "~2.3",
+                "symfony/http-kernel": "~2.3"
+            },
+            "suggest": {
+                "corley/influxdb-sdk": "For InfluxDB integration",
+                "kriswallsmith/buzz": "For Librato integration",
+                "okitsu/zabbix-sender": "For zabbix integration"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Beberlei\\Metrics\\": "src/Beberlei/Metrics",
+                    "Beberlei\\Bundle\\MetricsBundle\\": "src/Beberlei/Bundle/MetricsBundle"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Grégoire Pineau",
+                    "email": "lyrixx@lyrixx.info",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Simple library to talk to metrics collector services.",
+            "keywords": [
+                "Metrics",
+                "logging"
+            ],
+            "time": "2015-11-05 12:36:49"
+        },
+        {
+            "name": "erusev/parsedown",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7",
+                "reference": "3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2015-10-04 16:44:32"
+        },
+        {
+            "name": "ftlabs/exception",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "http://git.svc.ft.com/scm/labsmisc/exception.git",
+                "reference": "e8895c6bdf3722bf2fb3f5f307b0b7f707810906"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FTLabs": "src/"
+                }
+            },
+            "description": "A namespaced Exception with context support",
+            "time": "2014-04-25 15:18:57"
+        },
+        {
+            "name": "ftlabs/http",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "http://git.svc.ft.com/scm/hh/http.git",
+                "reference": "9218ed40a8e3671a51d15154982ee256858d681e"
+            },
+            "require": {
+                "ftlabs/exception": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FTLabs": "src/"
+                }
+            },
+            "description": "FT Labs helper for sending HTTP requests and receiving responses",
+            "time": "2014-03-07 16:39:07"
+        },
+        {
+            "name": "ftlabs/logger",
+            "version": "1.95",
+            "source": {
+                "type": "git",
+                "url": "http://git.svc.ft.com/scm/log/logger.git",
+                "reference": "0d988d84e12b2e4b8f7360cb65ec752178fe1cc6"
+            },
+            "require": {
+                "ftlabs/exception": "~1.1",
+                "psr/log": "~1.0",
+                "raven/raven": "~0.12.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Testing": "test/",
+                    "FTLabs": "src/"
+                }
+            },
+            "description": "PHP Logging interface that conforms to PSR-3 standard interface",
+            "time": "2016-01-29 14:14:23"
+        },
+        {
+            "name": "ftlabs/migrations",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "http://git.svc.ft.com/scm/dep/migrations.git",
+                "reference": "e7859e6ddf6cb6ed912fa2c71943638c0b8843ec"
+            },
+            "bin": [
+                "bin/DbMigrate"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FTLabs": "src/"
+                }
+            },
+            "license": [
+                "Proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Sam",
+                    "email": "samuel.giles@ft.com"
+                }
+            ],
+            "description": "SQL Database migrations for PHP",
+            "time": "2014-05-28 14:24:56"
+        },
+        {
+            "name": "ftlabs/mysql",
+            "version": "5.4.1",
+            "source": {
+                "type": "git",
+                "url": "http://git.svc.ft.com/scm/labsmisc/mysql.git",
+                "reference": "b3abc42e5e7c6f400100c810283d11ba86de7681"
+            },
+            "require": {
+                "ftlabs/exception": "~1.2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FTLabs": "src/"
+                }
+            },
+            "description": "FT Labs wrapper for using MySQL in PHP",
+            "time": "2016-01-04 14:28:05"
+        },
+        {
+            "name": "ftlabs/php-router",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "http://git.svc.ft.com/scm/labsmisc/php-router.git",
+                "reference": "f0751a0954f04231c82cf6cc715289a7605a4498"
+            },
+            "require": {
+                "ftlabs/exception": "~1.2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FTLabs\\Routing": "src/"
+                }
+            },
+            "description": "FT Labs HTTP router",
+            "time": "2014-06-20 22:14:42"
+        },
+        {
+            "name": "masterminds/html5",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Masterminds/html5-php.git",
+                "reference": "2cad9c173f14eb390f78100dd74ef005f67e1fa5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/2cad9c173f14eb390f78100dd74ef005f67e1fa5",
+                "reference": "2cad9c173f14eb390f78100dd74ef005f67e1fa5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-libxml": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": "4.*",
+                "satooshi/php-coveralls": "0.6.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Masterminds\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Butcher",
+                    "email": "technosophos@gmail.com"
+                },
+                {
+                    "name": "Asmir Mustafic",
+                    "email": "goetas@gmail.com"
+                },
+                {
+                    "name": "Matt Farina",
+                    "email": "matt@mattfarina.com"
+                }
+            ],
+            "description": "An HTML5 parser and serializer.",
+            "homepage": "http://masterminds.github.io/html5-php",
+            "keywords": [
+                "HTML5",
+                "dom",
+                "html",
+                "parser",
+                "querypath",
+                "serializer",
+                "xml"
+            ],
+            "time": "2014-07-28 06:21:18"
+        },
+        {
+            "name": "pimple/pimple",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/triblondon/Pimple.git",
+                "reference": "ade84d6ef15e33c2bcc0bfd26bf0fa865bbd611e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/triblondon/Pimple/zipball/ade84d6ef15e33c2bcc0bfd26bf0fa865bbd611e",
+                "reference": "ade84d6ef15e33c2bcc0bfd26bf0fa865bbd611e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pimple": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
+            "homepage": "http://pimple.sensiolabs.org",
+            "keywords": [
+                "container",
+                "dependency injection"
+            ],
+            "support": {
+                "source": "https://github.com/triblondon/Pimple/tree/master"
+            },
+            "time": "2014-03-07 15:01:54"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "raven/raven",
+            "version": "0.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getsentry/raven-php.git",
+                "reference": "b325984c792ff89f985b73da9a3ad8ed8b520bca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/getsentry/raven-php/zipball/b325984c792ff89f985b73da9a3ad8ed8b520bca",
+                "reference": "b325984c792ff89f985b73da9a3ad8ed8b520bca",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2.4"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.8.0",
+                "phpunit/phpunit": "^4.6.6"
+            },
+            "bin": [
+                "bin/raven"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.12.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Raven_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "David Cramer",
+                    "email": "dcramer@gmail.com"
+                }
+            ],
+            "description": "A PHP client for Sentry (http://getsentry.com)",
+            "homepage": "http://getsentry.com",
+            "keywords": [
+                "log",
+                "logging"
+            ],
+            "time": "2015-08-25 22:38:46"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.24.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.7"
+            },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.24-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2016-01-25 21:22:18"
+        },
+        {
+            "name": "vierbergenlars/php-semver",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vierbergenlars/php-semver.git",
+                "reference": "516bb3061577e60e9420cbecc479362d3ad8c7f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vierbergenlars/php-semver/zipball/516bb3061577e60e9420cbecc479362d3ad8c7f1",
+                "reference": "516bb3061577e60e9420cbecc479362d3ad8c7f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "1.1.*"
+            },
+            "bin": [
+                "bin/semver",
+                "bin/update-versions"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "vierbergenlars\\SemVer\\": "src/",
+                    "vierbergenlars\\LibJs\\": "src/"
+                },
+                "classmap": [
+                    "src/vierbergenlars/SemVer/internal.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lars Vierbergen",
+                    "email": "vierbergenlars@gmail.com"
+                }
+            ],
+            "description": "The Semantic Versioner for PHP",
+            "keywords": [
+                "semantic",
+                "semver",
+                "versioning"
+            ],
+            "time": "2015-05-02 19:28:54"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "heroku/heroku-buildpack-php",
+            "version": "v99",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heroku/heroku-buildpack-php.git",
+                "reference": "9fa233a21466e9b0364ce7436a56e52aa4a24fbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/9fa233a21466e9b0364ce7436a56e52aa4a24fbd",
+                "reference": "9fa233a21466e9b0364ce7436a56e52aa4a24fbd",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/heroku-hhvm-apache2",
+                "bin/heroku-hhvm-nginx",
+                "bin/heroku-php-apache2",
+                "bin/heroku-php-nginx"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Zuelke",
+                    "email": "dz@heroku.com"
+                }
+            ],
+            "description": "Toolkit for starting a PHP application locally, with or without foreman, using the same config for PHP/HHVM and Apache2/Nginx as on Heroku",
+            "homepage": "http://github.com/heroku/heroku-buildpack-php",
+            "keywords": [
+                "apache",
+                "apache2",
+                "foreman",
+                "heroku",
+                "hhvm",
+                "nginx",
+                "php"
+            ],
+            "time": "2016-03-23 17:39:59"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "ftlabs/migrations": 20,
+        "ftlabs/php-router": 20,
+        "pimple/pimple": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "ext-mbstring": "*"
+    },
+    "platform-dev": []
+}

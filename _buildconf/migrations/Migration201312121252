@@ -1,0 +1,61 @@
+<?php
+/**
+ * Base Migration, creates the database schema
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201312121252 extends Migrate {
+
+	public function preDeployUp() {
+		$this->createDatabase();
+
+		$sql = <<<'SQL'
+
+CREATE TABLE IF NOT EXISTS `components` (
+	`id` INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`module_name` VARCHAR(128) NOT NULL,
+	`is_origami` BOOLEAN NOT NULL DEFAULT FALSE,
+	`git_repo_url` VARCHAR(128) NOT NULL,
+	`datetime_created` TIMESTAMP NULL DEFAULT NULL,
+	`star_count` INTEGER(10) UNSIGNED NULL DEFAULT NULL,
+	`support_status` ENUM('active', 'maintained', 'deprecated', 'dead', 'not implemented') NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY (`module_name`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+DEFAULT COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `componentversions` (
+	`id` INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`component_id` INTEGER(10) UNSIGNED NOT NULL,
+	`tag_name` VARCHAR(16) NOT NULL,
+	`datetime_last_cached` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+	`is_valid` BOOLEAN NULL DEFAULT NULL,
+	`description` VARCHAR(512) NULL DEFAULT NULL,
+	`origami_type` ENUM('module', 'service') NULL DEFAULT NULL,
+	`origami_version` VARCHAR(16) NULL DEFAULT NULL,
+	`support` VARCHAR(32) NULL DEFAULT NULL,
+	`service_url` VARCHAR(64) NULL DEFAULT NULL,
+	`readme_gfm` TEXT NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`component_id`) REFERENCES `components`(`id`),
+	UNIQUE KEY (`component_id`, `tag_name`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+DEFAULT COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `componentdependencies` (
+	`parent_version_id` INTEGER(10) UNSIGNED NOT NULL,
+	`child_component_name` VARCHAR(32) NOT NULL,
+	`child_component_target` VARCHAR(128) NOT NULL,
+	PRIMARY KEY(`parent_version_id`, `child_component_name`),
+	FOREIGN KEY (`parent_version_id`) REFERENCES `componentversions`(`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+DEFAULT COLLATE = utf8_general_ci;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}

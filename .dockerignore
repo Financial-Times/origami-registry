@@ -1,0 +1,6 @@
+.git
+.env
+sample.env
+vendor
+build
+.DS_Store

@@ -1,0 +1,9 @@
+{% extends 'page.html' %}
+{% set title = '404: Page not found' %}
+
+{% block content %}
+<div class="o-techdocs-content">
+	<h1>Not found</h1>
+	<p>Sorry, the request URI <strong>{{ SERVER.REQUEST_URI }}</strong> does not match a known resource on this site.</p>
+</div>
+{% endblock %}

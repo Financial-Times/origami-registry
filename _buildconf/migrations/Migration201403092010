@@ -1,0 +1,21 @@
+<?php
+/**
+ * Fix too-short support field
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201403092010 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+ALTER TABLE `components` DROP `star_count`;
+ALTER TABLE `components` DROP `datetime_created`;
+ALTER TABLE `components` ADD `host_type` VARCHAR(30)  NOT NULL  DEFAULT ''  AFTER `git_repo_url`;
+ALTER TABLE `componentversions` ADD `datetime_created` TIMESTAMP  NULL  DEFAULT NULL  AFTER `datetime_last_cached`;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}
