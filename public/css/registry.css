@@ -186,6 +186,10 @@ body {
 	display: none;
 	margin-bottom: 1.5em;
 }
+
+.demo-source-container {
+	max-width: 100%;
+}
 .demo-container.visible {
 	display:block;
 }
@@ -306,6 +310,7 @@ body {
 
 
 .detail-section {
+	max-width: 100%;
 	clear: both;
 	margin-top: 40px;
 	margin-bottom: 40px;
@@ -383,4 +388,104 @@ body {
 }
 .demo-source:hover .auto-select-action {
 	display: block;
+}
+
+
+
+.component-navigation {
+	list-style: none;
+	padding-left: 0;
+}
+
+.component-navigation__group {
+
+}
+
+.component-navigation__list {
+	list-style: none;
+	padding-left: 0;
+}
+
+h3.component-navigation__title {
+	margin: 10px 0 5px;
+	padding: 8px 20px;
+	font-size: 16px;
+	background: #fff1e0;
+	color: #333;
+}
+
+.component-navigation__item {
+}
+
+.component-navigation__item a {
+	display: block;
+	padding: 5px 20px;
+	text-decoration: none;
+}
+
+.component-navigation__item a:hover {
+	background-color: #fff1e0;
+	color: #333;
+}
+
+
+.o-techdocs .o-header {
+	margin-bottom:0;
+}
+
+.component-side-nav {
+	flex: 0 0 200px;
+	width: 200px;
+	margin-right: 20px;
+	padding: 10px 0;
+	background-color: #333;
+	color: #fff;
+}
+
+.component-side-nav a {
+	color: #fff;
+}
+
+.component-main {
+	flex: 1 0 auto;
+	padding-top: 50px;
+	margin-right: 30px;
+}
+
+.component-info {
+	flex: 0 0 350px;
+	margin-right: 40px;
+}
+
+.o-techdocs-new-layout {
+	width: 100%;
+}
+
+.component-header {
+	float: left;
+}
+
+.component-description {
+	clear: both;
+	padding-top: 10px;
+}
+
+.o-techdocs-content .github-button {
+	float: right;
+}
+
+.o-techdocs-content .github-button i {
+	margin-right: 10px;
+}
+
+.hide-me {
+	display: none;
+}
+
+.grid-row {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
 }
