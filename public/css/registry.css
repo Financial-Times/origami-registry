@@ -138,12 +138,21 @@ body {
 .component-build-metadata {
 	text-align: right;
 }
+
+.component-info-details {
+	clear: both;
+}
+
+.version-title {
+	float: left;
+	font-size: 16px;
+	margin: 5px 10px 20px 0;
+}
+
 .version-select {
 	width: 120px;
+	float: left;
 	vertical-align: middle;
-	margin-left: 10px;
-	padding-top: 8px;
-	font-size: 20px;
 }
 .unstable-warning {
 	margin-top: 20px !important;
@@ -281,7 +290,7 @@ body {
 	background-image: linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.1)), linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.1));
 }
 .demo-embed-code {
-	width: 400px;
+	width: 100%;
 	height: 160px;
 	font-family: monospace;
 	font-size: 13px;
@@ -434,9 +443,12 @@ h3.component-navigation__title {
 }
 
 .component-side-nav {
-	flex: 0 0 200px;
-	width: 200px;
-	margin-right: 20px;
+	position:absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 15%;
+	max-width: 250px;
 	padding: 10px 0;
 	background-color: #333;
 	color: #fff;
@@ -447,18 +459,29 @@ h3.component-navigation__title {
 }
 
 .component-main {
-	flex: 1 0 auto;
-	padding-top: 50px;
-	margin-right: 30px;
+	float: left;
+	width: 65%;
+	margin-left: 15%;
+	padding: 50px 30px 0;
 }
 
 .component-info {
-	flex: 0 0 350px;
-	margin-right: 40px;
+	float: left;
+	width: 20%;
+	max-width: 350px;
+	padding-right: 30px;
 }
 
 .o-techdocs-new-layout {
 	width: 100%;
+	box-sizing: border-box;
+
+}
+
+.o-techdocs-new-layout *,
+.o-techdocs-new-layout *:after,
+.o-techdocs-new-layout *:before {
+	box-sizing: inherit;
 }
 
 .component-header {
@@ -483,9 +506,7 @@ h3.component-navigation__title {
 }
 
 .grid-row {
+	position: relative;
 	width: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-between;
+	overflow: hidden;
 }
