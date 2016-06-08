@@ -16,6 +16,9 @@ $(function() {
 					return filterMatch;
 				}
 			});
+
+			console.log(row.find('[data-module-name--js]').attr('data-name'));
+
 			if (filterMatch && regex.test(row.find('[data-module-name--js]').attr('data-name'))) {
 				if ($('#filter').val()) {
 					row.find('[data-module-name--js]').html(
