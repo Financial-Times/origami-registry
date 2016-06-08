@@ -41,7 +41,7 @@ $(function() {
 
 $(function() {
 	$('iframe').on('load', function() {
-		$(this).closest('.demo-wrapper').find('.demo-title').removeClass('activity');
+		$(this).closest('.demo-wrapper').find('.activity').removeClass('activity');
 	});
 });
 

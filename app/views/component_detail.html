@@ -81,7 +81,7 @@
 					{% for demo in demos %}
 
 						<div class="demo-wrapper">
-							<h2 class="demo-title activity">{{ demo.name }}</h2>
+							<h2 class="demo-title"><span class="activity">{{ demo.name }}</span> <a href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" class="jsbin-link">Open in JSBin <i class="fa fa-external-link"></i></a></h2>
 
 							{% if demo.description %}<div class="demo-subtitle">{{ demo.description }}</div>{% endif %}
 
