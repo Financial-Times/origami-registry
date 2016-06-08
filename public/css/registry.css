@@ -141,6 +141,26 @@ body {
 
 .component-info-details {
 	clear: both;
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+.component-info-details dt,
+.component-info-details dd {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+.component-info-details dd {
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.component-info-details dd .bundlesize_js,
+.component-info-details dd .bundlesize_css {
+	display: block;
 }
 
 .version-title {
@@ -321,8 +341,6 @@ body {
 .detail-section {
 	max-width: 100%;
 	clear: both;
-	margin-top: 40px;
-	margin-bottom: 40px;
 }
 .detail-modulelist__item + .detail-modulelist__item:before {
 	content: ', ';
@@ -419,7 +437,7 @@ h3.component-navigation__title {
 	margin: 10px 0 5px;
 	padding: 8px 20px;
 	font-size: 16px;
-	background: #fff1e0;
+	background: #a9cadc;
 	color: #333;
 }
 
@@ -433,7 +451,7 @@ h3.component-navigation__title {
 }
 
 .component-navigation__item a:hover {
-	background-color: #fff1e0;
+	background-color: #a9cadc;
 	color: #333;
 }
 
@@ -460,14 +478,14 @@ h3.component-navigation__title {
 
 .component-main {
 	float: left;
-	width: 65%;
+	width: 60%;
 	margin-left: 15%;
 	padding: 50px 30px 0;
 }
 
 .component-info {
 	float: left;
-	width: 20%;
+	width: 25%;
 	max-width: 350px;
 	padding-right: 30px;
 }
@@ -525,4 +543,24 @@ h3.component-navigation__title {
 .doc-links li a {
 	color: #fff;
 	text-transform: none;
+}
+
+
+.detail-comp-info {
+	margin-top: 110px;
+	background-color: #fff1e0;
+	padding: 15px;
+	border-radius: 6px;
+}
+
+pre.quickstart-tag {
+	font-size: 16px;
+}
+
+.o-overlay__content {
+	max-width: 600px;
+}
+
+.o-techdocs__aside--toggleable h4 {
+	margin-top: 0;
 }

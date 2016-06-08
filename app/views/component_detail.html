@@ -113,16 +113,6 @@
 					{% endfor %}
 				</section>
 			{% endif %}
-
-			<!-- <aside class="o-techdocs__aside--toggleable" id="note-buildservice-setup">
-				<h4>Loading assets using the build service</h4>
-				<p>The Origami build service is designed to efficiently bundle JavaScript and CSS resources and deliver them into your page.  To make best use of this, you should have <strong>only one</strong> (Origami related) <code>&lt;script&gt;</code> and one <code>&lt;link&gt;</code> tag in your page, even if you want to load more than one component.  You can request all the components you want in a single request, like this:</p>
-				<pre><code class="lang-html">&lt;link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=module@version,module@version,module@version" />
-&lt;script src="https://build.origami.ft.com/v2/bundles/js?modules=module@version,module@version,module@version">&lt;/script></code></pre>
-				<p>Read the <a href="http://origami.ft.com/docs/developer-guide/using-modules/#core-vs-enhanced-experience">developer guide</a> for information on where to place these tags in your source code (if in a hurry: link goes in <code>&lt;head&gt;</code>, script goes just before <code>&lt;/body&gt;</code>), and how to use a <em>cuts the mustard</em> test to make the script load only in browsers that are compatible with our enhanced experience.</p>
-				<p>Regardless of whether your site is loaded over HTTP or HTTPS, we recommend using HTTPS to load Origami resources.</p>
-				<p>For full build service options see the <a href="http://origami.ft.com/docs/developer-guide/build-service/#api-reference">build service API docs</a></p>
-			</aside> -->
 		</div>
 
 		<div class="component-info">
@@ -133,37 +123,38 @@
 				</section>
 			{% endif %}
 
+			<section class="detail-section detail-comp-info" id="section-info">
 
-				<section class="detail-section" id="section-info">
-					<h2>Component information</h2>
+				<div class="version-title">Version:</div>
+				<select class="o-forms-select version-select">
+					{% for version in versions %}
+						<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
+					{% endfor %}
+					<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
+				</select>
 
-					<div class="version-title">Current version</div>
-					<select class="o-forms-select version-select">
-						{% for version in versions %}
-							<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
-						{% endfor %}
-						<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
-					</select>
+				<dl class="component-info-details">
+					<dt>Latest stable version:</dt>
+					<dd><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</dd>
 
-					<div class="component-info-details">
-						<p>Latest stable version: <span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</p>
+					<dt>Status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more</a>):</dt>
+					<dd><span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span>  (as of <span class="version-number">{{support_status_version}}</span>)</dd>
 
-						<p>Support status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more</a>): <span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span> (as of <span class="version-number">{{support_status_version}}</span>)</p>
-
-						{% if origami_type == 'service' %}
-							<p>Live URL: <a href="{{service_url}}">{{service_url}}</a></p>
-						{% else %}
-							<p>Bundle sizes:
-								{% if bundlesize_js %}
-									{{bundlesize_js|bytes}} JavaScript
-								{% endif %}
-								{% if bundlesize_css %}
-									{{bundlesize_css|bytes}} CSS
-								{% endif %}
-							</p>
-						{% endif %}
-					</div>
-				</section>
+					{% if origami_type == 'service' %}
+						<p>Live URL: <a href="{{service_url}}">{{service_url}}</a></p>
+					{% else %}
+						<dt>Bundle sizes:</dt>
+						<dd>
+							{% if bundlesize_js %}
+								<span class="bundlesize_js">{{bundlesize_js|bytes}} JavaScript</span>
+							{% endif %}
+							{% if bundlesize_css %}
+								<span class="bundlesize_css">{{bundlesize_css|bytes}} CSS</span>
+							{% endif %}
+						</dd>
+					{% endif %}
+				</dl>
+			</section>
 
 			{% if origami_type == 'module' and (has_js or has_css) %}
 			<section class="detail-section" id="section-usage">
@@ -176,18 +167,28 @@
 					{% if has_js and has_css %}<code>script</code> and <code>link</code> tags
 					{% elseif has_js %}<code>script</code> tag
 					{% elseif has_css %}<code>link</code> tag{% endif %}
-					(<a href="#note-buildservice-setup">how do I do that?</a>):</p>
-					<pre><code>{{module_name}}@^{{tag_name}}</code></pre>
+					(<a class="o-overlay-trigger" data-o-overlay-id="overlay" data-o-overlay-src="#how-do-i-build-service" data-o-overlay-heading-shaded="true" data-o-overlay-heading-title="Using the Build Service" data-o-overlay-zindex="20" aria-pressed="false" aria-haspopup="true" href="#how-do-i-build-service">how do I do that?</a>):</p>
+					<pre class="quickstart-tag"><code>{{module_name}}@^{{tag_name}}</code></pre>
 				</div>
 
 				<div id="quickstart-manual">
 					<h3>Using a manual build process</h3>
 
 					<p>Add this dependency to your <code>bower.json</code> file during <strong>step 4</strong> of the <a href="http://origami.ft.com/docs/developer-guide/building-modules/">standard Origami build process</a>:</p>
-					<pre><code class="lang-json">"{{module_name}}": "^{{tag_name}}"</code></pre>
+					<pre class="quickstart-tag"><code class="lang-json">"{{module_name}}": "^{{tag_name}}"</code></pre>
 				</div>
 				<p>The tag includes <code>^</code> which enables <em>automatic upgrades</em> via <a href="http://semver.org">Semver</a>.  Use the <a href='http://semver.npmjs.com/'>semver calculator</a> to see what versions are covered by your tag.</p>
 			</section>
+
+			<aside class="o-techdocs__aside--toggleable" id="how-do-i-build-service">
+				<h4>Loading assets using the build service</h4>
+				<p>The Origami build service is designed to efficiently bundle JavaScript and CSS resources and deliver them into your page.  To make best use of this, you should have <strong>only one</strong> (Origami related) <code>&lt;script&gt;</code> and one <code>&lt;link&gt;</code> tag in your page, even if you want to load more than one component.  You can request all the components you want in a single request, like this:</p>
+				<pre><code class="lang-html">&lt;link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=module@version,module@version,module@version" />
+&lt;script src="https://build.origami.ft.com/v2/bundles/js?modules=module@version,module@version,module@version">&lt;/script></code></pre>
+				<p>Read the <a href="http://origami.ft.com/docs/developer-guide/using-modules/#core-vs-enhanced-experience">developer guide</a> for information on where to place these tags in your source code (if in a hurry: link goes in <code>&lt;head&gt;</code>, script goes just before <code>&lt;/body&gt;</code>), and how to use a <em>cuts the mustard</em> test to make the script load only in browsers that are compatible with our enhanced experience.</p>
+				<p>Regardless of whether your site is loaded over HTTP or HTTPS, we recommend using HTTPS to load Origami resources.</p>
+				<p>For full build service options see the <a href="http://origami.ft.com/docs/developer-guide/build-service/#api-reference">build service API docs</a></p>
+			</aside>
 			{% endif %}
 		</div>
 
