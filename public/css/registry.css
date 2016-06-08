@@ -63,6 +63,7 @@ body {
 /* Filter bar */
 
 .filter-bar {
+	margin-top:40px;
 	margin-bottom: 15px;
 }
 .filter-bar .o-forms-group {
@@ -473,6 +474,10 @@ h3.component-navigation__title {
 	color: #fff;
 }
 
+.component-side-nav .filter-bar {
+	margin-top: 0;
+}
+
 .component-side-nav a {
 	color: #fff;
 }
@@ -575,4 +580,21 @@ pre.quickstart-tag {
 
 .jsbin-link i {
 	margin-left: 5px;
+}
+
+
+.component-list-container {
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.component-filter-checkboxes {
+	float: left;
+	width: 50%;
+}
+
+
+.o-techdocs-content {
+	clear: left;
 }
