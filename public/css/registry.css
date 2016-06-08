@@ -133,7 +133,7 @@ body {
 /* Component detail header */
 
 .component-header {
-	margin: 0;
+	margin: 0 0 20px;
 }
 .component-build-metadata {
 	text-align: right;
@@ -509,4 +509,20 @@ h3.component-navigation__title {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
+}
+
+.doc-links {
+	clear: both;
+	list-style: none;
+	padding-left: 0;
+}
+
+.doc-links li {
+	display: inline;
+	margin-right: 5px;
+}
+
+.doc-links li a {
+	color: #fff;
+	text-transform: none;
 }
