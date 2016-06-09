@@ -4,48 +4,8 @@
 <!-- Component ID: {{component_id}}, version ID: {{id}} -->
 <div class="o-techdocs-content">
 	<div class="grid-row">
-		<nav class="component-side-nav">
-			<form action="" class="filter-bar">
-				<div class="o-forms-group">
-					<label for="module-search" class="hide-me">Seach modules</label>
-					<input type="text" class="o-forms-text" id="filter" placeholder="Type to filter by name">
-				</div>
-			</form>
-
-			<ul class="component-navigation">
-				<li class="component-navigation__group">
-					<h3 class="component-navigation__title searchable">Primitives</h3>
-					<ul class="component-navigation__list">
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-colors" href="/components/o-colors">o-colors</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-fonts" href="/components/o-fonts">o-fonts</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-grid" href="/components/o-grid">o-grid</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-typography" href="/components/o-typography">o-typography</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-icons" href="/components/o-icons">o-icons</a></li>
-					</ul>
-				</li>
-				<li class="component-navigation__group">
-					<h3 class="component-navigation__title searchable">Components</h3>
-					<ul class="component-navigation__list">
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-big-number" href="/components/o-big-number">o-big-number</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-buttons" href="/components/o-buttons">o-buttons</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-card" href="/components/o-card">o-card</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-gallery" href="/components/o-gallery">o-gallery</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-header" href="/components/o-header">o-header</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-labels" href="/components/o-labels">o-labels</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-overlay" href="/components/o-overlay">o-overlay</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-tabs" href="/components/o-tabs">o-tabs</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-tables" href="/components/o-tables">o-tables</a></li>
-					</ul>
-				</li>
-				<li class="component-navigation__group">
-					<h3 class="component-navigation__title searchable">Helpers</h3>
-					<ul class="component-navigation__list">
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-date" href="/components/o-date">o-date</a></li>
-						<li class="component-navigation__item searchable"><a data-module-name--js data-name="o-errors" href="/components/o-errors">o-errors</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
+		<!-- Nav -->
+		{% include "component-nav.html" %}
 
 		<div class="component-main">
 			<h1 class="component-header">{{module_name}}</h1>
