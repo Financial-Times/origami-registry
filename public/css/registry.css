@@ -592,7 +592,11 @@ pre.quickstart-tag {
 
 .component-filter-checkboxes {
 	float: left;
-	width: 50%;
+	width: 65%;
+}
+
+.component-filter-checkboxes--left {
+	width: 35%;
 }
 
 
