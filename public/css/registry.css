@@ -565,6 +565,11 @@ h3.component-navigation__title {
 
 pre.quickstart-tag {
 	font-size: 16px;
+	word-break: normal;
+}
+
+pre.quickstart-tag code {
+	white-space: normal;
 }
 
 .o-overlay__content {
