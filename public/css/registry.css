@@ -472,6 +472,7 @@ h3.component-navigation__title {
 	padding: 10px 0;
 	background-color: #333;
 	color: #fff;
+	overflow-y: auto;
 }
 
 .component-side-nav .filter-bar {
