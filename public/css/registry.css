@@ -59,6 +59,9 @@ body {
 	background-color: red;
 }
 
+a.o-buttons.o-buttons--standout {
+	color: #fff;
+}
 
 /* Filter bar */
 
@@ -602,4 +605,23 @@ pre.quickstart-tag {
 
 .o-techdocs-content {
 	clear: left;
+}
+
+
+.full-component-details .component-details-row {
+	clear: left;
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.full-component-details .key {
+	float: left;
+	width: 23%;
+	margin-right: 2%;
+}
+
+.full-component-details .val {
+	float: left;
+	width: 75%
 }
