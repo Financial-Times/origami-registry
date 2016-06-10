@@ -26,8 +26,8 @@ After the first setup, you will only need to start the created machine. (Use the
 Once started, put the machine's config into your environment. Both right now and on next login:
 
     docker-machine env dev
-    eval (docker-machine env dev)
-    echo "eval (docker-machine env dev)" >> ~/.profile
+    eval $(docker-machine env dev)
+    echo "eval $(docker-machine env dev)" >> ~/.profile
 
 Find out the IP address of the machine:
 
