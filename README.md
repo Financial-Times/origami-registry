@@ -54,19 +54,15 @@ Then, run `git describe --tags > ./appversion; heroku docker:release; rm -f ./ap
 
 See also the [architecture diagram](https://docs.google.com/drawings/d/1dP1nrX6H2VLQoeDt3Y1TWYOTZSUexESY3QUmPupMpxA/edit) in Google drive.
 
-## Update local database
+## Running the registry update script on your local machine
 
-To work with the Registry locally you will probably need some data in your local database. To do this you can run the update registry script on your local machine - **warning**, this will take several hours to run for the first time locally.
-
-To run the update script locally, you will need to SSH into the Docker VM and the container for the Registry:
+To run the update registry script on your local machine connect to the docker-machine:
 
     docker-machine ssh dev
     docker ps
-    docker exec -i -t origamiregistry_web_1 bash
-
-You should now be in a bash command line for the registry app. You can now run the update registry script with the following command:
-
-    php ./app/scripts/updateregistry
+    docker exec -i -t registry_web_1 bash
+    cd app/scripts
+    php updateregistry
 
 ## Orchestration files
 
