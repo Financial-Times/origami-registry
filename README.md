@@ -78,12 +78,13 @@ The following files are used in build, test and deploy automation:
 
 ## Configuration
 
-In dev, these are configured in docker-compose.yml.  In live, it's `heroku config`
+In dev, these are configured in the `.env` file.  In live, it's `heroku config`
 
 * `PORT`: Port used by Apache to serve HTTP traffic.  Must match container's exposed ports config.  Should not be configured explicitly on Heroku
 * `DATABASE_URL`: URL of the MySQL instance to use.  In dev, this is a linked container, in live, it's a ClearDB addon (TODO: Not sure why we can't allow Heroku to simulate the ClearDB container in dev)
 * `SENTRY_DSN`: URL of the Sentry project to use to collect runtime errors, exceptions and log messages
 * `IS_DEV`: Boolean to indicate whether the app should be considered to be running in a dev environment.  If true, will suppress some notifications and change error reporting behaviour.
+* `GITHUB_CREDENTIALS`: Used to connect to Github for the component discovery process.
 * `SLACK_WEBHOOK`: "Incoming Webhook" URL from Slack to which to post notifications of new discovered modules
 * `SLACK_CHANNEL`: Slack channel to post new module notifications in
 * `BUILD_SERVICE_HOST`: Hostname of the build service to use for fetching module metadata
