@@ -33,7 +33,9 @@ Find out the IP address of the machine:
 
     docker-machine ip dev
 
-In the registry's working directory, run the build and start the app:
+When running locally, the app [configuration values](#Configuration) are stored in a local `.env` file and ignored by Git. To set up your local `.env` file, copy the `sample.env` file to `.env` and fill in the missing values from the Origami Registry Configuration note in the shared folder on LastPass.
+
+With the `.env` file setup, in the registry's working directory, run the build and start the app (note: you need to be connected to the internal network in order to install the dependencies from Stash):
 
     docker-compose build
     docker-compose up
