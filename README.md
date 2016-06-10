@@ -46,7 +46,7 @@ To SSH into the web or DB nodes, you first need to SSH into the Docker VM, and t
 
     docker-machine ssh dev
     docker ps
-    docker exec -i -t registry_web_1 bash
+    docker exec -i -t origamiregistry_web_1 bash
 
 ### Setting up a local database
 
