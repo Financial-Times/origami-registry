@@ -48,15 +48,7 @@ To SSH into the web or DB nodes, you first need to SSH into the Docker VM, and t
     docker ps
     docker exec -i -t registry_web_1 bash
 
-## Deploying
-
-You need to authenticate with Heroku (this app is `origami-registry-eu`) and use the Heroku docker plugin: `heroku plugins:install heroku-docker`.
-
-Then, run `git describe --tags > ./appversion; heroku docker:release; rm -f ./appversion`.
-
-See also the [architecture diagram](https://docs.google.com/drawings/d/1dP1nrX6H2VLQoeDt3Y1TWYOTZSUexESY3QUmPupMpxA/edit) in Google drive.
-
-## Update local database
+### Setting up a local database
 
 To work with the Registry locally you will probably need some data in your local database. To do this you can run the update registry script on your local machine - **warning**, this will take several hours to run for the first time locally.
 
@@ -69,6 +61,15 @@ To run the update script locally, you will need to SSH into the Docker VM and th
 You should now be in a bash command line for the registry app. You can now run the update registry script with the following command:
 
     php ./app/scripts/updateregistry
+
+
+## Deploying
+
+You need to authenticate with Heroku (this app is `origami-registry-eu`) and use the Heroku docker plugin: `heroku plugins:install heroku-docker`.
+
+Then, run `git describe --tags > ./appversion; heroku docker:release; rm -f ./appversion`.
+
+See also the [architecture diagram](https://docs.google.com/drawings/d/1dP1nrX6H2VLQoeDt3Y1TWYOTZSUexESY3QUmPupMpxA/edit) in Google drive.
 
 ## Orchestration files
 
