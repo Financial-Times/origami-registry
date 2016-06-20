@@ -125,8 +125,8 @@
 			<aside class="o-techdocs__aside--toggleable" id="note-buildservice-setup">
 				<h4>Loading assets using the build service</h4>
 				<p>The Origami build service is designed to efficiently bundle JavaScript and CSS resources and deliver them into your page.  To make best use of this, you should have <strong>only one</strong> (Origami related) <code>&lt;script&gt;</code> and one <code>&lt;link&gt;</code> tag in your page, even if you want to load more than one component.  You can request all the components you want in a single request, like this:</p>
-				<pre><code class="lang-html">&lt;link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=module@version,module@version,module@version" />
-&lt;script src="https://build.origami.ft.com/v2/bundles/js?modules=module@version,module@version,module@version">&lt;/script></code></pre>
+				<pre><code class="lang-html">&lt;link rel="stylesheet" href="https://origami-build.ft.com/v2/bundles/css?modules=module@version,module@version,module@version" />
+&lt;script src="https://origami-build.ft.com/v2/bundles/js?modules=module@version,module@version,module@version">&lt;/script></code></pre>
 				<p>Read the <a href="http://origami.ft.com/docs/developer-guide/using-modules/#core-vs-enhanced-experience">developer guide</a> for information on where to place these tags in your source code (if in a hurry: link goes in <code>&lt;head&gt;</code>, script goes just before <code>&lt;/body&gt;</code>), and how to use a <em>cuts the mustard</em> test to make the script load only in browsers that are compatible with our enhanced experience.</p>
 				<p>Regardless of whether your site is loaded over HTTP or HTTPS, we recommend using HTTPS to load Origami resources.</p>
 				<p>For full build service options see the <a href="http://origami.ft.com/docs/developer-guide/build-service/#api-reference">build service API docs</a></p>
