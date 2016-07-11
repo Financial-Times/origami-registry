@@ -213,6 +213,7 @@ final class ComponentVersion extends Model {
 				foreach (array(
 					'description' => 'description',
 					'origamiType' => 'origami_type',
+					'origamiGroup' => 'origami_group',
 					'origamiVersion' => 'origami_version',
 					'support' => 'support',
 					'supportStatus' => 'support_status',

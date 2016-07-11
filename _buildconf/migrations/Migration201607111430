@@ -1,0 +1,18 @@
+<?php
+/**
+ * Add a recent commit count to each component to enable activity-based sorting
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201607111430 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+ALTER TABLE `components` ADD `origami_group` VARCHAR(128)  NULL  AFTER `recent_commit_count`;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}
