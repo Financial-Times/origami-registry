@@ -90,9 +90,10 @@ final class Component extends Model {
 			$isnew = ($version->is_valid === null);
 			try {
 				$version->build();
-
 				$version->save();
+
 				$this->data['is_origami'] = $latest->is_valid;
+				$this->data['origami_group'] = $latest->origami_group;
 				$this->save();
 
 				// If this is the latest version of a module which is valid (or we're doing a deep scan), rebuild last REBUILD_DEPENDENTS_DEPTH versions of all direct dependents
