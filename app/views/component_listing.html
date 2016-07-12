@@ -24,24 +24,31 @@
 	<div class="o-techdocs-content">
 		<table class="component-list">
 			<thead class="u-hide-on-mobile">
-				<tr><th></th><th></th><th>Updated</th><th title="Commits in the last 30 days">Activity</th></tr>
+				<tr><th></th><th></th><th>Updated</th></tr>
 			</thead>
 			<tbody>
-			{% for component in components %}
-				<tr class="component searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}">
-					<td>
-						<a href="/components/{{component.module_name}}@{{component.tag_name}}">
-							{% if component.origami_type == 'module' %}<i class="fa fa-puzzle-piece"></i>
-							{% elseif component.origami_type == 'service' %}<i class="fa fa-bolt"></i>
-							{% else %}<i class="fa fa-exclamation-triangle"></i>{% endif %}
-							<span class="component-name" data-module-name--js data-name="{{component.module_name}}">{{component.module_name}}</span>
-						</a>
-						<div class="description">{{component.description}}</div>
-					</td>
-					<td class="u-nowrap"><span class="version-number">{{component.tag_name}}</span> <span class="label-{{component.support_status|slugify}}">{{component.support_status|capitalize}}</span></td>
-					<td class="u-nowrap u-hide-on-mobile">{% if component.datetime_created %}<time datetime="{{component.datetime_created|date('c')}}" title="{{component.datetime_created|date('c')}}">{{component.datetime_created|timepast}}</time>{% endif %}</td>
-					<td class="u-nowrap u-hide-on-mobile">{{component.recent_commit_count}}</td>
-				</tr>
+			{% for group in components %}
+				{% if group.modules is not empty %}
+					<tr class="component-group">
+						<td><h3>{{group.title}}</h3></td><td></td><td></td>
+					</tr>
+
+					{% for component in group.modules %}
+						<tr class="component searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}">
+							<td>
+								<a href="/components/{{component.module_name}}@{{component.tag_name}}">
+									{% if component.origami_type == 'module' %}<i class="fa fa-puzzle-piece"></i>
+									{% elseif component.origami_type == 'service' %}<i class="fa fa-bolt"></i>
+									{% else %}<i class="fa fa-exclamation-triangle"></i>{% endif %}
+									<span class="component-name" data-module-name--js data-name="{{component.module_name}}">{{component.module_name}}</span>
+								</a>
+								<div class="description">{{component.description}}</div>
+							</td>
+							<td class="u-nowrap"><span class="version-number">{{component.tag_name}}</span> <span class="label-{{component.support_status|slugify}}">{{component.support_status|capitalize}}</span></td>
+							<td class="u-nowrap u-hide-on-mobile">{% if component.datetime_created %}<time datetime="{{component.datetime_created|date('c')}}" title="{{component.datetime_created|date('c')}}">{{component.datetime_created|timepast}}</time>{% endif %}</td>
+						</tr>
+					{% endfor %}
+				{% endif %}
 			{% endfor %}
 			</tbody>
 		</table>

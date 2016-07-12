@@ -14,15 +14,33 @@ class ComponentListing extends BaseController {
 
 	public function get() {
 
-		$viewdata = array();
+		$viewdata = array(
+				'primitives' => array(
+					'title' => 'Primitives',
+					'modules' => array(),
+				),
+				'component' => array(
+					'title' => 'Components',
+					'modules' => array(),
+				),
+				'templates' => array(
+					'title' => 'Templates',
+					'modules' => array(),
+				),
+				'utilities' => array(
+					'title' => 'Utilities',
+					'modules' => array(),
+				),
+			);
+
 		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
 			if ($component->latest_stable_version) {
-				$viewdata[] = array_merge(
+				$viewdata[$component->origami_group]['modules'][] = array_merge(
 					$component->toArray(),
 					$component->latest_stable_version->toArray()
 				);
 			} elseif($component->latest_version) {
-				$viewdata[] = array_merge(
+				$viewdata[$component->origami_group]['modules'][] = array_merge(
 					$component->toArray(),
 					$component->latest_version->toArray()
 				);
