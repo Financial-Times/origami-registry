@@ -171,7 +171,7 @@ final class Component extends Model {
 		$components = array();
 		if (empty($sql) or !is_string($sql)) $sql = '';
 		if (empty($data) or !is_array($data)) $data = array();
-		$results = self::$app->db_read->queryAllRows('SELECT c.*, MAX(cv.datetime_created) as latest_version_release_date FROM components c LEFT JOIN componentversions cv ON c.id=cv.component_id WHERE '.$sql.' GROUP BY c.id ORDER BY latest_version_release_date DESC', $data);
+		$results = self::$app->db_read->queryAllRows('SELECT c.*, MAX(cv.datetime_created) as latest_version_release_date FROM components c LEFT JOIN componentversions cv ON c.id=cv.component_id WHERE '.$sql.' GROUP BY c.id ORDER BY module_name ASC', $data);
 		foreach ($results as $data) {
 			$components[] = self::_createFromDatabaseRow($data);
 		}
