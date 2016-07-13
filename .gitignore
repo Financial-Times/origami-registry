@@ -2,3 +2,9 @@
 /build/
 .DS_Store
 .env
+
+/node_modules/
+/bower_components/
+
+/public/main.css
+/public/main.css.map
