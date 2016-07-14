@@ -8,13 +8,15 @@
 	{% if noindex %}<meta name="robots" content="NOINDEX" />{% endif %}
 
 	<!-- Load tech docs styles from build service -->
-	<link rel="stylesheet" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/bundles/css?modules=o-forms@^2.0.2,o-fonts@^2.1.2,o-techdocs@^6.0.0,o-icons@^4.1.2,o-tabs@^2.3.3,o-buttons@^4.0.0,o-date@^1.1.1,o-overlay@^1.8.5" />
+	<!-- Remove this once style is main.css with origami components -->
+	<!-- <link rel="stylesheet" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/bundles/css?modules=o-forms@^2.0.2,o-fonts@^2.1.2,o-techdocs@^6.0.0,o-icons@^4.1.2,o-tabs@^2.3.3,o-buttons@^4.0.0,o-date@^1.1.1,o-overlay@^1.8.5" /> -->
 
 	<!-- Font awesome for module and component icons -->
+	<!-- TODO: See if we can use o-icons instead -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" />
 
 	<!-- Registry-specific styles -->
-	<link rel="stylesheet" href="/css/registry.css" />
+	<link rel="stylesheet" href="/main.css" />
 
 	<!-- Google Analytics tracking code -->
 	<script>
@@ -30,28 +32,24 @@
 	<!-- Embed API needed before DOM so that inline iframes can use it if they load quickly -->
 	<script src="/embedapi"></script>
 </head>
-<body class="o-techdocs">
-
-	<header data-o-component="o-techdocs-header" class="o-techdocs-header">
-		<div class="o-techdocs-header__container">
-			<div class="o-techdocs-header__inner">
-				<div class="o-techdocs-header__primary">
-					<div class="o-techdocs-header__primary__left">
-						<a class="o-techdocs-header__logo" href="/">
-							<span class="origami-logo"></span>
-							<h1 class="o-techdocs-header__title">Origami</h1>
-						</a>
-					</div>
-					<nav class="o-techdocs-header__primary__right o-hierarchical-nav o-techdocs-header__nav--primary-theme" data-o-component="o-hierarchical-nav">
-						<ul data-o-hierarchical-nav-level="1"><!--
-							--><li data-priority="1"><a href="//origami.ft.com">Spec</a></li><!--
-							--><li data-priority="1" aria-selected="true"><a href="/">Registry</a></li><!--
-							--><li data-priority="1"><a href="//styleguide.ft.com">Style Guide</a></li><!--
-							--><li data-more class="o-hierarchical-nav__parent" aria-hidden="true"><a><span class="o-hierarchical-nav__more--if-some">More <i class="o-hierarchical-nav__parent__down-arrow"></i></span><span class="o-hierarchical-nav__more--if-all">Menu <i class="o-hierarchical-nav__parent__down-arrow"></i></span></a></li><!--
-						--></ul>
-					</nav>
+<body>
+	<header class="o-registry-header" data-o-component="o-registry-header">
+		<div class="o-registry-header__container">
+			<div class="o-registry-header__primary">
+				<div class="o-registry-header__primary__left">
+					<a class="o-registry-header__logo" href="/">
+						<span class="origami-logo"></span>
+						<h1 class="o-registry-header__title">Origami</h1>
+					</a>
 				</div>
-				<div class="o-techdocs-header__secondary"></div>
+				<nav class="o-registry-header__primary__right o-hierarchical-nav o-registry-header__nav--primary-theme" data-o-component="o-hierarchical-nav">
+					<ul data-o-hierarchical-nav-level="1"><!--
+						--><li data-priority="1"><a href="//origami.ft.com">Spec</a></li><!--
+						--><li data-priority="1" aria-selected="true"><a href="/">Registry</a></li><!--
+						--><li data-priority="1"><a href="//styleguide.ft.com">Style Guide</a></li><!--
+						--><li data-more class="o-hierarchical-nav__parent" aria-hidden="true"><a><span class="o-hierarchical-nav__more--if-some">More <i class="o-hierarchical-nav__parent__down-arrow"></i></span><span class="o-hierarchical-nav__more--if-all">Menu <i class="o-hierarchical-nav__parent__down-arrow"></i></span></a></li><!--
+					--></ul>
+				</nav>
 			</div>
 		</div>
 	</header>
