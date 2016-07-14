@@ -2,8 +2,8 @@ var gulp = require('gulp');
 var obt = require('origami-build-tools');
 
 gulp.task('build', function() {
-    obt.build.js(gulp, {js: './public/js/main.js', buildFolder: './public' });
-    obt.build.sass(gulp, {sass: './public/scss/main.scss', buildFolder: './public'});
+    obt.build.js(gulp, {js: './public/js/main.js', buildFolder: './public', env: 'production' });
+    obt.build.sass(gulp, {sass: './public/scss/main.scss', buildFolder: './public', env: 'production'});
 });
 
 gulp.task('verify', function() {
