@@ -2,25 +2,35 @@
 
 {% block content %}
 
-	<div class="component-list-container">
-		<form class="filter-bar o-grid-row">
-			<div class="o-forms-group" data-o-grid-colspan="12">
-				<input id="filter" type="text" class="o-forms-text" name="filter" placeholder="Type to filter by name" autofocus />
+	<form class="filter-bar">
+		<div class="grid-row">
+			<div class="grid-col--full">
+				<div class="o-forms-group">
+					<input id="filter" type="text" class="o-forms-text" name="filter" placeholder="Type to filter by name" autofocus />
+				</div>
 			</div>
-			<div class="o-forms-group component-filter-checkboxes component-filter-checkboxes--left">
-				<label class="o-forms-label filter-bar-label">Show:</label>
-				<input type="checkbox" name="type" value="module" class="o-forms-checkbox o-forms-checkbox--small" id="check-module" checked><label for="check-module" class="o-forms-label">Modules</label>
-				<input type="checkbox" name="type" value="service" class="o-forms-checkbox o-forms-checkbox--small" id="check-service"><label for="check-service" class="o-forms-label">Services</label>
+		</div>
+		<div class="grid-row">
+			<div class="grid-col--third">
+				<div class="o-forms-group component-filter-checkboxes">
+					<label class="o-forms-label filter-bar-label">Show:</label>
+					<input type="checkbox" name="type" value="module" class="o-forms-checkbox o-forms-checkbox--small" id="check-module" checked><label for="check-module" class="o-forms-label">Modules</label>
+					<input type="checkbox" name="type" value="service" class="o-forms-checkbox o-forms-checkbox--small" id="check-service"><label for="check-service" class="o-forms-label">Services</label>
+				</div>
 			</div>
-			<div class="o-forms-group component-filter-checkboxes">
-				<label class="o-forms-label filter-bar-label">Status:</label>
-				<input type="checkbox" name="support" value="active" class="o-forms-checkbox o-forms-checkbox--small" id="check-active" checked><label for="check-active" class="o-forms-label">Active</label>
-				<input type="checkbox" name="support" value="maintained" class="o-forms-checkbox o-forms-checkbox--small" id="check-maintained" checked><label for="check-maintained" class="o-forms-label">Maintained</label>
-				<input type="checkbox" name="support" value="deprecated" class="o-forms-checkbox o-forms-checkbox--small" id="check-deprecated"><label for="check-deprecated" class="o-forms-label">Deprecated</label>
-				<input type="checkbox" name="support" value="dead" class="o-forms-checkbox o-forms-checkbox--small" id="check-dead"><label for="check-dead" class="o-forms-label">Dead</label>
-				<input type="checkbox" name="support" value="experimental" class="o-forms-checkbox o-forms-checkbox--small" id="check-experimental"><label for="check-experimental" class="o-forms-label">Experimental</label>
+
+			<div class="grid-col--two-thirds">
+				<div class="o-forms-group component-filter-checkboxes">
+					<label class="o-forms-label filter-bar-label">Status:</label>
+					<input type="checkbox" name="support" value="active" class="o-forms-checkbox o-forms-checkbox--small" id="check-active" checked><label for="check-active" class="o-forms-label">Active</label>
+					<input type="checkbox" name="support" value="maintained" class="o-forms-checkbox o-forms-checkbox--small" id="check-maintained" checked><label for="check-maintained" class="o-forms-label">Maintained</label>
+					<input type="checkbox" name="support" value="deprecated" class="o-forms-checkbox o-forms-checkbox--small" id="check-deprecated"><label for="check-deprecated" class="o-forms-label">Deprecated</label>
+					<input type="checkbox" name="support" value="dead" class="o-forms-checkbox o-forms-checkbox--small" id="check-dead"><label for="check-dead" class="o-forms-label">Dead</label>
+					<input type="checkbox" name="support" value="experimental" class="o-forms-checkbox o-forms-checkbox--small" id="check-experimental"><label for="check-experimental" class="o-forms-label">Experimental</label>
+				</div>
 			</div>
-		</form>
+		</div>
+	</form>
 
 	<div class="o-techdocs-content">
 		<table class="component-list">
@@ -54,18 +64,21 @@
 			</tbody>
 		</table>
 
-		<p>Every 4 hours, the registry automatically scans the FT and FT Labs public GitHub accounts, and Stash, for repositories containing an Origami configuration file. To publish a new component and make it available on the Origami registry, push it to one of these Git locations, and ensure it is correctly set up with the appropriate Origami config.  Last scan: <time data-o-component="o-date" datetime="{{cron_last_complete|date('c')}}" title="{{cron_last_complete|date('c')}}">Unknown</time>.</p>
+	<div class="grid-row">
+		<div class="grid-col--full">
+			<p>Every 4 hours, the registry automatically scans the FT and FT Labs public GitHub accounts, and Stash, for repositories containing an Origami configuration file. To publish a new component and make it available on the Origami registry, push it to one of these Git locations, and ensure it is correctly set up with the appropriate Origami config.  Last scan: <time data-o-component="o-date" datetime="{{cron_last_complete|date('c')}}" title="{{cron_last_complete|date('c')}}">Unknown</time>.</p>
 
-		<h2>Registry API</h2>
-		<p>The Origami registry provides a read-only API conforming to the Bower Registry API spec (excluding registration and publishing).  To specify the Origami registry as your source for Bower components, create a <code>.bowerrc</code> file in your home directory or the root of your project's working tree, with the following content:</p>
-		<pre><code class="lang-json">{
-	  "registry": {
-	    "search": [
-	      "http://{{SERVER.HTTP_HOST}}",
-	      "https://bower.herokuapp.com"
-	    ]
-	  }
-	}</code></pre>
+			<h2>Registry API</h2>
+			<p>The Origami registry provides a read-only API conforming to the Bower Registry API spec (excluding registration and publishing).  To specify the Origami registry as your source for Bower components, create a <code>.bowerrc</code> file in your home directory or the root of your project's working tree, with the following content:</p>
+			<pre><code class="lang-json">{
+		  "registry": {
+		    "search": [
+		      "http://{{SERVER.HTTP_HOST}}",
+		      "https://bower.herokuapp.com"
+		    ]
+		  }
+		}</code></pre>
 		</div>
 	</div>
+
 {% endblock %}
