@@ -12,3 +12,7 @@ gulp.task('verify', function() {
         sass: './public/scss/main.scss'
     });
 });
+
+gulp.task('watch', function() {
+	gulp.watch(['public/scss/**/*.scss','public/js/**/*.js'] , ['build']);
+});
