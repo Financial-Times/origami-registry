@@ -36,7 +36,7 @@ $o-registry-header-breakpoint: M !default;
 .o-registry-header__container {
 	@include oGridContainer;
 	position: relative;
-	max-width: 100%;
+	max-width: $o-registry-max-width;
 	color: oColorsGetPaletteColor('white');
 
 	a {

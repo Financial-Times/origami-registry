@@ -6,6 +6,7 @@
 @import 'o-tabs/main';
 @import 'o-overlay/main';
 @import 'o-labels/main';
+@import 'o-table/main';
 
 @include oFontsInclude(MetricWeb, $weight: regular);
 
@@ -19,8 +20,23 @@ body {
 // $o-hierarchical-nav-is-silent: false;
 @import 'o-hierarchical-nav/main';
 
+@import 'partials/variables';
 @import 'partials/mixins';
+@import 'partials/layout';
 @import 'partials/header';
+@import 'partials/component-list';
+@import 'partials/forms';
+
+.o-registry-container {
+	@include oGridContainer;
+	position: relative;
+	max-width: $o-registry-max-width;
+}
+
+
+
+
+
 
 /* Labels and badges */
 
@@ -78,77 +94,6 @@ body {
 
 a.o-buttons.o-buttons--standout {
 	color: #fff;
-}
-
-/* Filter bar */
-
-.filter-bar {
-	margin-top:40px;
-	margin-bottom: 15px;
-}
-.filter-bar .o-forms-group {
-	margin-bottom: 10px;
-}
-.filter-bar-label {
-	float: left;
-	width: 80px;
-	line-height: 24px;
-	position: relative;
-	top: -2px; // Align with form labels
-}
-.highlight {
-	background-color: #fff1e0;
-	color: #333;
-	font-weight: bold;
-}
-
-
-.component-list {
-	width: 100%;
-}
-.component-list .component a {
-	text-decoration: none;
-}
-.component-list .component {
-	cursor: pointer;
-}
-.component-list .component:hover td {
-	background: #f8f8f8;
-}
-.component-list .component-name {
-	font-weight: bold;
-}
-.component-list .description {
-	font-size: 0.875em;
-	line-height: 1.4;
-	color: #777777;
-}
-
-/* Version number */
-
-.version-number {
-	font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
-	font-size: 0.875em;
-}
-.component-list .version-number {
-	min-width: 60px;
-	display: inline-block;
-}
-
-/* Mobile styles */
-@media (max-width: 600px) {
-	.component-list td {
-		border-bottom: 0 !important;
-	}
-	.component-list tr {
-		border-bottom: 1px solid #eeeeee;
-	}
-	.component-list td:nth-child(2) {
-		display: block;
-	}
-	.component-list .version-number {
-		display: block;
-	}
 }
 
 
@@ -606,13 +551,6 @@ pre.quickstart-tag code {
 
 .jsbin-link i {
 	margin-left: 5px;
-}
-
-
-.component-list-container {
-	width: 90%;
-	max-width: 1200px;
-	margin: 0 auto;
 }
 
 .component-filter-checkboxes {
