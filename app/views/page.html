@@ -54,19 +54,20 @@
 		</div>
 	</header>
 
-	<div class="o-techdocs-new-layout">
+	<div class="o-registry-container">
 		{% block content %}{% endblock %}
-	</div>
 
-	<footer class="o-techdocs-footer">
-		<div class="o-techdocs-footer__inner">
-		  <div class="footer-logo">
-				<span class="origami-logo"></span>Origami
-			</div>
-			<p>Help or advice for FT staff on any aspect of Origami is available from <a href="mailto:origami.support@ft.com">origami.support@ft.com</a> (public users please instead <a href="https://github.com/Financial-Times/ft-origami/issues">raise an issue on the repository</a>)</p>
-			<p>&copy; THE FINANCIAL TIMES LTD {{"now"|date('Y')}}. FT and 'Financial Times' are trademarks of The Financial Times Ltd.</p>
-	  </div>
-	</footer>
+		<footer class="o-registry-footer">
+			<div class="o-registry-footer__inner">
+			  <div class="footer-logo">
+					<span class="origami-logo"></span>Origami
+				</div>
+				<p>Help or advice for FT staff on any aspect of Origami is available from <a href="mailto:origami.support@ft.com">origami.support@ft.com</a> (public users please instead <a href="https://github.com/Financial-Times/ft-origami/issues">raise an issue on the repository</a>)</p>
+				<p>&copy; THE FINANCIAL TIMES LTD {{"now"|date('Y')}}. FT and 'Financial Times' are trademarks of The Financial Times Ltd.</p>
+		  </div>
+		</footer>
+
+	</div>
 
 	<script src="/js/libs/jquery.min.js"></script>
 	<script src="/main.js"></script>
