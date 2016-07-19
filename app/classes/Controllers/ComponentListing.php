@@ -57,6 +57,6 @@ class ComponentListing extends BaseController {
 		$this->resp->setCacheTTL(300);
 
 		$this->app->metrics->increment($this->app->metrics_prefix . 'serve.ComponentListing');
-		$this->renderView('component_listing');
+		$this->renderView('component-listing');
 	}
 }

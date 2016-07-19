@@ -103,7 +103,7 @@ class ComponentDetail extends BaseController {
 			$this->resp->setJSON($this->viewdata);
 		} else {
 			$this->app->metrics->increment($this->app->metrics_prefix . 'serve.ComponentDetail');
-			$this->renderView('component_detail');
+			$this->renderView('component-detail');
 		}
 	}
 }

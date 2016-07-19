@@ -59,7 +59,7 @@ class Source extends BaseController {
 			// REVIEW:AB:20140324: This should be done by the build service, ideally
 			$code = preg_replace('/( (?:href|src)=)([\'\"])(\/(?!\/)[^\\2]+\\2)/i', '$1$2//'.getenv('BUILD_SERVICE_HOST').'$3', $code);
 			$this->addViewData('code', $code);
-			$this->renderView('page_jsbinredirect');
+			$this->renderView('page-jsbinredirect');
 
 		} elseif (!$errors) {
 

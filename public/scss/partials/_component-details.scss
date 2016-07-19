@@ -1,6 +1,14 @@
 
 /* Component detail header */
 
+.component-detail-wrapper {
+	position: relative;
+	clear: both;
+	margin: 0;
+}
+
+
+
 .o-overlay__content {
 	max-width: 600px;
 }

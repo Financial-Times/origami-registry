@@ -29,6 +29,6 @@ class Embed extends BaseController {
 		$this->addViewData('support_status_version', $this->version->supportStatusVersion->tag_name);
 
 		$this->resp->setCacheTTL(3600);
-		$this->renderView('page_embed_demo');
+		$this->renderView('page-embed-demo');
 	}
 }
