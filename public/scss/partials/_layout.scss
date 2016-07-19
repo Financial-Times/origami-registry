@@ -2,6 +2,10 @@
 	@include oGridContainer;
 	position: relative;
 	max-width: $o-registry-max-width;
+
+	.o-registry-page--component-detail & {
+		max-width: 100%;
+	}
 }
 
 .grid-row {

@@ -49,6 +49,7 @@ class ComponentListing extends BaseController {
 
 		$this->addViewData('components', $viewdata);
 		$this->addViewData('title', 'Components');
+		$this->addViewData('body_class', 'o-registry-page--component-listing');
 
 		$cron_interval = 60*60*4;
 		$this->addViewData('cron_last_complete', $this->app->db_read->querySingle("SELECT FROM_UNIXTIME(meta_value) FROM meta WHERE meta_key=%s", 'cron_last_complete'));

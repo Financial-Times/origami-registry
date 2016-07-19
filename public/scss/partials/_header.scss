@@ -39,6 +39,10 @@ $o-registry-header-breakpoint: M !default;
 	max-width: $o-registry-max-width;
 	color: oColorsGetPaletteColor('white');
 
+	.o-registry-page--component-detail & {
+		max-width: 100%;
+	}
+
 	a {
 		color: oColorsGetPaletteColor('white');
 

@@ -32,6 +32,7 @@ class ComponentDetail extends BaseController {
 		$versions = array_reverse($versions);
 		$versionlist = array();
 		$unstabledone = false;
+
 		foreach ($versions as $version) {
 			if ($unstabledone and !$version->isStable()) continue;
 			$versionlist[] = array_merge($version->toArray(), array(
@@ -39,6 +40,7 @@ class ComponentDetail extends BaseController {
 			));
 			if (!$version->isStable()) $unstabledone = true;
 		}
+
 		$this->addViewData('versions', $versionlist);
 
 		// Check dependencies
@@ -60,12 +62,15 @@ class ComponentDetail extends BaseController {
 			}
 			$dependencies[] = $dep;
 		}
+
 		$this->addViewData('dependencies', $dependencies);
 
 		$this->addViewData('demos', $this->version->demos);
 		$this->addViewData('dependents', $this->version->dependents);
 
 		$this->addViewData('title', $this->component->module_name);
+		$this->addViewData('body_class', 'o-registry-page--component-detail');
+
 		$this->addViewData('repo_home_url', str_replace('.git', '', $this->component->git_repo_url));
 		$this->addViewData('latest_version', $this->component->latest_version->tag_name);
 		$this->addViewData('latest_datetime_created', $this->component->latest_version->datetime_created);
