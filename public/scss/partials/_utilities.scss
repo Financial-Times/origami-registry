@@ -1,0 +1,29 @@
+/* Utility classes and trumps */
+
+[aria-hidden=true] {
+	display: none;
+}
+
+.u-nowrap {
+	white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+	.u-hide-on-mobile {
+		display: none !important;
+	}
+}
+
+/* Progress spinner */
+
+.u-activity::after {
+	content: '';
+	margin: 0 3px;
+	background: url(/images/loading.svg) no-repeat;
+	display: inline-block;
+	width: 32px;
+	height: 15px;
+	border-radius: 3px;
+	vertical-align: middle;
+}
+

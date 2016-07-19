@@ -1,0 +1,178 @@
+
+/* Component detail header */
+
+.o-overlay__content {
+	max-width: 600px;
+}
+
+.component-main {
+	float: left;
+	width: 60%;
+	margin-left: 15%;
+	padding: 50px 30px 0;
+}
+
+.component-info {
+	float: left;
+	width: 25%;
+	max-width: 350px;
+	padding-right: 30px;
+}
+
+.o-techdocs-new-layout {
+	width: 100%;
+	box-sizing: border-box;
+
+}
+
+.o-techdocs-new-layout *,
+.o-techdocs-new-layout *:after,
+.o-techdocs-new-layout *:before {
+	box-sizing: inherit;
+}
+.component-header {
+	float: left;
+}
+
+.component-description {
+	clear: both;
+	padding-top: 10px;
+}
+
+.o-techdocs-content .github-button {
+	float: right;
+}
+
+.o-techdocs-content .github-button i {
+	margin-right: 10px;
+}
+
+.full-component-details .component-details-row {
+	clear: left;
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.full-component-details .key {
+	float: left;
+	width: 23%;
+	margin-right: 2%;
+}
+
+.full-component-details .val {
+	float: left;
+	width: 75%
+}
+
+.detail-comp-info {
+	margin-top: 110px;
+	background-color: #fff1e0;
+	padding: 15px;
+	border-radius: 6px;
+}
+
+
+
+.component-header {
+	margin: 0 0 20px;
+}
+
+.doc-links {
+	clear: both;
+	list-style: none;
+	padding-left: 0;
+}
+
+.doc-links li {
+	display: inline;
+	margin-right: 5px;
+}
+
+.doc-links li a {
+	color: #fff;
+	text-transform: none;
+}
+
+.component-build-metadata {
+	text-align: right;
+}
+
+.component-info-details {
+	clear: both;
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+.component-info-details dt,
+.component-info-details dd {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+.component-info-details dd {
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.component-info-details dd .bundlesize_js,
+.component-info-details dd .bundlesize_css {
+	display: block;
+}
+
+.version-title {
+	float: left;
+	font-size: 16px;
+	margin: 5px 10px 20px 0;
+}
+
+.version-select {
+	width: 120px;
+	float: left;
+	vertical-align: middle;
+}
+.unstable-warning {
+	margin-top: 20px !important;
+}
+
+
+.detail-section {
+	max-width: 100%;
+	clear: both;
+}
+.detail-modulelist__item + .detail-modulelist__item:before {
+	content: ', ';
+}
+.dependency-list {
+	border-collapse: collapse;
+}
+.dependency-list td {
+	padding-right: 10px;
+}
+
+.bundlesize_js,
+.bundlesize_css {
+	display: inline;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #029A77;
+}
+.bundlesize_css {
+	color: #CE6308;
+}
+
+pre.quickstart-tag {
+	font-size: 16px;
+	word-break: normal;
+}
+
+pre.quickstart-tag code {
+	white-space: normal;
+}
+
+/* Make it 'pop more' */
+.o-overlay {
+	box-shadow: 0 0 30px 7px rgba(0, 0, 0, 0.2);
+}

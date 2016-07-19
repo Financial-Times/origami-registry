@@ -1,3 +1,9 @@
+.o-registry-container {
+	@include oGridContainer;
+	position: relative;
+	max-width: $o-registry-max-width;
+}
+
 .grid-row {
 	@include oGridRow;
 }
