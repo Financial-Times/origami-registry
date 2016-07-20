@@ -16,7 +16,7 @@ final class Component extends Model {
 
 	const REBUILD_DEPENDENTS_DEPTH = 30;
 
-	protected $fields = array('id', 'module_name', 'git_repo_url', 'is_origami', 'host_type', 'datetime_last_discovered', 'recent_commit_count');
+	protected $fields = array('id', 'module_name', 'origami_group', 'git_repo_url', 'is_origami', 'host_type', 'datetime_last_discovered', 'recent_commit_count');
 	protected $datefields = array('datetime_last_discovered');
 
 	public function __construct() {
@@ -48,7 +48,7 @@ final class Component extends Model {
 
 	public function save() {
 		$this->data['is_origami'] = isset($this->data['is_origami']) ? (int)$this->data['is_origami'] : null;
-		self::$app->db_write->query('INSERT INTO components SET {module_name}, {is_origami}, {git_repo_url}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date} ON DUPLICATE KEY UPDATE {git_repo_url}, {is_origami}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date}', $this->data);
+		self::$app->db_write->query('INSERT INTO components SET {module_name}, {is_origami}, {origami_group}, {git_repo_url}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date} ON DUPLICATE KEY UPDATE {git_repo_url}, {is_origami}, {origami_group}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date}', $this->data);
 		if (!$this->id) {
 			$this->id = self::$app->db_write->querySingle('SELECT id FROM components WHERE {module_name}', $this->data);
 		}
@@ -90,9 +90,10 @@ final class Component extends Model {
 			$isnew = ($version->is_valid === null);
 			try {
 				$version->build();
-
 				$version->save();
+
 				$this->data['is_origami'] = $latest->is_valid;
+				$this->data['origami_group'] = $latest->origami_group;
 				$this->save();
 
 				// If this is the latest version of a module which is valid (or we're doing a deep scan), rebuild last REBUILD_DEPENDENTS_DEPTH versions of all direct dependents
