@@ -31,29 +31,17 @@
 	max-width: 600px;
 }
 
-.o-techdocs-new-layout {
-	width: 100%;
-	box-sizing: border-box;
-
-}
-
-.o-techdocs-new-layout *,
-.o-techdocs-new-layout *:after,
-.o-techdocs-new-layout *:before {
-	box-sizing: inherit;
-}
-
-
 .component-description {
 	clear: both;
 	padding-top: 10px;
 }
 
-.o-techdocs-content .github-button {
+.o-registry__github-button {
 	float: right;
+	margin-top: 25px;
 }
 
-.o-techdocs-content .github-button i {
+.o-registry__github-button i {
 	margin-right: 10px;
 }
 
@@ -81,7 +69,6 @@
 	padding: 15px;
 	border-radius: 6px;
 }
-
 
 
 .component-header {
