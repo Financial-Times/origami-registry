@@ -23,8 +23,8 @@ class ComponentListing extends BaseController {
 					'title' => 'Components',
 					'modules' => array(),
 				),
-				'templates' => array(
-					'title' => 'Templates',
+				'layouts' => array(
+					'title' => 'Layouts',
 					'modules' => array(),
 				),
 				'utilities' => array(
