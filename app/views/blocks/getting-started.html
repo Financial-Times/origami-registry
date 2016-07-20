@@ -24,7 +24,7 @@
 	</div>
 </section>
 
-<aside class="o-techdocs__aside--toggleable" id="how-do-i-build-service">
+<script type="text/template" id="how-do-i-build-service">
 	<h4>Loading assets using the build service</h4>
 	<p>To load this module add the following {% if has_js and has_css %}<code>&lt;script></code> and <code>&lt;link></code> tags {% elseif has_js %}<code>&lt;script></code> tag {% elseif has_css %}<code>&lt;link></code> tag{% endif %} to your page:
 	</p>
@@ -36,4 +36,4 @@
 	<pre><code class="lang-html">https://build.origami.ft.com/v2/bundles/css?modules={{module_name}}@^{{tag_name}},module@version,module@version</code></pre>
 
 	<p>For full build service options see the <a href="http://origami.ft.com/docs/developer-guide/build-service/#api-reference">build service API docs</a></p>
-</aside>
+</script>

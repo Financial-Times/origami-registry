@@ -2,12 +2,12 @@
 
 {% block content %}
 <!-- Component ID: {{component_id}}, version ID: {{id}} -->
-	<div class="component-detail-wrapper grid-row">
+	<div class="component-detail__wrapper grid-row">
 		<!-- Nav -->
 		{% include "blocks/component-nav.html" %}
 
-		<div class="component-main">
-			<h1 class="component-header">{{module_name}}</h1>
+		<div class="component-detail__main">
+			<h1 class="component-detail__header">{{module_name}}</h1>
 
 			<a href="{{repo_home_url}}" class="o-buttons o-buttons--big github-button"><i class="fa fa-github"></i>View on Github</a>
 
@@ -54,7 +54,7 @@
 			</section>
 		</div>
 
-		<div class="component-info">
+		<div class="component-detail__info">
 			{% if origami_type == 'service' %}
 				<section class="detail-section" id="section-usage">
 					<h2>Use the service</h2>

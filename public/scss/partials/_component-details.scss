@@ -1,30 +1,34 @@
 
 /* Component detail header */
 
-.component-detail-wrapper {
+.component-detail__wrapper {
 	position: relative;
 	clear: both;
 	margin: 0;
 }
 
+.component-detail__main {
+	@include oGridColspan((default: 12, S: 7, M: 6));
 
+	@include oGridRespondTo(M) {
+		@include oGridPush(2);
+	}
+}
+
+.component-detail__info {
+	@include oGridColspan((default: 12, S: 5, M: 3));
+
+	@include oGridRespondTo(M) {
+		@include oGridPush(2);
+	}
+}
+
+.component-detail__header {
+	float: left;
+}
 
 .o-overlay__content {
 	max-width: 600px;
-}
-
-.component-main {
-	float: left;
-	width: 60%;
-	margin-left: 15%;
-	padding: 50px 30px 0;
-}
-
-.component-info {
-	float: left;
-	width: 25%;
-	max-width: 350px;
-	padding-right: 30px;
 }
 
 .o-techdocs-new-layout {
@@ -38,9 +42,7 @@
 .o-techdocs-new-layout *:before {
 	box-sizing: inherit;
 }
-.component-header {
-	float: left;
-}
+
 
 .component-description {
 	clear: both;

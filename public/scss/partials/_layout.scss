@@ -20,7 +20,7 @@
 	@include oGridColspan((default: 12, M: 6, L: 3));
 }
 
-.grid-col--half {
+.grid__col--half {
 	@include oGridColspan((default: 12, M: 6));
 }
 
