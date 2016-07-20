@@ -18,6 +18,7 @@
     "o-labels": "^1.0.5",
     "o-grid": "^4.2.0",
     "o-hierarchical-nav": "^4.0.0",
-    "o-table": "^5.0.1"
+    "o-table": "^5.0.1",
+    "highlight.js": "Financial-Times/highlight.js-shim"
   }
 }

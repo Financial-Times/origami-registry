@@ -1,1 +1,79 @@
 @include oFontsInclude(MetricWeb, $weight: regular);
+
+
+code,
+pre,
+var,
+kbd,
+output {
+	font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+
+code {
+	background-color: $o-techdocs-color-grey1;
+	color: $o-techdocs-color-green;
+	white-space: pre-wrap;
+}
+
+var {
+	font-style: italic;
+	white-space: nowrap;
+	color: $o-techdocs-color-purple;
+}
+
+pre { // Override defaults
+	display: block;
+	overflow-x: auto;
+	margin: 0 0 10px;
+	padding: 9.5px;
+	border: 1px solid $o-techdocs-color-grey2;
+	background-color: $o-techdocs-color-grey1;
+	color: $o-techdocs-color-charcoal;
+	word-wrap: inherit;
+	word-break: break-all;
+	font-size: 15px;
+	line-height: 1.5;
+	tab-size: 4;
+
+	> code {
+		padding: 0;
+		border: 0;
+		background-color: transparent;
+		color: inherit;
+		white-space: pre;
+		font-size: inherit;
+	}
+	li.l1,
+	li.l3,
+	li.l5,
+	li.l7,
+	li.l9 {
+		// Stripe rows if desired
+	}
+}
+pre.long-code {
+	overflow-y: scroll;
+	max-height: 340px;
+}
+pre.cli {
+	background: $o-techdocs-color-charcoal;
+
+	kbd,
+	output {
+		padding-left: 15px;
+		display: inline-block;
+	}
+	kbd {
+		color: white;
+
+		// scss-lint:disable NestingDepth
+		&:before {
+			content: '>';
+			margin-left: -15px;
+			float: left;
+		}
+	}
+	output {
+		color: $o-techdocs-color-grey3;
+	}
+}
