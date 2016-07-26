@@ -10,6 +10,7 @@
 .component-list .component {
 	cursor: pointer;
 }
+.component-list .component.focused td,
 .component-list .component:hover td {
 	background: #f8f8f8;
 }

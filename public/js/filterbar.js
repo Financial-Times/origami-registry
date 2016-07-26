@@ -4,6 +4,12 @@
 
 $(function() {
 	var $componentList = $('.component-navigation__list');
+	var itemSelector = 'li';
+
+	if ($componentList.length === 0) {
+		$componentList = $('.component-list tbody');
+		itemSelector = 'tr';
+	}
 
 	function filterRows() {
 		var rows = $('.searchable');
@@ -34,7 +40,9 @@ $(function() {
 	}
 
 	function navigateRows(key) {
-		var rows = $componentList.find('li:visible'),
+
+
+		var rows = $componentList.find(itemSelector + ':visible'),
 			current = rows.filter('.focused'),
 			index = rows.index(current),
 			select = 0;
@@ -44,7 +52,6 @@ $(function() {
 				select = index + 1;
 			}
 		} else { // Up
-			// $componentList.find('li:last-child').addClass('focused');
 			if (index > 0) {
 				select = index - 1;
 			} else {
@@ -75,6 +82,7 @@ $(function() {
 			}
 		}
 
+		// If the user has pressed any other key, disable the focused element
 		$componentList.find('.focused').removeClass('focused');
 	}
 
