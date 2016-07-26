@@ -6,17 +6,15 @@
 		</div>
 	</form>
 
-	<ul class="component-navigation">
+	<ul class="component-navigation__list">
 		{% for group in components %}
 			{% if group.modules is not empty %}
-				<li class="component-navigation__group">
-					<h3 class="component-navigation__title searchable">{{group.title}}</h3>
-					<ul class="component-navigation__list">
-						{% for component in group.modules %}
-							<li class="component-navigation__item searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}"><a data-module-name--js data-name="{{component.module_name}}" href="/components/{{component.module_name}}@{{component.tag_name}}">{{component.module_name}}</a></li>
-						{% endfor %}
-					</ul>
+				<li class="component-navigation__item searchable">
+					<h3 class="component-navigation__title">{{group.title}}</h3>
 				</li>
+				{% for component in group.modules %}
+					<li class="component-navigation__item searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}"><a data-module-name--js data-name="{{component.module_name}}" href="/components/{{component.module_name}}@{{component.tag_name}}">{{component.module_name}}</a></li>
+				{% endfor %}
 			{% endif %}
 		{% endfor %}
 	</ul>

@@ -3,6 +3,8 @@
 'use strict';
 
 $(function() {
+	var $componentList = $('.component-navigation__list');
+
 	function filterRows() {
 		var rows = $('.searchable');
 		var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
@@ -31,14 +33,49 @@ $(function() {
 		return rows;
 	}
 
+	function navigateRows(key) {
+		var rows = $componentList.find('li:visible'),
+			current = rows.filter('.focused'),
+			index = rows.index(current),
+			select = 0;
+
+		if (key === 40) { // Down
+			if (index !== (rows.length - 1) && index >= 0) {
+				select = index + 1;
+			}
+		} else { // Up
+			// $componentList.find('li:last-child').addClass('focused');
+			if (index > 0) {
+				select = index - 1;
+			} else {
+				select = rows.length - 1;
+			}
+		}
+
+		$(current).removeClass('focused');
+		$(rows[select]).addClass('focused');
+	}
+
 	function filterEvent(e){
 		e.preventDefault();
 
 		var rows = filterRows();
 
-		if (e.keyCode && e.keyCode === 13 && $('#filter').val() && rows.find(':visible:eq(0)').length){
-			location.href = rows.find(':visible:eq(0) a').attr('href');
+		// If using the up/down arrow keys, navigate the user through the list of components
+		if (e.keyCode && (e.keyCode === 40 || e.keyCode === 38) && rows.find(':visible:eq(0)').length) {
+			navigateRows(e.keyCode);
+			return;
 		}
+
+		if (e.keyCode && e.keyCode === 13 && $('#filter').val() && rows.find(':visible:eq(0)').length) {
+			if ($componentList.find('.focused').length) {
+				location.href = $componentList.find('.focused a').attr('href');
+			} else {
+				location.href = rows.find('a:visible').eq(0).attr('href');
+			}
+		}
+
+		$componentList.find('.focused').removeClass('focused');
 	}
 
 	$('.filter-bar').on('submit', function(e) { e.preventDefault(); });
