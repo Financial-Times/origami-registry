@@ -31,16 +31,25 @@ class ComponentListing extends BaseController {
 					'title' => 'Utilities',
 					'modules' => array(),
 				),
+				'other' => array(
+					'title' => 'Misc',
+					'modules' => array(),
+				),
 			);
 
 		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
+			$cat = $component->origami_category;
+			if ($cat === '') {
+				$cat = 'other';
+			}
+
 			if ($component->latest_stable_version) {
-				$viewdata[$component->origami_category]['modules'][] = array_merge(
+				$viewdata[$cat]['modules'][] = array_merge(
 					$component->toArray(),
 					$component->latest_stable_version->toArray()
 				);
 			} elseif($component->latest_version) {
-				$viewdata[$component->origami_category]['modules'][] = array_merge(
+				$viewdata[$cat]['modules'][] = array_merge(
 					$component->toArray(),
 					$component->latest_version->toArray()
 				);
