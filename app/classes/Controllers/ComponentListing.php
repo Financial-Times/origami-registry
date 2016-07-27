@@ -31,8 +31,8 @@ class ComponentListing extends BaseController {
 					'title' => 'Utilities',
 					'modules' => array(),
 				),
-				'other' => array(
-					'title' => 'Misc',
+				'uncategorised' => array(
+					'title' => 'Uncategorised',
 					'modules' => array(),
 				),
 			);
@@ -40,7 +40,7 @@ class ComponentListing extends BaseController {
 		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
 			$cat = $component->origami_category;
 			if ($cat === '') {
-				$cat = 'other';
+				$cat = 'uncategorised';
 			}
 
 			if ($component->latest_stable_version) {
