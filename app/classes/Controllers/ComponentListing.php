@@ -19,7 +19,7 @@ class ComponentListing extends BaseController {
 					'title' => 'Primitives',
 					'modules' => array(),
 				),
-				'component' => array(
+				'components' => array(
 					'title' => 'Components',
 					'modules' => array(),
 				),
