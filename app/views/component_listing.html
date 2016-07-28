@@ -17,7 +17,7 @@
 			<input type="checkbox" name="support" value="maintained" class="o-forms-checkbox o-forms-checkbox--small" id="check-maintained" checked><label for="check-maintained" class="o-forms-label">Maintained</label>
 			<input type="checkbox" name="support" value="deprecated" class="o-forms-checkbox o-forms-checkbox--small" id="check-deprecated"><label for="check-deprecated" class="o-forms-label">Deprecated</label>
 			<input type="checkbox" name="support" value="dead" class="o-forms-checkbox o-forms-checkbox--small" id="check-dead"><label for="check-dead" class="o-forms-label">Dead</label>
-			<input type="checkbox" name="support" value="experimental" class="o-forms-checkbox o-forms-checkbox--small" id="check-experimental" checked><label for="check-experimental" class="o-forms-label">Experimental</label>
+			<input type="checkbox" name="support" value="experimental" class="o-forms-checkbox o-forms-checkbox--small" id="check-experimental"><label for="check-experimental" class="o-forms-label">Experimental</label>
 		</div>
 	</form>
 
@@ -29,7 +29,7 @@
 			<tbody>
 			{% for group in components %}
 				{% if group.modules is not empty %}
-					<tr class="component-group">
+					<tr class="component-group" style="display:none">
 						<td><h3>{{group.title}}</h3></td><td></td><td></td>
 					</tr>
 
