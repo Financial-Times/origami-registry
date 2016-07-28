@@ -19,7 +19,7 @@ class ComponentListing extends BaseController {
 					'title' => 'Primitives',
 					'modules' => array(),
 				),
-				'component' => array(
+				'components' => array(
 					'title' => 'Components',
 					'modules' => array(),
 				),
@@ -31,16 +31,25 @@ class ComponentListing extends BaseController {
 					'title' => 'Utilities',
 					'modules' => array(),
 				),
+				'uncategorised' => array(
+					'title' => 'Uncategorised',
+					'modules' => array(),
+				),
 			);
 
 		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
+			$cat = $component->origami_category;
+			if ($cat === '') {
+				$cat = 'uncategorised';
+			}
+
 			if ($component->latest_stable_version) {
-				$viewdata[$component->origami_group]['modules'][] = array_merge(
+				$viewdata[$cat]['modules'][] = array_merge(
 					$component->toArray(),
 					$component->latest_stable_version->toArray()
 				);
 			} elseif($component->latest_version) {
-				$viewdata[$component->origami_group]['modules'][] = array_merge(
+				$viewdata[$cat]['modules'][] = array_merge(
 					$component->toArray(),
 					$component->latest_version->toArray()
 				);
