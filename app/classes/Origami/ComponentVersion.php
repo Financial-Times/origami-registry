@@ -179,11 +179,6 @@ final class ComponentVersion extends Model {
 				}
 			}
 
-			self::$app->logger->debug('Build service response', array(
-				'component' => $name,
-				'response' => $response->getBody(),
-			));
-
 			$this->is_valid = !empty($responseJson->build->origami->valid);
 
 			if (isset($responseJson->bowerManifest) and isset($responseJson->bowerManifest->dependencies)) {
