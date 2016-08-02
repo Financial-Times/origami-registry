@@ -38,6 +38,9 @@
 				<tr><th></th><th></th><th>Updated</th></tr>
 			</thead>
 			<tbody>
+			<tr class="component-group empty-search">
+				<td><h3>Can't find what you are looking for</h3></td>
+			</tr>
 			{% for group in components %}
 				{% if group.modules is not empty %}
 					<tr class="component-group searchable">

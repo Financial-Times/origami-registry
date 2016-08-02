@@ -15,7 +15,7 @@ $(function() {
 		var rows = $('.searchable');
 		var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
 		rows.hide();
-		rows.filter(function () {
+		var filteredRows = rows.filter(function () {
 			var row = $(this);
 			var filterMatch = true;
 			$('.filter-bar input:checkbox').each(function () {
@@ -24,7 +24,8 @@ $(function() {
 					return filterMatch;
 				}
 			});
-			if (filterMatch && regex.test(row.find('[data-module-name--js]').attr('data-name'))) {
+			var elem = row.find('[data-module-name--js]').attr('data-name');
+			if (filterMatch && elem && regex.test(elem)) {
 				if ($('#filter').val()) {
 					row.find('[data-module-name--js]').html(
 						row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
@@ -34,8 +35,10 @@ $(function() {
 				}
 				return true;
 			}
-		}).show();
-
+		});
+		filteredRows.show();
+		var emptySearch = $('.empty-search');
+		filteredRows.length === 0 ? emptySearch.removeAttr('hidden') : emptySearch.attr('hidden');
 		return rows;
 	}
 
