@@ -144,10 +144,12 @@
 		<h2>Component information</h2>
 		<div class="o-grid-row o-grid-row--compact">
 			<div data-o-grid-colspan="12 S6">
+				{% if latest_stable_version %}
 				<div class="o-grid-row">
 					<div class="key" data-o-grid-colspan="12 M4">Latest stable version</div>
 					<div class="val" data-o-grid-colspan="12 M8"><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</div>
 				</div>
+				{% endif %}
 				<div class="o-grid-row">
 					<div class="key" data-o-grid-colspan="12 M4">This version</div>
 					<div class="val" data-o-grid-colspan="12 M8"><span class="version-number">{{tag_name}}</span> ({{datetime_created|timediff}} old)</div>
