@@ -6,6 +6,16 @@
 	@include oFormsLabel;
 }
 
+.o-forms-checkbox {
+	@include oFormsRadioCheckbox;
+
+	&+.o-forms-label {
+		display: inline-block;
+		margin-left: 5px;
+		margin-right: 10px;
+	}
+}
+
 .o-forms-text {
 	@include oFormsCommonField;
 }
@@ -21,8 +31,8 @@
 
 .filter-bar-label {
 	float: left;
-	width: 80px;
 	line-height: 24px;
+	margin-right: 10px;
 	position: relative;
 	top: -2px; // Align with form labels
 }
