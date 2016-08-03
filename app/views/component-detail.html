@@ -8,7 +8,8 @@
 
 		<div class="component-detail__main">
 			<h1 class="component-detail__header">{{module_name}}</h1>
-
+			{% if has_css %}<span class="component-detail__header o-registry__lang-label label-css">CSS</span>{% endif %}
+			{% if has_js %}<span class="component-detail__header o-registry__lang-label label-js">JS</span>{% endif %}
 			<a href="{{repo_home_url}}" class="o-buttons o-buttons--big o-registry__github-button"><i class="fa fa-github"></i>View on Github</a>
 
 			<ul class="doc-links">
@@ -84,10 +85,10 @@
 					{% else %}
 						<dt>Bundle sizes:</dt>
 						<dd>
-							{% if bundlesize_js %}
+							{% if has_js and bundlesize_js %}
 								<span class="bundlesize_js">{{bundlesize_js|bytes}} JavaScript</span>
 							{% endif %}
-							{% if bundlesize_css %}
+							{% if has_css and bundlesize_css %}
 								<span class="bundlesize_css">{{bundlesize_css|bytes}} CSS</span>
 							{% endif %}
 						</dd>
