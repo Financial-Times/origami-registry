@@ -2,6 +2,10 @@
 	@include oFormsGroup;
 }
 
+.o-forms-label {
+	@include oFormsLabel;
+}
+
 .o-forms-text {
 	@include oFormsCommonField;
 }
@@ -21,4 +25,10 @@
 	line-height: 24px;
 	position: relative;
 	top: -2px; // Align with form labels
+}
+
+.version-select {
+	@include oFormsCommonField;
+	@include oFormsSelect;
+	width: 140px;
 }
