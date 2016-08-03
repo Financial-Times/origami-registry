@@ -65,15 +65,13 @@
 			<section class="detail-section detail-comp-info" id="section-info">
 				<h2>Component information</h2>
 
-				<div class="o-forms-group">
-					<label class="o-forms-label" for="version-select">Version:</label>
-					<select class="version-select" id="version-select" name="version-select" data-bind="position">
-						{% for version in versions %}
-							<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
-						{% endfor %}
-						<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
-					</select>
-				</div>
+				<label class="o-forms-label o-forms-label--inline" for="version-select">Version:</label>
+				<select class="version-select" id="version-select" name="version-select" data-bind="position">
+					{% for version in versions %}
+						<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
+					{% endfor %}
+					<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
+				</select>
 
 				<dl class="component-info-details">
 					<dt>Latest stable version:</dt>

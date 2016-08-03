@@ -4,6 +4,11 @@
 
 .o-forms-label {
 	@include oFormsLabel;
+
+	&--inline {
+		display: inline-block;
+		margin-right: 5px;
+	}
 }
 
 .o-forms-checkbox {
