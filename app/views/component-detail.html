@@ -85,10 +85,10 @@
 					{% else %}
 						<dt>Bundle sizes:</dt>
 						<dd>
-							{% if has_js and bundlesize_js %}
+							{% if bundlesize_js %}
 								<span class="bundlesize_js">{{bundlesize_js|bytes}} JavaScript</span>
 							{% endif %}
-							{% if has_css and bundlesize_css %}
+							{% if bundlesize_css %}
 								<span class="bundlesize_css">{{bundlesize_css|bytes}} CSS</span>
 							{% endif %}
 						</dd>
