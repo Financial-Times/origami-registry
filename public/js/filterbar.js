@@ -1,10 +1,8 @@
 /* global $ */
 
-'use strict';
-
 $(function() {
-	var $componentList = $('.component-navigation__list');
-	var itemSelector = 'li';
+	 var $componentList = $('.component-navigation__list');
+	 var itemSelector = 'li';
 
 	if ($componentList.length === 0) {
 		$componentList = $('.component-list tbody');
@@ -12,19 +10,19 @@ $(function() {
 	}
 
 	function filterRows() {
-		var rows = $('.searchable');
-		var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
+		 var rows = $('.searchable');
+		 var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
 		rows.hide();
-		var filteredRows = rows.filter(function () {
-			var row = $(this);
-			var filterMatch = true;
+		 var filteredRows = rows.filter(function () {
+			 var row = $(this);
+			 var filterMatch = true;
 			$('.filter-bar input:checkbox').each(function () {
 				if (!this.checked && row.hasClass(this.name + '-' + this.value)) {
 					filterMatch = false;
 					return filterMatch;
 				}
 			});
-			var elem = row.find('[data-module-name--js]').attr('data-name');
+			 var elem = row.find('[data-module-name--js]').attr('data-name');
 			if (filterMatch && elem && regex.test(elem)) {
 				if ($('#filter').val()) {
 					row.find('[data-module-name--js]').html(
@@ -37,18 +35,16 @@ $(function() {
 			}
 		});
 		filteredRows.show();
-		var emptySearch = $('.empty-search');
-		filteredRows.length === 0 ? emptySearch.removeAttr('hidden') : emptySearch.attr('hidden');
+		 var emptySearch = $('.empty-search');
+		filteredRows.length === 0 ? emptySearch.attr('aria-hidden', 'false') : emptySearch.attr('aria-hidden', 'true');
 		return rows;
 	}
 
 	function navigateRows(key) {
-
-
-		var rows = $componentList.find(itemSelector + ':visible'),
-			current = rows.filter('.focused'),
-			index = rows.index(current),
-			select = 0;
+		 var rows = $componentList.find(itemSelector + ':visible');
+		 var	current = rows.filter('.focused');
+		 var	index = rows.index(current);
+		 var	select = 0;
 
 		if (key === 40) { // Down
 			if (index !== (rows.length - 1) && index >= 0) {
@@ -69,7 +65,7 @@ $(function() {
 	function filterEvent(e){
 		e.preventDefault();
 
-		var rows = filterRows();
+		 var rows = filterRows();
 
 		// If using the up/down arrow keys, navigate the user through the list of components
 		if (e.keyCode && (e.keyCode === 40 || e.keyCode === 38) && rows.find(':visible:eq(0)').length) {
