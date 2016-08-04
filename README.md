@@ -29,7 +29,13 @@ You may now have to change the owner of your `.docker` directory if the owner is
 chown -R `whoami` ~/.docker
 ```
 
-Create a virtual machine to run the application's containers using the Make task. The default size didn't appear to be large enough so this will create one with an increased disk size:
+You'll also need `gulp` installed globally to compile the front-end assets:
+
+```sh
+npm install -g gulp
+```
+
+Create a virtual machine to run the application's containers using the Make task, this will also install all of the front-end dependencies with `npm` and `bower`.
 
 ```sh
 make install
@@ -52,7 +58,13 @@ Now you can access the app over HTTP on port `3000`. If you're on a Mac, you'll 
 open "http://$(docker-machine ip default):3000/"
 ```
 
-The MySQL database is accessible on port 3306.
+The MySQL database is accessible on port 3306, the settings for which are in the `.env` file.
+
+To watch and compile front-end assets during development, you can run:
+
+```sh
+make watch-dev
+```
 
 ### Setting up a local database
 
