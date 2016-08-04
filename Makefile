@@ -11,13 +11,13 @@ install: node_modules bower_components
 
 build-dev: build
 	@docker-compose build
-	@gulp build
+	@obt build --js=./public/js/main.js --sass=./public/scss/main.scss --env=production --buildFolder=./public
 
 run-dev:
 	@docker-compose up
 
 watch-dev:
-	@gulp watch
+	@obt build --watch --js=./public/js/main.js --sass=./public/scss/main.scss --env=production --buildFolder=./public
 
 node_modules:
 	@echo "Running npm install"
