@@ -10,29 +10,29 @@ $(function() {
 	}
 
 	function filterRows() {
-		 var rows = $('.searchable');
-		 var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
+		var rows = $('.searchable');
+		var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
 		rows.hide();
-		 var filteredRows = rows.filter(function () {
-			var row = $(this);
-			var filterMatch = true;
-			$('.filter-bar input:checkbox').each(function () {
-				if (!this.checked && row.hasClass(this.name + '-' + this.value)) {
-					filterMatch = false;
-					return filterMatch;
-				}
-			});
-			var elem = row.find('[data-module-name--js]').attr('data-name');
-			if (filterMatch && elem && regex.test(elem)) {
-				if ($('#filter').val()) {
-					row.find('[data-module-name--js]').html(
-						row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
-					);
-				} else {
-					row.find('[data-module-name--js]').html(row.find('[data-module-name--js]').attr('data-name'));
-				}
-				return true;
+		var filteredRows = rows.filter(function () {
+		var row = $(this);
+		var filterMatch = true;
+		$('.filter-bar input:checkbox').each(function () {
+			if (!this.checked && row.hasClass(this.name + '-' + this.value)) {
+				filterMatch = false;
+				return filterMatch;
 			}
+		});
+		var elem = row.find('[data-module-name--js]').attr('data-name');
+		if (filterMatch && elem && regex.test(elem)) {
+			if ($('#filter').val()) {
+				row.find('[data-module-name--js]').html(
+					row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
+				);
+			} else {
+				row.find('[data-module-name--js]').html(row.find('[data-module-name--js]').attr('data-name'));
+			}
+			return true;
+		}
 		});
 		filteredRows.show();
 		var emptySearch = $('.empty-search');
