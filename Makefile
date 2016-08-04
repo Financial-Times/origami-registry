@@ -6,14 +6,26 @@ deploy: build
 build:
 	@if [[ "$$(docker-machine ls | grep dev)" == *"Stopped"* ]]; then make _docker-start; else echo "Docker machine already running"; fi
 
-install:
+install: node_modules bower_components
 	@if [[ "$$(docker-machine ls | grep dev)" != *"dev"* ]]; then make _docker-create; else echo "Docker machine already created"; fi
 
 build-dev: build
 	@docker-compose build
+	@gulp build
 
 run-dev:
 	@docker-compose up
+
+watch-dev:
+	@gulp watch
+
+node_modules:
+	@echo "Running npm install"
+	@npm install
+
+bower_components:
+	@echo "Running bower install"
+	@bower install
 
 _docker-create:
 	@docker-machine create --driver virtualbox --virtualbox-disk-size "50000" dev
