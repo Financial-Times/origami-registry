@@ -1,0 +1,279 @@
+{% extends "page.html" %}
+
+{% block content %}
+<!-- Component ID: {{component_id}}, version ID: {{id}} -->
+<div class="o-techdocs-content">
+	<a href="/">All components</a> <i class="fa fa-angle-double-right"></i>
+	<div class="o-grid-row">
+		<div data-o-grid-colspan="12 M9">
+			<h1 class="component-header">{{module_name}}
+				<select class="o-forms-select version-select">
+					{% for version in versions %}
+						<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
+					{% endfor %}
+					<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
+				</select>
+			</h1>
+		</div>
+		<div class="component-build-metadata" data-o-grid-colspan="12 M3">
+			{% if ci_status == 'pass' %}
+				<div class="badge-ok"><i class="fa fa-check"></i> Build passed</div>
+			{% elseif ci_status == 'fail' %}
+				<div class="badge-danger"><i class="fa fa-warning"></i> Build failed</div>
+			{% endif %}
+		</div>
+
+		{% if not is_stable %}
+		<div data-o-grid-colspan="12" class='o-techdocs-content'>
+			<aside class='unstable-warning'>
+				<h4>Warning: this version is unstable</h4>
+				<p>This is an unstable pre-release of an upcoming version of this component.  Its API may be subject to breaking changes.</p>
+			</aside>
+		</div>
+		{% endif %}
+
+		<div data-o-grid-colspan="12 M6">
+			<p>{{description}}</p>
+		</div>
+		<div data-o-grid-colspan="12 M6" style="text-align: right;">
+			<p class="pills">Jump to:
+				{% if demos %}<a href="#section-demos">Demos</a>{% endif %}
+				{% if origami_type == 'service' or has_js or has_css %}<a href="#section-usage">Quick start</a>{% endif %}
+				<a href="#section-info">Component information</a>
+				{% if readme_gfm %}<a href="#section-docs">Documentation</a>{% endif %}
+			</p>
+		</div>
+	</div>
+
+	{% if demos %}
+	<section class="detail-section" id="section-demos">
+		{% if demos|length > 1 %}
+			<div data-o-grid-colspan="9" class="demos-wrap">
+		{% endif %}
+			{% for demo in demos %}
+				<div class="demo-container{% if demo.expanded %} visible{% endif %} with-source" id="demo-{{ demo.name|slugify}}">
+					<div class="demo-header">
+						<span class="demo-title activity">{{ demo.name }}</span>
+						{% if not force_old_demo_url %}
+						<ul class="demo-tools">
+							<li><a target="_blank" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" title="Open this demo in a new window"><i class="fa fa-expand"></i></a></li>
+							<li><a href="/components/{{module_name}}@{{tag_name}}/demos/visual/{{demo.name}}" title="Embed this demo on another webpage" class="demo-embed-link o-overlay-trigger" data-o-overlay-src="#overlay-template-{{ demo.name|slugify}}"  data-o-overlay-id="overlay-template-{{ demo.name|slugify}}" data-o-overlay-arrow-position="bottom" data-o-overlay-compact="true"><i class="fa fa-file-code-o"></i></a>
+								<script type="text/template" id="overlay-template-{{ demo.name|slugify}}">
+								<textarea class="demo-embed-code" onclick="this.select();"><!-- Put the following line *once* at the top of your page -->
+&lt;script src="http://registry.origami.ft.com/embedapi">&lt;/script>
+
+<!-- Put the following line where you want the demo to show -->
+&lt;iframe style="width: 100%;" frameborder="0" scrolling="no" src="http://{{SERVER.HTTP_HOST}}/components/{{module_name}}@{{tag_name}}/demos/visual/{{demo.name}}?embed=1">&lt;/iframe></textarea>
+								</script>
+							</li>
+							<li><a target="_blank" href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" title="Experiment with this demo in JS Bin"><i class="fa fa-wrench"></i></a></li>
+						</ul>
+						{% endif %}
+						{% if demo.description %}<div class="demo-subtitle">{{ demo.description }}</div>{% endif %}
+					</div>
+					{% if force_old_demo_url %}
+					<div class="demo-frame-container">
+						<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/files/{{module_name}}@{{tag_name}}/{{demo.path}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
+					</div>
+					{% else %}
+					<div class="demo-frame-container">
+						<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
+					</div>
+					<pre class="demo-source" data-src="/components/{{module_name}}@{{tag_name}}/demos/code/{{demo.name}}"></pre>
+					{% endif %}
+				</div>
+			{% endfor %}
+
+		{% if demos|length > 1 %}
+			</div>
+			<div data-o-grid-colspan="3">
+				<h4 style="margin-top: 0">Show/hide demos</h4>
+				<ul class="demo-selector">
+				{% for demo in demos %}
+					<input type="checkbox" name="demos" value="{{ demo.name|slugify}}" class="o-forms-checkbox o-forms-checkbox--small" id="toggle-{{ demo.name|slugify}}"{% if demo.expanded %} checked{% endif %}><label for="toggle-{{ demo.name|slugify}}" class="o-forms-label">{{ demo.name }}</label>
+				{% endfor %}
+				</ul>
+
+				<h4>Set demo options</h4>
+				<input type="checkbox" name="checkerboard" class="o-forms-checkbox o-forms-checkbox--small" id="transparency-toggle"><label for="transparency-toggle" class="o-forms-label">Show transparency checkerboard</label>
+				<input type="checkbox" name="code" class="o-forms-checkbox o-forms-checkbox--small" id="code-toggle" checked="checked"><label for="code-toggle" class="o-forms-label">Show source code</label>
+			</div>
+		{% endif %}
+	</section>
+	{% endif %}
+
+	{% if origami_type == 'service' %}
+	<section class="detail-section" id="section-usage">
+		<h2>Use the service</h2>
+		<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
+	</section>
+	{% endif %}
+	{% if origami_type == 'module' and (has_js or has_css) %}
+	<section class="detail-section" id="section-usage">
+		<p class="pills pills--float" data-tabs="quickstart">
+			<a href="#quickstart-bs">Build service</a>
+			<a href="#quickstart-manual">Manual build</a>
+		</p>
+		<h2>Quick start</h2>
+		<div id="quickstart-bs">
+			<p>Add the following token to your <a href="http://origami.ft.com/docs/developer-guide/build-service">build service</a>
+			{% if has_js and has_css %}<code>script</code> and <code>link</code> tags
+			{% elseif has_js %}<code>script</code> tag
+			{% elseif has_css %}<code>link</code> tag{% endif %}
+			(<a href="#note-buildservice-setup">how do I do that?</a>):</p>
+			<pre><code>{{module_name}}@^{{tag_name}}</code></pre>
+			<aside class="o-techdocs__aside--toggleable" id="note-buildservice-setup">
+				<h4>Loading assets using the build service</h4>
+				<p>The Origami build service is designed to efficiently bundle JavaScript and CSS resources and deliver them into your page.  To make best use of this, you should have <strong>only one</strong> (Origami related) <code>&lt;script&gt;</code> and one <code>&lt;link&gt;</code> tag in your page, even if you want to load more than one component.  You can request all the components you want in a single request, like this:</p>
+				<pre><code class="lang-html">&lt;link rel="stylesheet" href="https://origami-build.ft.com/v2/bundles/css?modules=module@version,module@version,module@version" />
+&lt;script src="https://origami-build.ft.com/v2/bundles/js?modules=module@version,module@version,module@version">&lt;/script></code></pre>
+				<p>Read the <a href="http://origami.ft.com/docs/developer-guide/using-modules/#core-vs-enhanced-experience">developer guide</a> for information on where to place these tags in your source code (if in a hurry: link goes in <code>&lt;head&gt;</code>, script goes just before <code>&lt;/body&gt;</code>), and how to use a <em>cuts the mustard</em> test to make the script load only in browsers that are compatible with our enhanced experience.</p>
+				<p>Regardless of whether your site is loaded over HTTP or HTTPS, we recommend using HTTPS to load Origami resources.</p>
+				<p>For full build service options see the <a href="http://origami.ft.com/docs/developer-guide/build-service/#api-reference">build service API docs</a></p>
+			</aside>
+		</div>
+		<div id="quickstart-manual">
+			<p>Add this dependency to your <code>bower.json</code> file during <strong>step 4</strong> of the <a href="http://origami.ft.com/docs/developer-guide/building-modules/">standard Origami build process</a>:</p>
+			<pre><code class="lang-json">"{{module_name}}": "^{{tag_name}}"</code></pre>
+		</div>
+		<p>The tag includes <code>^</code> which enables <em>automatic upgrades</em> via <a href="http://semver.org">Semver</a>.  Use the <a href='http://semver.npmjs.com/'>semver calculator</a> to see what versions are covered by your tag.</p>
+	</section>
+	{% endif %}
+
+	<section class="detail-section" id="section-info">
+		<h2>Component information</h2>
+		<div class="o-grid-row o-grid-row--compact">
+			<div data-o-grid-colspan="12 S6">
+				{% if latest_stable_version %}
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">Latest stable version</div>
+					<div class="val" data-o-grid-colspan="12 M8"><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</div>
+				</div>
+				{% endif %}
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">This version</div>
+					<div class="val" data-o-grid-colspan="12 M8"><span class="version-number">{{tag_name}}</span> ({{datetime_created|timediff}} old)</div>
+				</div>
+
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">Support status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more</a>)</div>
+					<div class="val" data-o-grid-colspan="12 M8"><span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span> (as of <span class="version-number">{{support_status_version}}</span>)</div>
+				</div>
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">Report issues to</div>
+					<div class="val" data-o-grid-colspan="12 M8">{{support|linkify|raw}}</div>
+				</div>
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">Installable?</div>
+					<div class="val" data-o-grid-colspan="12 M8">
+						<span class="label-{% if is_valid %}pass{% endif %}{% if not is_valid %}fail{% endif %}">
+							{% if is_valid == 1 %}
+								OK
+							{% elseif is_valid == 0 %}
+								Not installable, fails build tests
+							{% else %}
+								Unknown
+							{% endif %}
+							<a style="margin-left: 5px; color: white" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/modules/{{module_name}}@{{tag_name}}" title="View build test results"><i class="fa fa-info-circle"></i></a>
+						</span>
+					</div>
+				</div>
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">Code repository</div>
+					<div class="val" data-o-grid-colspan="12 M8">
+						<a href="{{repo_home_url}}">{{repo_home_url}}</a>
+					</div>
+				</div>
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">Last indexed</div>
+					<div class="val" data-o-grid-colspan="12 M8">
+						{{datetime_last_cached|date('j M Y H:i:s')}} (<a href="/components/{{module_name}}@{{tag_name}}/refresh" class="link-refresh">Build now</a>)
+					</div>
+				</div>
+				{% if origami_type == 'service' %}
+					<div class="o-grid-row">
+						<div class="key" data-o-grid-colspan="12 M4">Live URL</div>
+						<div class="val" data-o-grid-colspan="12 M8">
+							<a href="{{service_url}}">{{service_url}}</a>
+						</div>
+					</div>
+				{% else %}
+					<div class="o-grid-row">
+						<div class="key" data-o-grid-colspan="12 M4">Bundle sizes</div>
+						<div class="val" data-o-grid-colspan="12 M8">
+							{% if bundlesize_js %}
+								<div class='bundlesize_js'>{{bundlesize_js|bytes}} JavaScript</div>
+							{% endif %}
+							{% if bundlesize_css %}
+								<div class='bundlesize_css'>{{bundlesize_css|bytes}} CSS</div>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			<div data-o-grid-colspan="12 S6">
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">Dependencies</div>
+					<div class="val" data-o-grid-colspan="12 M8">
+						{% if not dependencies %}
+							<span style="color:#bbb">None</span>
+						{% endif %}
+						{% if dependencies %}
+						<table class='dependency-list'>
+							{% for dependency in dependencies %}
+							<tr>
+								<td>{% if dependency.id %}<a href="/components/{{dependency.child_component_name}}">{% endif %}{{dependency.child_component_name}}{% if dependency.id %}</a>{% endif %}</td>
+								<td><span class='version-number'>{{dependency.child_component_target}}</span></td>
+								<td>
+									{% if dependency.uptodate %}
+									<span title='The latest version of the dependency can be used' class='label-active'>OK</span>
+									{% else %}
+									<span title='Forced by this constraint to use an older version of the dependency' class='label-experimental'>Out of date</span>
+									{% endif %}
+								</td>
+								<td><span title='Latest available version of the dependency' class='version-number'>{{dependency.latest}}</span></td>
+							</tr>
+							{% endfor %}
+						</table>
+						{% endif %}
+					</div>
+				</div>
+				<div class="o-grid-row">
+					<div class="key" data-o-grid-colspan="12 M4">Dependents</div>
+					<div class="val" data-o-grid-colspan="12 M8">
+						{% if not dependents %}
+							<span style="color: #bbb">None</span>
+						{% endif %}
+<!-- No indentation, to ensure there's no space in between items: -->
+{% for dependent in dependents %}<span class="detail-modulelist__item">{% if dependent.id %}<a href="/components/{{dependent.module_name}}">{% endif %}{{dependent.module_name}}{% if dependent.id %}</a>{% endif %}</span>{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{% if docs_sections %}
+	<section class="detail-section" id="section-docs">
+		{% if docs_sections > 1 %}
+		<p class="pills pills--float" data-tabs="docs">
+			{% if readme_gfm %}<a href="#docs-readme">README</a>{% endif %}
+			{% if has_css %}<a href="#docs-css">Sass reference</a>{% endif %}
+			{% if has_js %}<a href="#docs-js">JavaScript reference</a>{% endif %}
+		</p>
+		{% endif %}
+		<h2>Documentation</h2>
+		{% if readme_gfm %}
+		<div id="docs-readme" class="docs-content o-techdocs-content">
+			{{readme_gfm|markdown|raw}}
+		</div>
+		{% endif %}
+		{% if has_css %}
+		<iframe id="docs-css" style="min-height: 400px" class="docs-content docs-content--frame" src="http://codedocs.webservices.ft.com/v1/sassdoc/{{module_name}}@{{tag_name}}" allowTransparency="true" scrolling="no"></iframe>
+		{% endif %}
+		{% if has_js %}
+		<iframe id="docs-js" class="docs-content docs-content--frame" src="http://codedocs.webservices.ft.com/v1/jsdoc/{{module_name}}@{{tag_name}}" allowTransparency="true" scrolling="no"></iframe>
+		{% endif %}
+	</section>
+	{% endif %}
+</div>
+{% endblock %}

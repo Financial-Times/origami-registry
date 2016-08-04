@@ -17,7 +17,7 @@ final class ComponentVersion extends Model {
 
 	private $component;
 
-	protected $fields = array('id', 'component_id', 'tag_name', 'datetime_last_cached', 'datetime_created', 'is_valid', 'description', 'origami_type', 'origami_group', 'origami_version', 'support', 'service_url', 'readme_gfm', 'support_status', 'ci_status', 'has_js', 'has_css', 'bundlesize_js', 'bundlesize_css');
+	protected $fields = array('id', 'component_id', 'tag_name', 'datetime_last_cached', 'datetime_created', 'is_valid', 'description', 'origami_type', 'origami_category', 'origami_version', 'support', 'service_url', 'readme_gfm', 'support_status', 'ci_status', 'has_js', 'has_css', 'bundlesize_js', 'bundlesize_css');
 	protected $datefields = array('datetime_last_cached', 'datetime_created');
 
 
@@ -179,11 +179,6 @@ final class ComponentVersion extends Model {
 				}
 			}
 
-			self::$app->logger->debug('Build service response', array(
-				'component' => $name,
-				'response' => $response->getBody(),
-			));
-
 			$this->is_valid = !empty($responseJson->build->origami->valid);
 
 			if (isset($responseJson->bowerManifest) and isset($responseJson->bowerManifest->dependencies)) {
@@ -213,7 +208,7 @@ final class ComponentVersion extends Model {
 				foreach (array(
 					'description' => 'description',
 					'origamiType' => 'origami_type',
-					'origamiGroup' => 'origami_group',
+					'origamiCategory' => 'origami_category',
 					'origamiVersion' => 'origami_version',
 					'support' => 'support',
 					'supportStatus' => 'support_status',
