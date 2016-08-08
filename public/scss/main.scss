@@ -6,6 +6,9 @@
 @import 'o-hierarchical-nav/main';
 @import 'o-labels/main';
 
+$o-header-services-is-silent: false;
+@import 'o-header-services/main';
+
 $o-buttons-is-silent: false;
 @import 'o-buttons/main';
 $o-tabs-is-silent: false;
