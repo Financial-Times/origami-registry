@@ -4,6 +4,8 @@ deploy: build
 	@rm -f ./appversion
 
 build:
+	@# If the dev machine is 'saved' I had problems restarting it, so kill the machine and start again.
+	@if [[ "$$(docker-machine ls | grep dev)" == *"Saved"* ]]; then docker-machine kill dev; fi
 	@if [[ "$$(docker-machine ls | grep dev)" == *"Stopped"* ]]; then make _docker-start; else echo "Docker machine already running"; fi
 
 install: node_modules bower_components
