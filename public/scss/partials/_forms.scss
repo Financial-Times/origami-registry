@@ -1,24 +1,9 @@
+@include oFormsRadioCheckbox;
+
 .o-forms-group {
 	@include oFormsGroup;
 }
 
 .o-forms-text {
 	@include oFormsCommonField;
-}
-
-.filter-bar {
-	margin-top:40px;
-	margin-bottom: 15px;
-}
-
-.filter-bar .o-forms-group {
-	margin-bottom: 10px;
-}
-
-.filter-bar-label {
-	float: left;
-	width: 80px;
-	line-height: 24px;
-	position: relative;
-	top: -2px; // Align with form labels
 }

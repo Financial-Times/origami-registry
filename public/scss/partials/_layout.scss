@@ -7,31 +7,3 @@
 		max-width: 100%;
 	}
 }
-
-.grid-row {
-	@include oGridRow;
-}
-
-.grid-col--full {
-	@include oGridColspan((default: 12));
-}
-
-.grid-col--quarter {
-	@include oGridColspan((default: 12, M: 6, L: 3));
-}
-
-.grid__col--half {
-	@include oGridColspan((default: 12, M: 6));
-}
-
-.grid-col--three-quarters {
-	@include oGridColspan((default: 12, M: 6, L: 9));
-}
-
-.grid-col--third {
-	@include oGridColspan((default: 12, M: 6, L: 4));
-}
-
-.grid-col--two-thirds {
-	@include oGridColspan((default: 12, M: 6, L: 8));
-}

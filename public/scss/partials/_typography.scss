@@ -1,5 +1,6 @@
-@include oFontsInclude(MetricWeb, $weight: regular);
-
+a {
+	color: oColorsGetPaletteColor('dark-blue');
+}
 
 code,
 pre,
@@ -76,4 +77,15 @@ pre.cli {
 	output {
 		color: $o-techdocs-color-grey3;
 	}
+}
+
+/* Version number */
+
+.version-number {
+	font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+	font-size: 0.875em;
+}
+.component-list .version-number {
+	min-width: 60px;
+	display: inline-block;
 }

@@ -16,19 +16,22 @@ $o-overlay-is-silent: false;
 @import 'partials/variables';
 @import 'partials/mixins';
 
+@import 'partials/github-gist.hljs-theme';
+
 @import 'partials/base';
 @import 'partials/typography';
 @import 'partials/layout';
-
-@import 'partials/github-gist.hljs-theme';
 
 @import 'partials/logo';
 
 @import 'partials/header';
 @import 'partials/forms';
-@import 'partials/component-list';
-@import 'partials/component-details';
-@import 'partials/demos';
 @import 'partials/labels';
-@import 'partials/utilities';
-@import 'partials/component-sidenav';
+
+@import 'partials/filter-bar';
+@import 'partials/component-list';
+// @import 'partials/component-details';
+// @import 'partials/demos';
+
+// @import 'partials/utilities';
+// @import 'partials/component-sidenav';

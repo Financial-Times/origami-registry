@@ -3,32 +3,23 @@
 {% block content %}
 <div class="o-registry-container">
 	<form class="filter-bar">
-		<div class="grid-row">
-			<div class="grid-col--full">
-				<div class="o-forms-group">
-					<input id="filter" type="text" class="o-forms-text" name="filter" placeholder="Type to filter by name" autofocus />
-				</div>
-			</div>
+		<div class="o-forms-group">
+			<input id="filter" type="text" class="o-forms-text" name="filter" placeholder="Type to filter by name" autofocus />
 		</div>
-		<div class="grid-row">
-			<div class="grid-col--third">
-				<div class="o-forms-group component-filter-checkboxes">
-					<label class="o-forms-label filter-bar-label">Show:</label>
-					<input type="checkbox" name="type" value="module" class="o-forms-checkbox o-forms-checkbox--small" id="check-module" checked><label for="check-module" class="o-forms-label">Modules</label>
-					<input type="checkbox" name="type" value="service" class="o-forms-checkbox o-forms-checkbox--small" id="check-service"><label for="check-service" class="o-forms-label">Services</label>
-				</div>
-			</div>
 
-			<div class="grid-col--two-thirds">
-				<div class="o-forms-group component-filter-checkboxes">
-					<label class="o-forms-label filter-bar-label">Status:</label>
-					<input type="checkbox" name="support" value="active" class="o-forms-checkbox o-forms-checkbox--small" id="check-active" checked><label for="check-active" class="o-forms-label">Active</label>
-					<input type="checkbox" name="support" value="maintained" class="o-forms-checkbox o-forms-checkbox--small" id="check-maintained" checked><label for="check-maintained" class="o-forms-label">Maintained</label>
-					<input type="checkbox" name="support" value="deprecated" class="o-forms-checkbox o-forms-checkbox--small" id="check-deprecated"><label for="check-deprecated" class="o-forms-label">Deprecated</label>
-					<input type="checkbox" name="support" value="dead" class="o-forms-checkbox o-forms-checkbox--small" id="check-dead"><label for="check-dead" class="o-forms-label">Dead</label>
-					<input type="checkbox" name="support" value="experimental" class="o-forms-checkbox o-forms-checkbox--small" id="check-experimental"><label for="check-experimental" class="o-forms-label">Experimental</label>
-				</div>
-			</div>
+		<div class="o-forms-group filter-bar__checkboxes filter-bar__checkboxes--type">
+			<label class="o-forms-label filter-bar__label">Show:</label>
+			<input type="checkbox" name="type" value="module" class="o-forms-checkbox o-forms-checkbox--small" id="check-module" checked><label for="check-module" class="o-forms-label">Modules</label>
+			<input type="checkbox" name="type" value="service" class="o-forms-checkbox o-forms-checkbox--small" id="check-service"><label for="check-service" class="o-forms-label">Services</label>
+		</div>
+
+		<div class="o-forms-group filter-bar__checkboxes filter-bar__checkboxes--status">
+			<label class="o-forms-label filter-bar__label">Status:</label>
+			<input type="checkbox" name="support" value="active" class="o-forms-checkbox o-forms-checkbox--small" id="check-active" checked><label for="check-active" class="o-forms-label">Active</label>
+			<input type="checkbox" name="support" value="maintained" class="o-forms-checkbox o-forms-checkbox--small" id="check-maintained" checked><label for="check-maintained" class="o-forms-label">Maintained</label>
+			<input type="checkbox" name="support" value="deprecated" class="o-forms-checkbox o-forms-checkbox--small" id="check-deprecated"><label for="check-deprecated" class="o-forms-label">Deprecated</label>
+			<input type="checkbox" name="support" value="dead" class="o-forms-checkbox o-forms-checkbox--small" id="check-dead"><label for="check-dead" class="o-forms-label">Dead</label>
+			<input type="checkbox" name="support" value="experimental" class="o-forms-checkbox o-forms-checkbox--small" id="check-experimental"><label for="check-experimental" class="o-forms-label">Experimental</label>
 		</div>
 	</form>
 

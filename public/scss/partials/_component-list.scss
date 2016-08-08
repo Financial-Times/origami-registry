@@ -1,14 +1,13 @@
 .component-list {
-	@include oTableBase;
-	@include oTableHorizontalLines;
-	@include oTableRowStripes;
 	width: 100%;
 }
 .component-list .component a {
 	text-decoration: none;
 }
 .component-list .component {
+	padding: 5px;
 	cursor: pointer;
+	border-bottom: 1px solid #eee;
 }
 .component-list .component:hover td {
 	background: #f8f8f8;
@@ -22,21 +21,10 @@
 	color: #777777;
 }
 
-/* Version number */
-
-.version-number {
-	font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
-	font-size: 0.875em;
-}
-.component-list .version-number {
-	min-width: 60px;
-	display: inline-block;
-}
-
 /* Mobile styles */
 @media (max-width: 600px) {
 	.component-list td {
-		border-bottom: 0 !important;
+		border-bottom: 0;
 	}
 	.component-list tr {
 		border-bottom: 1px solid #eeeeee;
