@@ -7,6 +7,8 @@
 @import 'o-labels/main';
 @import 'o-buttons/main';
 
+$o-header-services-is-silent: false;
+@import 'o-header-services/main';
 $o-tabs-is-silent: false;
 @import 'o-tabs/main';
 $o-overlay-is-silent: false;
@@ -23,7 +25,6 @@ $o-overlay-is-silent: false;
 
 @import 'partials/logo';
 
-@import 'partials/header';
 @import 'partials/forms';
 @import 'partials/labels';
 

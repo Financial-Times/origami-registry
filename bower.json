@@ -19,6 +19,7 @@
     "o-grid": "^4.2.0",
     "o-hierarchical-nav": "^4.0.0",
     "o-table": "^5.0.1",
+    "o-header-services": "^1.0.0-beta.2",
     "highlight.js": "Financial-Times/highlight.js-shim"
   }
 }
