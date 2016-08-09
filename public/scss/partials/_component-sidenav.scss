@@ -1,3 +1,18 @@
+.component-side-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 220px;
+	height: 100%;
+	padding: 40px 15px 0;
+	border-right: 1px solid #cec6b9;
+	overflow-y: auto;
+}
+
+.component-side-nav .filter-bar {
+	margin: 0 0 20px;
+}
+
 .component-navigation {
 	list-style: none;
 	padding-left: 0;
@@ -12,7 +27,6 @@ h3.component-navigation__title {
 	margin: 10px 0 5px;
 	padding: 8px 20px;
 	font-size: 16px;
-	background: #a9cadc;
 	color: #333;
 }
 
@@ -20,35 +34,4 @@ h3.component-navigation__title {
 	display: block;
 	padding: 5px 20px;
 	text-decoration: none;
-}
-
-.component-navigation__item a:hover {
-	background-color: #a9cadc;
-	color: #333;
-}
-
-
-.component-side-nav {
-	@include oGridColspan((default: 0, M: 2));
-	position:absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	padding-top: 20px;
-
-	color: #fff;
-	overflow-y: auto;
-
-	@include oGridRespondTo(M) {
-		padding-left: 0;
-		background-color: #333;
-	}
-}
-
-.component-side-nav .filter-bar {
-	margin-top: 0;
-}
-
-.component-side-nav a {
-	color: #fff;
 }

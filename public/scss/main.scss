@@ -5,9 +5,8 @@
 @import 'o-table/main';
 @import 'o-hierarchical-nav/main';
 @import 'o-labels/main';
-
-$o-buttons-is-silent: false;
 @import 'o-buttons/main';
+
 $o-tabs-is-silent: false;
 @import 'o-tabs/main';
 $o-overlay-is-silent: false;
@@ -30,8 +29,9 @@ $o-overlay-is-silent: false;
 
 @import 'partials/filter-bar';
 @import 'partials/component-list';
-// @import 'partials/component-details';
-// @import 'partials/demos';
+@import 'partials/component-sidenav';
+@import 'partials/component-details';
+@import 'partials/demos';
 
-// @import 'partials/utilities';
-// @import 'partials/component-sidenav';
+@import 'partials/utilities';
+

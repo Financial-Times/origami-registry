@@ -1,17 +1,22 @@
 {% extends "page.html" %}
 
 {% block content %}
-<!-- Component ID: {{component_id}}, version ID: {{id}} -->
-	<div class="component-detail__wrapper grid-row">
+	<!-- Component ID: {{component_id}}, version ID: {{id}} -->
+	<div class="component-detail__wrapper">
 		<!-- Nav -->
 		{% include "blocks/component-nav.html" %}
 
-		<div class="component-detail__main">
-			<h1 class="component-detail__header">{{module_name}}</h1>
-
+		<div class="component-detail__header">
+			<h1>{{module_name}}</h1>
 			<a href="{{repo_home_url}}" class="o-buttons o-buttons--big o-registry__github-button"><i class="fa fa-github"></i>View on Github</a>
+			<div class="component-description">
+				<p>{{description}}</p>
+			</div>
+		</div>
 
-			<ul class="doc-links">
+		<div class="component-detail__main">
+
+			<!-- <ul class="doc-links">
 				<li><strong>Documentation:</strong></li>
 				<li><a href="{{repo_home_url}}#readme" class="o-buttons o-buttons--standout">README</a></li>
 				{% if has_css %}
@@ -20,20 +25,14 @@
 				{% if has_js %}
 					<li><a href="http://codedocs.webservices.ft.com/v1/jsdoc/{{module_name}}@{{tag_name}}" class="o-buttons o-buttons--standout">JSDoc</a></li>
 				{% endif %}
-			</ul>
+			</ul> -->
 
 			{% if not is_stable %}
-				<div data-o-grid-colspan="12" class='o-techdocs-content'>
-					<aside class='unstable-warning'>
-						<h4>Warning: this version is unstable</h4>
-						<p>This is an unstable pre-release of an upcoming version of this component.  Its API may be subject to breaking changes.</p>
-					</aside>
-				</div>
+				<aside class='unstable-warning'>
+					<h4>Warning: this version is unstable</h4>
+					<p>This is an unstable pre-release of an upcoming version of this component.  Its API may be subject to breaking changes.</p>
+				</aside>
 			{% endif %}
-
-			<div class="component-description">
-				<p>{{description}}</p>
-			</div>
 
 			{% if demos %}
 				<section class="detail-section" id="section-demos">
@@ -60,6 +59,10 @@
 					<h2>Use the service</h2>
 					<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
 				</section>
+			{% endif %}
+
+			{% if origami_type == 'module' and (has_js or has_css) %}
+				{% include "blocks/getting-started.html" %}
 			{% endif %}
 
 			<section class="detail-section detail-comp-info" id="section-info">
@@ -96,11 +99,6 @@
 
 				<a href="#more-information">Full component information</a>
 			</section>
-
-			{% if origami_type == 'module' and (has_js or has_css) %}
-				{% include "blocks/getting-started.html" %}
-			{% endif %}
-
 		</div>
 	</div>
 
