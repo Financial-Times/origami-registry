@@ -4,10 +4,6 @@
 	position: relative;
 }
 
-.demo-source:hover .auto-select-action {
-	display: block;
-}
-
 .demos-wrap {
 	min-height: 1px;
 	padding-left: 0;
@@ -128,7 +124,6 @@
 }
 
 .auto-select-action {
-	display: none;
 	position: absolute;
 	top: 5px;
 	right: 5px;

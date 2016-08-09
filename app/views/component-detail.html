@@ -16,17 +16,6 @@
 
 		<div class="component-detail__main">
 
-			<!-- <ul class="doc-links">
-				<li><strong>Documentation:</strong></li>
-				<li><a href="{{repo_home_url}}#readme" class="o-buttons o-buttons--standout">README</a></li>
-				{% if has_css %}
-					<li><a href="http://codedocs.webservices.ft.com/v1/sassdoc/{{module_name}}@{{tag_name}}" class="o-buttons o-buttons--standout">SassDoc</a></li>
-				{% endif %}
-				{% if has_js %}
-					<li><a href="http://codedocs.webservices.ft.com/v1/jsdoc/{{module_name}}@{{tag_name}}" class="o-buttons o-buttons--standout">JSDoc</a></li>
-				{% endif %}
-			</ul> -->
-
 			{% if not is_stable %}
 				<aside class='unstable-warning'>
 					<h4>Warning: this version is unstable</h4>
@@ -54,10 +43,23 @@
 		</div>
 
 		<div class="component-detail__info">
+			<section class="detail-section" id="section-usage">
+				<h2>Getting started</h2>
+
+				<ul class="doc-links">
+					<li><strong>Documentation:</strong></li>
+					<li><a href="{{repo_home_url}}#readme" class="o-buttons o-buttons--standout">README</a></li>
+					{% if has_css %}
+						<li><a href="http://codedocs.webservices.ft.com/v1/sassdoc/{{module_name}}@{{tag_name}}" class="o-buttons o-buttons--standout">SassDoc</a></li>
+					{% endif %}
+					{% if has_js %}
+						<li><a href="http://codedocs.webservices.ft.com/v1/jsdoc/{{module_name}}@{{tag_name}}" class="o-buttons o-buttons--standout">JSDoc</a></li>
+					{% endif %}
+				</ul>
+
 			{% if origami_type == 'service' %}
-				<section class="detail-section" id="section-usage">
-					<h2>Use the service</h2>
-					<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
+				<h3>Use the service</h3>
+				<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
 				</section>
 			{% endif %}
 

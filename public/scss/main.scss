@@ -28,6 +28,9 @@ $o-overlay-is-silent: false;
 @import 'partials/forms';
 @import 'partials/labels';
 
+@import 'partials/header';
+@import 'partials/footer';
+
 @import 'partials/filter-bar';
 @import 'partials/component-list';
 @import 'partials/component-sidenav';
