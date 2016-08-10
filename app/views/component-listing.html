@@ -44,6 +44,8 @@
 								{% else %}<i class="fa fa-exclamation-triangle"></i>{% endif %}
 								<span class="component-list__component-name" data-module-name--js data-name="{{component.module_name}}">{{component.module_name}}</span>
 							</a>
+							{% if component.has_css %}<span class="label-css">CSS</span>{% endif %}
+							{% if component.has_js %}<span class="label-js">JS</span>{% endif %}
 							<div class="description">{{component.description}}</div>
 						</td>
 						<td class="u-nowrap"><span class="version-number">{{component.tag_name}}</span></td>

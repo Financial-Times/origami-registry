@@ -8,6 +8,9 @@
 
 		<div class="component-detail__header">
 			<h1>{{module_name}}</h1>
+			{% if has_css %}<span class="component-detail__header o-registry__lang-label label-css">CSS</span>{% endif %}
+			{% if has_js %}<span class="component-detail__header o-registry__lang-label label-js">JS</span>{% endif %}
+
 			<a href="{{repo_home_url}}" class="o-buttons o-buttons--big o-registry__github-button"><i class="fa fa-github"></i>View on Github</a>
 			<div class="component-description">
 				<p>{{description}}</p>
