@@ -13,8 +13,8 @@
 
 .component-detail__info {
 	float: right;
-	width: 20%;
-	margin-right: 5%;
+	width: calc(25% - 40px);
+	margin-right: 40px;
 }
 
 .component-detail__header {
@@ -50,7 +50,7 @@
 
 .docs-navigation {
 	list-style: none;
-	margin: 0;
+	margin: 0 0 20px;
 	padding: 0;
 
 	li {
@@ -59,11 +59,11 @@
 
 	a {
 		display: block;
-		padding: 5px 7px;
+		padding: 10px 15px;
 		color: #fff;
 		font-size: 16px;
 		text-decoration: none;
-		background-color: #2e6e9e;
+		background-color: #598caf;
 	}
 }
 
@@ -72,6 +72,15 @@
 
 	p {
 		margin: 0;
+	}
+}
+
+.using-callout {
+	padding: 10px 15px;
+	background-color: #eeeeee;
+
+	h2 {
+		margin-top: 0;
 	}
 }
 
