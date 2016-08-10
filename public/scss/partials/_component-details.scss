@@ -48,6 +48,25 @@
 	max-width: 600px;
 }
 
+.docs-navigation {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		margin-bottom: 2px;
+	}
+
+	a {
+		display: block;
+		padding: 5px 7px;
+		color: #fff;
+		font-size: 16px;
+		text-decoration: none;
+		background-color: #2e6e9e;
+	}
+}
+
 .component-description {
 	clear: both;
 

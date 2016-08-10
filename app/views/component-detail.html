@@ -44,11 +44,9 @@
 
 		<div class="component-detail__info">
 			<section class="detail-section" id="section-usage">
-				<h2>Getting started</h2>
-
-				<ul class="doc-links">
-					<li><strong>Documentation:</strong></li>
-					<li><a href="{{repo_home_url}}#readme" class="o-buttons o-buttons--standout">README</a></li>
+				<ul class="docs-navigation">
+					<li><a href="#more-information" class="o-buttons o-buttons--standout">Component information</a></li>
+					<li><a href="{{repo_home_url}}#readme" class="o-buttons o-buttons--standout">Readme</a></li>
 					{% if has_css %}
 						<li><a href="http://codedocs.webservices.ft.com/v1/sassdoc/{{module_name}}@{{tag_name}}" class="o-buttons o-buttons--standout">SassDoc</a></li>
 					{% endif %}
@@ -57,50 +55,14 @@
 					{% endif %}
 				</ul>
 
-			{% if origami_type == 'service' %}
-				<h3>Use the service</h3>
-				<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
-				</section>
-			{% endif %}
+				{% if origami_type == 'service' %}
+					<h3>Use the service</h3>
+					<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
+				{% endif %}
 
-			{% if origami_type == 'module' and (has_js or has_css) %}
-				{% include "blocks/getting-started.html" %}
-			{% endif %}
-
-			<section class="detail-section detail-comp-info" id="section-info">
-				<h2>Component information</h2>
-
-				<label class="o-forms-label o-forms-label--inline" for="version-select">Version:</label>
-				<select class="version-select" id="version-select" name="version-select" data-bind="position">
-					{% for version in versions %}
-						<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
-					{% endfor %}
-					<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
-				</select>
-
-				<dl class="component-info-details">
-					<dt>Latest stable version:</dt>
-					<dd><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</dd>
-
-					<dt>Status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more</a>):</dt>
-					<dd><span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span>  (as of <span class="version-number">{{support_status_version}}</span>)</dd>
-
-					{% if origami_type == 'service' %}
-						<p>Live URL: <a href="{{service_url}}">{{service_url}}</a></p>
-					{% else %}
-						<dt>Bundle sizes:</dt>
-						<dd>
-							{% if bundlesize_js %}
-								<span class="bundlesize_js">{{bundlesize_js|bytes}} JavaScript</span>
-							{% endif %}
-							{% if bundlesize_css %}
-								<span class="bundlesize_css">{{bundlesize_css|bytes}} CSS</span>
-							{% endif %}
-						</dd>
-					{% endif %}
-				</dl>
-
-				<a href="#more-information">Full component information</a>
+				{% if origami_type == 'module' and (has_js or has_css) %}
+					{% include "blocks/getting-started.html" %}
+				{% endif %}
 			</section>
 		</div>
 	</div>

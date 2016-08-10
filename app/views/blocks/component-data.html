@@ -1,5 +1,35 @@
 <section class="detail-section full-component-details" id="more-information">
-	<h2>Component details</h2>
+	<h2>Component information</h2>
+
+	<label class="o-forms-label o-forms-label--inline" for="version-select">Version:</label>
+	<select class="version-select" id="version-select" name="version-select" data-bind="position">
+		{% for version in versions %}
+			<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
+		{% endfor %}
+		<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
+	</select>
+
+	<dl class="component-info-details">
+		<dt>Latest stable version:</dt>
+		<dd><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</dd>
+
+		<dt>Status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more</a>):</dt>
+		<dd><span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span>  (as of <span class="version-number">{{support_status_version}}</span>)</dd>
+
+		{% if origami_type == 'service' %}
+			<p>Live URL: <a href="{{service_url}}">{{service_url}}</a></p>
+		{% else %}
+			<dt>Bundle sizes:</dt>
+			<dd>
+				{% if bundlesize_js %}
+					<span class="bundlesize_js">{{bundlesize_js|bytes}} JavaScript</span>
+				{% endif %}
+				{% if bundlesize_css %}
+					<span class="bundlesize_css">{{bundlesize_css|bytes}} CSS</span>
+				{% endif %}
+			</dd>
+		{% endif %}
+	</dl>
 
 	<div class="component-details-row">
 		<div class="key" data-o-grid-colspan="12 M4">This version</div>
