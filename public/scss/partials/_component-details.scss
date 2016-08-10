@@ -18,8 +18,9 @@
 }
 
 .o-registry__lang-label {
-	margin-top: 33px;
-	margin-left: 10px;
+	position: relative;
+	top: 5px;
+	margin-left: 5px;
 }
 
 .component-detail__header {
@@ -27,12 +28,12 @@
 	width: calc(100% - 220px);
 	margin: 0 0 40px 220px;
 	padding: 40px;
-	background-color: #2e6e9e;
+	background-color: #275e86;
 	color: #fff;
 
 	h1 {
 		float: left;
-		margin: 0;
+		margin: 0 5px 0 0;
 		line-height: 1;
 	}
 
