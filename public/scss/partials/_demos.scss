@@ -26,11 +26,6 @@
 	display:block;
 }
 
-.demo__header {
-	float: left;
-	margin: 0;
-}
-
 .demo-title {
 	margin: 0;
 	font-weight: bold;
@@ -113,14 +108,18 @@
 }
 
 .jsbin-link {
-	float: right;
-	font-size: 14px;
-	line-height: 34px;
+	display: inline;
+	margin-left: 15px;
+	font-size: 12px;
+	font-weight: normal;
+	text-transform: none;
 	text-decoration: none;
 }
 
 .jsbin-link i {
-	margin-left: 5px;
+	margin-left: 1px;
+	font-size: 10px;
+	font-weight: bold;
 }
 
 .auto-select-action {
