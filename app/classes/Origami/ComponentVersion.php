@@ -69,7 +69,7 @@ final class ComponentVersion extends Model {
 
 				// Backwards compat: remove reference to `title` column in next release
 				// and keep 'path' for use in older demos that are not compatible with demo endpoint
-				$this->data['demos'] = self::$app->db_read->queryAllRows('SELECT IF(name IS NULL, title, name) as name, path, description, expanded FROM demos WHERE componentversion_id=%d', $this->id);
+				$this->data['demos'] = self::$app->db_read->queryAllRows('SELECT IF(name IS NULL, title, name) as name, path, description, hidden FROM demos WHERE componentversion_id=%d', $this->id);
 			break;
 		}
 		return parent::__get($propertyName);
@@ -102,7 +102,7 @@ final class ComponentVersion extends Model {
 		}
 		if ($this->demos) {
 			foreach ($this->demos as $demo) {
-				self::$app->db_write->query('REPLACE INTO demos SET componentversion_id=%d, name=%s, path=%s, description=%s, expanded=%d', $this->id, $demo['name'], $demo['path'], $demo['description'], (integer)$demo['expanded']);
+				self::$app->db_write->query('REPLACE INTO demos SET componentversion_id=%d, name=%s, path=%s, description=%s, hidden=%d', $this->id, $demo['name'], $demo['path'], $demo['description'], (integer)$demo['hidden']);
 			}
 		}
 	}
@@ -237,15 +237,17 @@ final class ComponentVersion extends Model {
 					$demodefaults = array();
 				}
 				if (isset($responseJson->origamiManifest->demos)) {
-					$explicithidden = false;
 					foreach ($responseJson->origamiManifest->demos as $demo) {
+						$hidden = false;
 						if (!is_object($demo)) {
 							$demo = array_merge($demodefaults, array('name' => $demo));
 						} else {
 							$demo = array_merge($demodefaults, (array)$demo);
 						}
-						if (isset($demo['hidden'])) $explicithidden = true;
-						$demo['expanded'] = !$explicithidden;
+						if (isset($demo['hidden']))	{
+							$hidden = true;
+						}
+						$demo['hidden'] = $hidden;
 						if (empty($demo['name']) and !empty($demo['path'])) {
 							$demo['name'] = basename($demo['path'], '.html');
 						} else if (empty($demo['name']) and !empty($demo['title'])) {
@@ -255,11 +257,6 @@ final class ComponentVersion extends Model {
 							$demo['description'] = null;
 						}
 						$this->data['demos'][] = $demo;
-					}
-
-					// If none of the demos have an expanded property, make them all expanded
-					if (!$explicitexpanded) {
-						foreach ($this->data['demos'] as &$demo) $demo['expanded'] = true;
 					}
 				}
 				// Check CI - if not specified, and repo is GH, try Travis

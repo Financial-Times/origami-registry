@@ -51,7 +51,7 @@
 			<div data-o-grid-colspan="9" class="demos-wrap">
 		{% endif %}
 			{% for demo in demos %}
-				<div class="demo-container{% if demo.expanded %} visible{% endif %} with-source" id="demo-{{ demo.name|slugify}}">
+				<div class="demo-container{% if not demo.hidden %} visible{% endif %} with-source" id="demo-{{ demo.name|slugify}}">
 					<div class="demo-header">
 						<span class="demo-title activity">{{ demo.name }}</span>
 						{% if not force_old_demo_url %}
@@ -90,7 +90,7 @@
 				<h4 style="margin-top: 0">Show/hide demos</h4>
 				<ul class="demo-selector">
 				{% for demo in demos %}
-					<input type="checkbox" name="demos" value="{{ demo.name|slugify}}" class="o-forms-checkbox o-forms-checkbox--small" id="toggle-{{ demo.name|slugify}}"{% if demo.expanded %} checked{% endif %}><label for="toggle-{{ demo.name|slugify}}" class="o-forms-label">{{ demo.name }}</label>
+					<input type="checkbox" name="demos" value="{{ demo.name|slugify}}" class="o-forms-checkbox o-forms-checkbox--small" id="toggle-{{ demo.name|slugify}}"{% if not demo.hidden %} checked{% endif %}><label for="toggle-{{ demo.name|slugify}}" class="o-forms-label">{{ demo.name }}</label>
 				{% endfor %}
 				</ul>
 
