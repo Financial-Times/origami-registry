@@ -45,7 +45,7 @@
 .component-detail__header {
 	width: 100%;
 	margin-bottom: 40px;
-	padding: 40px;
+	padding: 20px;
 	background-color: #275e86;
 	color: #fff;
 
@@ -53,20 +53,23 @@
 		float: left;
 		width: calc(100% - 220px);
 		margin-left: 220px;
+		padding: 40px;
 	}
+}
 
+.component-detail__description {
+	@media (min-width: 900px) {
+		float: left;
+	}
 
 	h1 {
 		float: left;
 		margin: 0 5px 0 0;
 		line-height: 1;
 	}
-}
-
-.component-detail__description {
-	clear: both;
 
 	p {
+		clear: left;
 		margin: 0;
 	}
 }

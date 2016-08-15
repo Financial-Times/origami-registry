@@ -17,14 +17,16 @@
 }
 
 .filter-bar__checkboxes {
-	float: left;
+	@media (min-width: 930px) {
+		float: left;
 
-	&--type {
-		width: 30%;
-	}
+		&--type {
+			width: 30%;
+		}
 
-	&--status {
-		text-align: right;
-		width: 70%;
+		&--status {
+			text-align: right;
+			width: 70%;
+		}
 	}
 }
