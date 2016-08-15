@@ -3,6 +3,11 @@ deploy: build
 	@heroku docker:release --app origami-registry-eu
 	@rm -f ./appversion
 
+deploy-qa: build
+	@git describe --tags > ./appversion
+	@heroku docker:release --app origami-registry-qa
+	@rm -f ./appversion
+
 build:
 	@# If the dev machine is 'saved' I had problems restarting it, so kill the machine and start again.
 	@if [[ "$$(docker-machine ls | grep dev)" == *"Saved"* ]]; then docker-machine kill dev; fi
