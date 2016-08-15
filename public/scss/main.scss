@@ -20,6 +20,7 @@ $o-overlay-is-silent: false;
 @import 'partials/github-gist.hljs-theme';
 
 @import 'partials/base';
+@import 'partials/buttons';
 @import 'partials/typography';
 @import 'partials/layout';
 
@@ -35,7 +36,9 @@ $o-overlay-is-silent: false;
 @import 'partials/component-list';
 @import 'partials/component-sidenav';
 @import 'partials/component-details';
+@import 'partials/docs-navigation';
 @import 'partials/demos';
+@import 'partials/overlay';
 
 @import 'partials/utilities';
 

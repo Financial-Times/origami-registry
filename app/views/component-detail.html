@@ -2,7 +2,7 @@
 
 {% block content %}
 	<!-- Component ID: {{component_id}}, version ID: {{id}} -->
-	<div class="component-detail__wrapper">
+	<div class="component-detail">
 		<!-- Nav -->
 		{% include "blocks/component-nav.html" %}
 
@@ -12,41 +12,13 @@
 			{% if has_js %}<span class="o-registry__lang-label label-js">JS</span>{% endif %}
 
 			<a href="{{repo_home_url}}" class="o-buttons o-buttons--big o-registry__github-button"><i class="fa fa-github"></i>View on Github</a>
-			<div class="component-description">
+			<div class="component-detail__description">
 				<p>{{description}}</p>
 			</div>
 		</div>
 
-		<div class="component-detail__main">
-
-			{% if not is_stable %}
-				<aside class='unstable-warning'>
-					<h4>Warning: this version is unstable</h4>
-					<p>This is an unstable pre-release of an upcoming version of this component.  Its API may be subject to breaking changes.</p>
-				</aside>
-			{% endif %}
-
-			{% if demos %}
-				<section class="detail-section" id="section-demos">
-					{% for demo in demos %}
-						{% include "blocks/demo.html" %}
-					{% endfor %}
-				</section>
-			{% endif %}
-
-			{% include "blocks/component-information.html" %}
-
-			<section class="detail-section full-component-details using-callout" id="more-information">
-				<h2>Contact</h2>
-
-				<p>To talk to the team you can contact the Origami team on Slack channel <a href="https://financialtimes.slack.com/messages/ft-origami/">#ft-origami</a> or directly by email at <a href="mailto:origami-support@ft.com">origami-support@ft.com</a></p>
-
-				<p><a href="{{support}}" class="o-buttons o-buttons--big o-buttons--standout">Report an issue</a></p>
-			</section>
-		</div>
-
 		<div class="component-detail__info">
-			<section class="detail-section" id="section-usage">
+			<section class="component-detail__section" id="section-usage">
 				<ul class="docs-navigation">
 					<li><a href="#more-information">Component information</a></li>
 					<li><a href="{{repo_home_url}}#readme">Readme <i class="fa fa-external-link"></i></a></li>
@@ -58,7 +30,7 @@
 					{% endif %}
 				</ul>
 
-				<div class="using-callout">
+				<div class="component-detail__section component-detail__section--highlight">
 					{% if origami_type == 'service' %}
 						<h3>Use the service</h3>
 						<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
@@ -68,6 +40,34 @@
 						{% include "blocks/getting-started.html" %}
 					{% endif %}
 				</div>
+			</section>
+		</div>
+
+		<div class="component-detail__main">
+
+			{% if not is_stable %}
+				<aside class='component-detail__warning'>
+					<h4>Warning: this version is unstable</h4>
+					<p>This is an unstable pre-release of an upcoming version of this component.  Its API may be subject to breaking changes.</p>
+				</aside>
+			{% endif %}
+
+			{% if demos %}
+				<section class="component-detail__section" id="section-demos">
+					{% for demo in demos %}
+						{% include "blocks/demo.html" %}
+					{% endfor %}
+				</section>
+			{% endif %}
+
+			{% include "blocks/component-information.html" %}
+
+			<section class="component-detail__section component-detail__section--highlight" id="more-information">
+				<h2>Contact</h2>
+
+				<p>To talk to the team you can contact the Origami team on Slack channel <a href="https://financialtimes.slack.com/messages/ft-origami/">#ft-origami</a> or directly by email at <a href="mailto:origami-support@ft.com">origami-support@ft.com</a></p>
+
+				<p><a href="{{support}}" class="o-buttons o-buttons--big o-buttons--standout">Report an issue</a></p>
 			</section>
 		</div>
 	</div>

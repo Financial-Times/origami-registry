@@ -1,18 +1,17 @@
-<section class="detail-section" id="more-information">
+<section class="component-detail__section" id="more-information">
 	<h2>Component information</h2>
 
-<dl class="component-information">
-	<dt><label class="o-forms-label o-forms-label--inline" for="version-select">Version:</label></dt>
-	<dd>
-		<select class="version-select" id="version-select" name="version-select" data-bind="position">
-			{% for version in versions %}
-				<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
-			{% endfor %}
-			<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
-		</select>
-	</dd>
+	<dl class="component-detail__information">
+		<dt><label class="o-forms-label o-forms-label--inline" for="version-select">Version:</label></dt>
+		<dd>
+			<select class="version-select" id="version-select" name="version-select" data-bind="position">
+				{% for version in versions %}
+					<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
+				{% endfor %}
+				<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
+			</select>
+		</dd>
 
-	<dl class="component-information">
 		<dt>Latest stable version:</dt>
 		<dd><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</dd>
 
@@ -65,7 +64,7 @@
 				<span style="color:#bbb">None</span>
 			{% endif %}
 			{% if dependencies %}
-			<table class='dependency-list'>
+			<table class="component-details__dependencies">
 				{% for dependency in dependencies %}
 				<tr>
 					<td>{% if dependency.id %}<a href="/components/{{dependency.child_component_name}}">{% endif %}{{dependency.child_component_name}}{% if dependency.id %}</a>{% endif %}</td>
@@ -90,7 +89,7 @@
 				<span style="color: #bbb">None</span>
 			{% endif %}
 <!-- No indentation, to ensure there's no space in between items: -->
-{% for dependent in dependents %}<span class="detail-modulelist__item">{% if dependent.id %}<a href="/components/{{dependent.module_name}}">{% endif %}{{dependent.module_name}}{% if dependent.id %}</a>{% endif %}</span>{% endfor %}
+{% for dependent in dependents %}<span class="component-detail__dependent">{% if dependent.id %}<a href="/components/{{dependent.module_name}}">{% endif %}{{dependent.module_name}}{% if dependent.id %}</a>{% endif %}</span>{% endfor %}
 		</dd>
 	</dl>
 </section>

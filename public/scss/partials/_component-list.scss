@@ -59,6 +59,14 @@
 	font-weight: bold;
 }
 
+/* Version number */
+
+.component-list .version-number {
+	min-width: 60px;
+	display: inline-block;
+}
+
+
 /* Mobile styles */
 @media (max-width: 600px) {
 	.component-list td:nth-child(2) {

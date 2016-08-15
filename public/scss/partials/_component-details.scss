@@ -1,4 +1,4 @@
-.component-detail__wrapper {
+.component-detail {
 	position: relative;
 	clear: both;
 	float: left;
@@ -6,79 +6,64 @@
 }
 
 .component-detail__main {
-	float: left;
-	margin-left: 280px;
-	width: calc(70% - 280px);
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+
+	@media (min-width: 600px) {
+		width: calc(100% - 300px);
+		margin-left: 260px;
+		margin-right: 40px;
+	}
+
+	@media (min-width: 900px) {
+		float: left;
+		width: calc(70% - 280px);
+		margin-right: 0;
+	}
 }
 
 .component-detail__info {
-	float: right;
-	width: calc(25% - 40px);
-	margin-right: 40px;
-}
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
 
-.o-registry__lang-label {
-	position: relative;
-	top: 5px;
-	margin-left: 5px;
+	@media (min-width: 600px) {
+		width: calc(100% - 300px);
+		margin-left: 260px;
+		margin-right: 40px;
+	}
+
+	@media (min-width: 900px) {
+		float: right;
+		width: calc(25% - 40px);
+		margin-left: 0;
+		margin-right: 40px;
+	}
 }
 
 .component-detail__header {
-	float: left;
-	width: calc(100% - 220px);
-	margin: 0 0 40px 220px;
+	width: 100%;
+	margin-bottom: 40px;
 	padding: 40px;
 	background-color: #275e86;
 	color: #fff;
+
+	@media (min-width: 600px) {
+		float: left;
+		width: calc(100% - 220px);
+		margin-left: 220px;
+	}
+
 
 	h1 {
 		float: left;
 		margin: 0 5px 0 0;
 		line-height: 1;
 	}
-
-	.o-registry__github-button {
-		@include oButtons;
-		@include oButtonsSize(big);
-		float: right;
-		background-color: #fff;
-		color: #2e6e9e;
-	}
-
-	.o-registry__github-button i {
-		margin-right: 10px;
-	}
 }
 
-.o-overlay__content {
-	max-width: 600px;
-}
-
-.docs-navigation {
-	list-style: none;
-	margin: 0 0 20px;
-	padding: 0;
-
-	li {
-		margin-bottom: 2px;
-	}
-
-	a {
-		display: block;
-		padding: 10px 15px;
-		color: #fff;
-		font-size: 16px;
-		text-decoration: none;
-		background-color: #598caf;
-
-		i {
-			font-size: 12px;
-			font-weight: bold;
-		}
-	}
-}
-
-.component-description {
+.component-detail__description {
 	clear: both;
 
 	p {
@@ -86,105 +71,54 @@
 	}
 }
 
-.using-callout {
-	margin-bottom: 20px;
-	padding: 10px 15px;
-	background-color: #eeeeee;
+.component-detail__warning {
+	margin-top: 20px !important;
+}
+
+.component-detail__section {
+	max-width: 100%;
+	clear: both;
+	margin-bottom: 40px;
+
+	&--highlight {
+		margin-bottom: 20px;
+		padding: 10px 15px;
+		background-color: #eeeeee;
+	}
 
 	h2 {
 		margin-top: 0;
 	}
 }
 
-.component-information dt {
-	clear: left;
-	float: left;
-	width: 23%;
-	margin: 0 2% 5px 0;
-	font-weight: bold;
-}
-
-.component-information dd {
-	float: left;
-	width: 75%;
-	margin: 0 0 5px;
-}
-
-.doc-links {
-	clear: both;
-	list-style: none;
-	padding-left: 0;
-}
-
-.doc-links li {
-	display: inline;
-	margin-right: 5px;
-}
-
-.doc-links li a {
-	color: #fff;
-	text-transform: none;
-}
-
-.component-build-metadata {
-	text-align: right;
-}
-
-.component-information {
+.component-detail__information {
 	clear: both;
 	overflow: hidden;
 	margin-bottom: 0;
+
+	dt {
+		clear: left;
+		float: left;
+		width: 23%;
+		margin: 0 2% 5px 0;
+		font-weight: bold;
+	}
+
+	dd {
+		float: left;
+		width: 75%;
+		margin: 0 0 5px;
+	}
 }
 
-.component-information dd .bundlesize_js,
-.component-information dd .bundlesize_css {
-	display: block;
-}
-
-.unstable-warning {
-	margin-top: 20px !important;
-}
-
-.detail-section {
-	max-width: 100%;
-	clear: both;
-	margin-bottom: 40px;
-}
-
-.detail-modulelist__item + .detail-modulelist__item:before {
+.component-detail__dependent + .component-detail__dependent:before {
 	content: ', ';
 }
 
-.dependency-list {
+.component-detail__dependencies {
 	border-collapse: collapse;
-}
 
-.dependency-list td {
-	padding-right: 10px;
-}
-
-.bundlesize_js,
-.bundlesize_css {
-	display: inline;
-	margin-right: 10px;
-	font-weight: bold;
-	color: #029A77;
-}
-
-.bundlesize_css {
-	color: #CE6308;
-}
-
-pre.quickstart-tag {
-	font-size: 16px;
-	word-break: normal;
-}
-
-pre.quickstart-tag code {
-	white-space: normal;
-}
-
-/* Make it 'pop more' */
-.o-overlay {
-	box-shadow: 0 0 30px 7px rgba(0, 0, 0, 0.2);
+	td {
+		padding-right: 10px;
+	}
 }
