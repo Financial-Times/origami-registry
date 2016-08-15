@@ -1,5 +1,17 @@
 /* Demos */
 
+.o-tabs--buttontabs[data-o-tabs--js] [role=tab] {
+	color: #2e6e9e;
+}
+
+.o-tabs--buttontabs[data-o-tabs--js] [role=tab][aria-selected=true] {
+	background-color: rgba(#2e6e9e, 0.2) !important;
+}
+
+.o-tabs--buttontabs[data-o-tabs--js][role=tablist] {
+	border-bottom-color: #275e86;
+}
+
 .demo-source {
 	position: relative;
 }
@@ -41,7 +53,7 @@
 	border-left: 1px solid #E8E8E8;
 	border-right: 1px solid #E8E8E8;
 	border-bottom: 1px solid #E8E8E8;
-	background: white;
+	background: #fff1e0;
 	padding: 12px;
 }
 
