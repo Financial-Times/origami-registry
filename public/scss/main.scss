@@ -15,14 +15,13 @@ $o-overlay-is-silent: false;
 @import 'o-overlay/main';
 
 @import 'partials/variables';
-@import 'partials/mixins';
 
 @import 'partials/github-gist.hljs-theme';
 
 @import 'partials/base';
-@import 'partials/buttons';
 @import 'partials/typography';
 @import 'partials/layout';
+@import 'partials/buttons';
 
 @import 'partials/logo';
 
@@ -34,8 +33,8 @@ $o-overlay-is-silent: false;
 
 @import 'partials/filter-bar';
 @import 'partials/component-list';
-@import 'partials/component-sidenav';
 @import 'partials/component-details';
+@import 'partials/component-navigation';
 @import 'partials/docs-navigation';
 @import 'partials/demos';
 @import 'partials/overlay';

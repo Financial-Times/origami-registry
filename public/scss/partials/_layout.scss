@@ -8,3 +8,14 @@
 		max-width: 100%;
 	}
 }
+
+.sidebar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 220px;
+	height: 100%;
+	padding: 30px 15px 0;
+	border-right: 1px solid #cec6b9;
+	overflow-y: auto;
+}

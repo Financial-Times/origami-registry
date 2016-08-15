@@ -72,6 +72,13 @@
 		clear: left;
 		margin: 0;
 	}
+
+	[class^="label-"],
+	[class*=" label-"] {
+		position: relative;
+		top: 5px;
+		margin-left: 5px;
+	}
 }
 
 .component-detail__warning {
