@@ -49,7 +49,7 @@
 				{% else %}
 					Unknown
 				{% endif %}
-				<a style="margin-left: 5px; color: white" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/modules/{{module_name}}@{{tag_name}}" title="View build test results"><i class="fa fa-info-circle"></i></a>
+				<a href="https://{{ SERVER.BUILD_SERVICE_HOST }}/modules/{{module_name}}@{{tag_name}}" title="View build test results"><i class="fa fa-info-circle"></i></a>
 			</span>
 		</dd>
 
@@ -61,7 +61,7 @@
 		<dt>Dependencies</dt>
 		<dd>
 			{% if not dependencies %}
-				<span style="color:#bbb">None</span>
+				<span>None</span>
 			{% endif %}
 			{% if dependencies %}
 			<table class="component-details__dependencies">
