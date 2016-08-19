@@ -66,6 +66,7 @@ class ComponentDetail extends BaseController {
 		$this->addViewData('dependents', $this->version->dependents);
 
 		$this->addViewData('title', $this->component->module_name);
+		$this->addViewData('keywords', $this->component->latest_version->keywords);
 		$this->addViewData('repo_home_url', str_replace('.git', '', $this->component->git_repo_url));
 		$this->addViewData('latest_version', $this->component->latest_version->tag_name);
 		$this->addViewData('latest_datetime_created', $this->component->latest_version->datetime_created);

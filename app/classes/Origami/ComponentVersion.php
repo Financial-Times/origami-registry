@@ -207,6 +207,7 @@ final class ComponentVersion extends Model {
 
 				foreach (array(
 					'description' => 'description',
+					'keywords' => 'keywords',
 					'origamiType' => 'origami_type',
 					'origamiCategory' => 'origami_category',
 					'origamiVersion' => 'origami_version',
@@ -295,6 +296,7 @@ final class ComponentVersion extends Model {
 
 			self::$app->logger->info('Build complete', array(
 				'component'=>$this->component->module_name,
+				'keywords'=>$this->component->keywords,
 				'version'=>$this->tag_name,
 				'is_valid'=>$this->is_valid
 			));

@@ -16,7 +16,7 @@ final class Component extends Model {
 
 	const REBUILD_DEPENDENTS_DEPTH = 30;
 
-	protected $fields = array('id', 'module_name', 'origami_category', 'git_repo_url', 'is_origami', 'host_type', 'datetime_last_discovered', 'recent_commit_count');
+	protected $fields = array('id', 'module_name', 'keywords', 'origami_category', 'git_repo_url', 'is_origami', 'host_type', 'datetime_last_discovered', 'recent_commit_count');
 	protected $datefields = array('datetime_last_discovered');
 
 	public function __construct() {
@@ -48,7 +48,7 @@ final class Component extends Model {
 
 	public function save() {
 		$this->data['is_origami'] = isset($this->data['is_origami']) ? (int)$this->data['is_origami'] : null;
-		self::$app->db_write->query('INSERT INTO components SET {module_name}, {is_origami}, {origami_category}, {git_repo_url}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date} ON DUPLICATE KEY UPDATE {git_repo_url}, {is_origami}, {origami_category}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date}', $this->data);
+		self::$app->db_write->query('INSERT INTO components SET {module_name}, {keywords}, {is_origami}, {origami_category}, {git_repo_url}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date} ON DUPLICATE KEY UPDATE {keywords}, {git_repo_url}, {is_origami}, {origami_category}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date}', $this->data);
 		if (!$this->id) {
 			$this->id = self::$app->db_write->querySingle('SELECT id FROM components WHERE {module_name}', $this->data);
 		}
@@ -92,6 +92,7 @@ final class Component extends Model {
 				$version->build();
 				$version->save();
 
+				$this->data['keywords'] = $latest->keywords;
 				$this->data['is_origami'] = $latest->is_valid;
 				$this->data['origami_category'] = $latest->origami_category;
 				$this->save();

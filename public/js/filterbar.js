@@ -16,8 +16,9 @@ $(function() {
 					return filterMatch;
 				}
 			});
-			if (filterMatch && ((regex.test(row.find('[data-module-name--js]').attr('data-name'))) || (regex.test(row.find('[data-module-name--js]').attr('data-keyword'))))) {
+			if (filterMatch && ((regex.test(row.find('[data-module-name--js]').attr('data-name'))) || (regex.test(row.find('[data-module-name--js]').attr('data-keywords'))))) {
 				if ($('#filter').val()) {
+					console.log('data-keywords value is ' + row.find('[data-module-name--js]').attr('data-keywords'));
 					row.find('[data-module-name--js]').html(
 						row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
 					);
