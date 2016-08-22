@@ -5,7 +5,8 @@
 	width: 100%;
 }
 
-.component-detail__main {
+.component-detail__main,
+.component-detail__header {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
@@ -42,19 +43,15 @@
 	}
 }
 
-.component-detail__header {
-	width: 100%;
-	margin-bottom: 40px;
-	padding: 20px;
-	background-color: #275e86;
-	color: #fff;
-
-	@media (min-width: 600px) {
-		float: left;
-		width: calc(100% - 220px);
-		margin-left: 220px;
-		padding: 40px;
+.component-detail__header,
+.component-detail__info {
+	@media (min-width: 900px) {
+		margin-top: 30px;
 	}
+}
+
+.component-detail__header {
+	margin-bottom: 30px;
 }
 
 .component-detail__description {
