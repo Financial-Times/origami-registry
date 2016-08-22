@@ -2,12 +2,12 @@
 require('o-date');
 require('o-tabs');
 require('o-overlay');
+require('o-header-services');
 
 require('./filterbar');
 require('./click-helper');
 require('./demos');
 
-import { Header } from './header';
 import { gistIt } from './gist-it';
 import highlight from './highlight';
 
@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Dispatch a custom event that will tell all required modules to initialise
 	document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
 
-	// Init the header
-	Header.init();
 	gistIt();
 	highlight();
 });

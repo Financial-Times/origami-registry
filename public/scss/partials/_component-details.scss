@@ -1,175 +1,134 @@
-
-/* Component detail header */
-
-.component-detail__wrapper {
+.component-detail {
 	position: relative;
 	clear: both;
-	margin: 0;
+	float: left;
+	width: 100%;
 }
 
 .component-detail__main {
-	@include oGridColspan((default: 12, S: 7, M: 6));
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
 
-	@include oGridRespondTo(M) {
-		@include oGridPush(2);
+	@media (min-width: 600px) {
+		width: calc(100% - 300px);
+		margin-left: 260px;
+		margin-right: 40px;
+	}
+
+	@media (min-width: 900px) {
+		float: left;
+		width: calc(70% - 280px);
+		margin-right: 0;
 	}
 }
 
 .component-detail__info {
-	@include oGridColspan((default: 12, S: 5, M: 3));
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
 
-	@include oGridRespondTo(M) {
-		@include oGridPush(2);
+	@media (min-width: 600px) {
+		width: calc(100% - 300px);
+		margin-left: 260px;
+		margin-right: 40px;
+	}
+
+	@media (min-width: 900px) {
+		float: right;
+		width: calc(25% - 40px);
+		margin-left: 0;
+		margin-right: 40px;
 	}
 }
 
 .component-detail__header {
-	float: left;
-}
-
-.o-overlay__content {
-	max-width: 600px;
-}
-
-.component-description {
-	clear: both;
-	padding-top: 10px;
-}
-
-.o-registry__github-button {
-	float: right;
-	margin-top: 25px;
-}
-
-.o-registry__github-button i {
-	margin-right: 10px;
-}
-
-.full-component-details .component-details-row {
-	clear: left;
-	float: left;
 	width: 100%;
-	margin-bottom: 10px;
-}
-
-.full-component-details .key {
-	float: left;
-	width: 23%;
-	margin-right: 2%;
-}
-
-.full-component-details .val {
-	float: left;
-	width: 75%
-}
-
-.detail-comp-info {
-	margin-top: 110px;
-	background-color: #fff1e0;
-	padding: 15px;
-	border-radius: 6px;
-}
-
-
-.component-header {
-	margin: 0 0 20px;
-}
-
-.doc-links {
-	clear: both;
-	list-style: none;
-	padding-left: 0;
-}
-
-.doc-links li {
-	display: inline;
-	margin-right: 5px;
-}
-
-.doc-links li a {
+	margin-bottom: 40px;
+	padding: 20px;
+	background-color: #275e86;
 	color: #fff;
-	text-transform: none;
+
+	@media (min-width: 600px) {
+		float: left;
+		width: calc(100% - 220px);
+		margin-left: 220px;
+		padding: 40px;
+	}
 }
 
-.component-build-metadata {
-	text-align: right;
+.component-detail__description {
+	@media (min-width: 900px) {
+		float: left;
+	}
+
+	h1 {
+		float: left;
+		margin: 0 5px 0 0;
+		line-height: 1;
+	}
+
+	p {
+		clear: left;
+		margin: 0;
+	}
+
+	[class^="label-"],
+	[class*=" label-"] {
+		position: relative;
+		top: 5px;
+		margin-left: 5px;
+	}
 }
 
-.component-info-details {
-	clear: both;
-	overflow: hidden;
-	margin-bottom: 0;
-}
-
-.component-info-details dt,
-.component-info-details dd {
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	font-size: 14px;
-}
-
-.component-info-details dd {
-	margin-bottom: 10px;
-	font-size: 16px;
-}
-
-.component-info-details dd .bundlesize_js,
-.component-info-details dd .bundlesize_css {
-	display: block;
-}
-
-.version-title {
-	float: left;
-	font-size: 16px;
-	margin: 5px 10px 20px 0;
-}
-
-.version-select {
-	width: 120px;
-	float: left;
-	vertical-align: middle;
-}
-.unstable-warning {
+.component-detail__warning {
 	margin-top: 20px !important;
 }
 
-
-.detail-section {
+.component-detail__section {
 	max-width: 100%;
 	clear: both;
+	margin-bottom: 40px;
+
+	&--highlight {
+		margin-bottom: 20px;
+		padding: 10px 15px;
+		background-color: #eeeeee;
+	}
+
+	h2 {
+		margin-top: 0;
+	}
 }
-.detail-modulelist__item + .detail-modulelist__item:before {
+
+.component-detail__information {
+	clear: both;
+	overflow: hidden;
+	margin-bottom: 0;
+
+	dt {
+		clear: left;
+		float: left;
+		width: 23%;
+		margin: 0 2% 5px 0;
+		font-weight: bold;
+	}
+
+	dd {
+		float: left;
+		width: 75%;
+		margin: 0 0 5px;
+	}
+}
+
+.component-detail__dependent + .component-detail__dependent:before {
 	content: ', ';
 }
-.dependency-list {
+
+.component-detail__dependencies {
 	border-collapse: collapse;
-}
-.dependency-list td {
-	padding-right: 10px;
-}
 
-.bundlesize_js,
-.bundlesize_css {
-	display: inline;
-    margin-right: 10px;
-    font-weight: bold;
-    color: #029A77;
-}
-.bundlesize_css {
-	color: #CE6308;
-}
-
-pre.quickstart-tag {
-	font-size: 16px;
-	word-break: normal;
-}
-
-pre.quickstart-tag code {
-	white-space: normal;
-}
-
-/* Make it 'pop more' */
-.o-overlay {
-	box-shadow: 0 0 30px 7px rgba(0, 0, 0, 0.2);
+	td {
+		padding-right: 10px;
+	}
 }

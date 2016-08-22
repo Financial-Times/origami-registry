@@ -7,12 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	{% if noindex %}<meta name="robots" content="NOINDEX" />{% endif %}
 
-	<!-- Load tech docs styles from build service -->
-	<!-- Remove this once style is main.css with origami components -->
-	<!-- <link rel="stylesheet" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/bundles/css?modules=o-forms@^2.0.2,o-fonts@^2.1.2,o-techdocs@^6.0.0,o-icons@^4.1.2,o-tabs@^2.3.3,o-buttons@^4.0.0,o-date@^1.1.1,o-overlay@^1.8.5" /> -->
-
 	<!-- Font awesome for module and component icons -->
-	<!-- TODO: See if we can use o-icons instead -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" />
 
 	<!-- Registry-specific styles -->
@@ -33,42 +28,59 @@
 	<script src="/embedapi"></script>
 </head>
 <body class="{{body_class}}">
-	<header class="o-registry-header" data-o-component="o-registry-header">
-		<div class="o-registry-header__container">
-			<div class="o-registry-header__primary">
-				<div class="o-registry-header__primary__left">
-					<a class="o-registry-header__logo origami-logo" href="/">
-						<span class="origami-logo__icon"></span>
-						<h1 class="o-registry-header__title">Origami</h1>
-					</a>
-				</div>
-				<nav class="o-registry-header__primary__right o-hierarchical-nav o-registry-header__nav--primary-theme" data-o-component="o-hierarchical-nav">
-					<ul data-o-hierarchical-nav-level="1"><!--
-						--><li data-priority="1"><a href="//origami.ft.com">Spec</a></li><!--
-						--><li data-priority="1" aria-selected="true"><a href="/">Registry</a></li><!--
-						--><li data-priority="1"><a href="//styleguide.ft.com">Style Guide</a></li><!--
-						--><li data-more class="o-hierarchical-nav__parent" aria-hidden="true"><a><span class="o-hierarchical-nav__more--if-some">More <i class="o-hierarchical-nav__parent__down-arrow"></i></span><span class="o-hierarchical-nav__more--if-all">Menu <i class="o-hierarchical-nav__parent__down-arrow"></i></span></a></li><!--
-					--></ul>
-				</nav>
+	<header class="o-header-services" data-o-component="o-header">
+		<div class="o-header-services__top o-header-services__container">
+			<div class="o-header-services__hamburger">
+				<a class="o-header-services__hamburger-icon" href="#o-header-drawer" aria-controls="o-header-drawer"></a>
+			</div>
+			<div class="o-header-services__ftlogo"></div>
+			<div class="o-header-services__title">
+				<h1 class="o-header-services__product-name">Origami</h1>
+			</div>
+			<div class="o-header-services__related-content">
+				<a class="o-header-services__related-content-link" href="//origami.ft.com/docs/developer-guide/">Docs</a>
+				<a class="o-header-services__related-content-link" href="//origami.ft.com/docs/component-spec/">Specs</a>
+				<a class="o-header-services__related-content-link" href="/components">Registry</a>
 			</div>
 		</div>
 	</header>
-
+	<div class="o-header__drawer--services o-header__drawer o--if-js" id="o-header-drawer" data-o-header-drawer="" data-o-header-drawer--no-js="">
+		<div class="o-header__drawer-inner">
+			<div class="o-header__drawer-tools">
+				<span>Origami</span>
+				<button type="button" class="o-header__drawer-tools-close" aria-controls="o-header-drawer">
+					<span class="o-header__visually-hidden">Close</span>
+				</button>
+			</div>
+			<nav class="o-header__drawer-menu o-header__drawer-menu--primary" role="navigation" aria-label="Primary navigation">
+				<ul class="o-header__drawer-menu-list">
+					<li class="o-header__drawer-menu-item">
+						<a class="o-header__drawer-menu-link" href="//origami.ft.com/docs/developer-guide/">Docs</a>
+					</li>
+					<li class="o-header__drawer-menu-item">
+						<a class="o-header__drawer-menu-link" href="//origami.ft.com/docs/component-spec/">Specs</a>
+					</li>
+					<li class="o-header__drawer-menu-item">
+						<a class="o-header__drawer-menu-link" href="/components">Registry</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
 
 	{% block content %}{% endblock %}
 
-	<div class="o-registry-container">
-		<footer class="o-registry-footer">
+	<footer class="o-registry-footer">
+		<div class="o-registry-container">
 			<div class="o-registry-footer__inner">
 				<div class="origami-logo origami-logo--footer">
 					<span class="origami-logo__icon"></span>Origami
 				</div>
 				<p>Help or advice for FT staff on any aspect of Origami is available from <a href="mailto:origami.support@ft.com">origami.support@ft.com</a> (public users please instead <a href="https://github.com/Financial-Times/ft-origami/issues">raise an issue on the repository</a>)</p>
 				<p>&copy; THE FINANCIAL TIMES LTD {{"now"|date('Y')}}. FT and 'Financial Times' are trademarks of The Financial Times Ltd.</p>
-		  </div>
-		</footer>
-
-	</div>
+			</div>
+		</div>
+	</footer>
 
 	<script src="/js/libs/jquery.min.js"></script>
 	<script src="/main.js"></script>

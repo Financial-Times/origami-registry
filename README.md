@@ -1,52 +1,70 @@
-# Origami registry
+Origami registry
+================
 
 Origami component registry; lists modules and web services with build status details, etc.
 
+Table of Contents
+-----------------
 
-## Development set up
+  * [Requirements](#requirements)
+  * [Running Locally](#running-locally)
+  * [Configuration](#configuration)
+  * [Deployment](#deployment)
+  * [License](#license)
 
-To set up a development environment, download and install the docker toolkit (http://docs.docker.com/mac/step_one/).  You'll need `docker-compose` and `docker`.  Or use homebrew:
+Requirements
+------------
 
-    brew tap caskroom/homebrew-cask
-    brew install brew-cask
-    brew cask install docker-machine docker-compose
+To set up a development environment, download and install the docker toolkit (https://docs.docker.com/engine/getstarted/step_one/).  You'll need `docker-compose` and `docker`.  Or use homebrew:
+
+```sh
+brew tap caskroom/homebrew-cask
+brew install brew-cask
+brew cask install docker-machine docker-compose
+```
 
 You may now have to change the owner of your `.docker` directory if the owner is root:
 
-    chown -R `whoami` ~/.docker
+```sh
+chown -R `whoami` ~/.docker
+```
 
-Create a virtual machine to run the application's containers. The default size didn't appear to be large enough so this will create one with an increased disk size:
+You'll also need `gulp` installed globally to compile the front-end assets:
 
-    docker-machine create --driver virtualbox --virtualbox-disk-size "50000" dev
+```sh
+npm install -g gulp
+```
 
-After the first setup, you will only need to start the created machine. (Use the same name as before - in our case `dev`):
+Create a virtual machine to run the application's containers using the Make task, this will also install all of the front-end dependencies with `npm` and `bower`.
 
-    docker-machine start dev
+```sh
+make install
+```
 
-Once started, put the machine's config into your environment. Both right now and on next login:
+Running locally
+---------------
 
-    docker-machine env dev
-    eval $(docker-machine env dev)
-    echo "eval $(docker-machine env dev)" >> ~/.profile
+Before we can run the application, we'll need to create a `.env` file. You can copy the `sample.env` file to `.env` and fill in the missing values from the Origami Registry Configuration note in the shared folder on LastPass.
 
-Find out the IP address of the machine:
+In the working directory, use `docker-compose` to build and start a container. We have some Make tasks which simplify this:
 
-    docker-machine ip dev
+```sh
+make build-dev run-dev
+```
 
-When running locally, the app [configuration values](#Configuration) are stored in a local `.env` file and ignored by Git. To set up your local `.env` file, copy the `sample.env` file to `.env` and fill in the missing values from the Origami Registry Configuration note in the shared folder on LastPass.
+Now you can access the app over HTTP on port `3000`. If you're on a Mac, you'll need to use the IP of your Docker Machine, which you can get by running `docker-machine ip dev`:
 
-With the `.env` file setup, in the registry's working directory, run the build and start the app (note: you need to be connected to the internal network in order to install the dependencies from Stash):
+```sh
+open "http://$(docker-machine ip default):3000/"
+```
 
-    docker-compose build
-    docker-compose up
+The MySQL database is accessible on port 3306, the settings for which are in the `.env` file.
 
-Now you can access the app at the IP address discovered earlier, over HTTP on port 3000, and over MySQL on port 3306.  In your browser go to http://192.168.99.102:3000/ (using the IP given by `docker-machine ip dev`)
+To watch and compile front-end assets during development, you can run:
 
-To SSH into the web or DB nodes, you first need to SSH into the Docker VM, and then into the container you want:
-
-    docker-machine ssh dev
-    docker ps
-    docker exec -i -t origamiregistry_web_1 bash
+```sh
+make watch-dev
+```
 
 ### Setting up a local database
 
@@ -54,34 +72,29 @@ To work with the Registry locally you will probably need some data in your local
 
 To run the update script locally, you will need to SSH into the Docker VM and the container for the Registry:
 
-    docker-machine ssh dev
-    docker ps
-    docker exec -i -t origamiregistry_web_1 bash
+```sh
+docker-machine ssh dev
+docker ps
+docker exec -i -t origamiregistry_web_1 bash
+```
 
 You should now be in a bash command line for the registry app. You can now run the update registry script with the following command:
 
-    php ./app/scripts/updateregistry
+```sh
+php ./app/scripts/updateregistry
+```
 
-
-## Deploying
+Deploying
+---------
 
 You need to authenticate with Heroku (this app is `origami-registry-eu`) and use the Heroku docker plugin: `heroku plugins:install heroku-docker`.
 
-Then, run `git describe --tags > ./appversion; heroku docker:release; rm -f ./appversion`.
+Then, run `make deploy`.
 
 See also the [architecture diagram](https://docs.google.com/drawings/d/1dP1nrX6H2VLQoeDt3Y1TWYOTZSUexESY3QUmPupMpxA/edit) in Google drive.
 
-## Orchestration files
-
-The following files are used in build, test and deploy automation:
-
-* `.dockerignore`: used to ignore things when adding files to the Docker image.  Generally this will be the same as the `.gitignore` file as the build happens at the container creation time.  See the `Dockerfile` for more info.
-* `app.json`: TODO
-* `Dockerfile`: TODO
-* `docker-compose.yml': TODO
-* `start.sh`: TODO
-
-## Configuration
+Configuration
+-------------
 
 In dev, these are configured in the `.env` file.  In live, it's `heroku config`
 
@@ -95,3 +108,20 @@ In dev, these are configured in the `.env` file.  In live, it's `heroku config`
 * `BUILD_SERVICE_HOST`: Hostname of the build service to use for fetching module metadata
 * `VIEW_CACHE_PATH`: Path on disk to use to cache view templates in Twig
 * `DEBUG_KEY`: String, if set in a `Debug` HTTP header, will set dev mode to true for that request only.
+
+### Orchestration files
+
+The following files are used in build, test and deploy automation:
+
+* `.dockerignore`: used to ignore things when adding files to the Docker image.  Generally this will be the same as the `.gitignore` file as the build happens at the container creation time.  See the `Dockerfile` for more info.
+* `app.json`: TODO
+* `Dockerfile`: TODO
+* `docker-compose.yml': TODO
+* `start.sh`: TODO
+
+License
+-------
+
+The Financial Times has published this software under the [MIT license][license].
+
+[license]: http://opensource.org/licenses/MIT

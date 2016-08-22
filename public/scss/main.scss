@@ -5,30 +5,39 @@
 @import 'o-table/main';
 @import 'o-hierarchical-nav/main';
 @import 'o-labels/main';
-
-$o-buttons-is-silent: false;
 @import 'o-buttons/main';
+
+$o-header-services-is-silent: false;
+@import 'o-header-services/main';
 $o-tabs-is-silent: false;
 @import 'o-tabs/main';
 $o-overlay-is-silent: false;
 @import 'o-overlay/main';
 
 @import 'partials/variables';
-@import 'partials/mixins';
+
+@import 'partials/github-gist.hljs-theme';
 
 @import 'partials/base';
 @import 'partials/typography';
 @import 'partials/layout';
-
-@import 'partials/github-gist.hljs-theme';
+@import 'partials/buttons';
 
 @import 'partials/logo';
 
-@import 'partials/header';
 @import 'partials/forms';
+@import 'partials/labels';
+
+@import 'partials/header';
+@import 'partials/footer';
+
+@import 'partials/filter-bar';
 @import 'partials/component-list';
 @import 'partials/component-details';
+@import 'partials/component-navigation';
+@import 'partials/docs-navigation';
 @import 'partials/demos';
-@import 'partials/labels';
+@import 'partials/overlay';
+
 @import 'partials/utilities';
-@import 'partials/component-sidenav';
+

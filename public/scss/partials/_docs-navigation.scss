@@ -1,0 +1,28 @@
+.docs-navigation {
+	list-style: none;
+	margin: 0 0 20px;
+	padding: 0;
+
+	li {
+		margin-bottom: 2px;
+	}
+
+	a {
+		display: block;
+		padding: 10px 15px;
+		color: #fff;
+		font-size: 16px;
+		text-decoration: none;
+		background-color: #598caf;
+		transition: background-color 0.4s ease-in;
+
+		&:hover {
+			background-color: #275e86;
+		}
+
+		i {
+			font-size: 12px;
+			font-weight: bold;
+		}
+	}
+}

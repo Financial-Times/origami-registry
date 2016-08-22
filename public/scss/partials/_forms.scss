@@ -1,24 +1,35 @@
+// Include all the styles for radio and checkboxes
+@include oFormsRadioCheckbox;
+
 .o-forms-group {
 	@include oFormsGroup;
+}
+
+.o-forms-label {
+	@include oFormsLabel;
+
+	&--inline {
+		display: inline-block;
+		margin-right: 5px;
+	}
+}
+
+.o-forms-checkbox {
+	@include oFormsRadioCheckbox;
+
+	&+.o-forms-label {
+		display: inline-block;
+		margin-left: 5px;
+		margin-right: 10px;
+	}
 }
 
 .o-forms-text {
 	@include oFormsCommonField;
 }
 
-.filter-bar {
-	margin-top:40px;
-	margin-bottom: 15px;
-}
-
-.filter-bar .o-forms-group {
-	margin-bottom: 10px;
-}
-
-.filter-bar-label {
-	float: left;
-	width: 80px;
-	line-height: 24px;
-	position: relative;
-	top: -2px; // Align with form labels
+.version-select {
+	@include oFormsCommonField;
+	@include oFormsSelect;
+	width: 140px;
 }

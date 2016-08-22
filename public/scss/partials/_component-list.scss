@@ -1,50 +1,75 @@
 .component-list {
-	@include oTableBase;
-	@include oTableHorizontalLines;
-	@include oTableRowStripes;
 	width: 100%;
+	margin-bottom: 40px;
+	border-collapse: collapse;
+
+	th,
+	td {
+		padding: 12px 10px;
+		font-size: 14px;
+	}
+
+	th {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		font-weight: normal;
+		text-align: left;
+		background-color: #a7a59b;
+	}
+
+	.version-number {
+		min-width: 60px;
+		display: inline-block;
+	}
 }
-.component-list .component a {
-	text-decoration: none;
+
+.component-list__group-title {
+	td {
+		border-bottom: 1px solid #cec6b9;
+	}
+
+	h3 {
+		margin: 0;
+		font-size: 14px;
+		font-weight: normal;
+	}
 }
-.component-list .component {
+
+.component-list .label-css,
+.component-list .label-js {
+	margin-left: 5px;
+}
+
+.component-list__component {
 	cursor: pointer;
+
+	&:hover td {
+		background: #f8f8f8;
+	}
+
+	a {
+		text-decoration: none;
+	}
 }
-.component-list .component.focused td,
-.component-list .component:hover td {
-	background: #f8f8f8;
-}
-.component-list .component-name {
-	font-weight: bold;
-}
-.component-list .description {
-	font-size: 0.875em;
-	line-height: 1.4;
+
+.component-list__component-description {
+	padding-left: 16px;
+	font-size: 12px;
+	line-height: 1.5;
 	color: #777777;
 }
 
-/* Version number */
-
-.version-number {
-	font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
-	font-size: 0.875em;
-}
-.component-list .version-number {
-	min-width: 60px;
-	display: inline-block;
+.component-list__component-name {
+	font-size: 16px;
+	font-weight: bold;
 }
 
 /* Mobile styles */
 @media (max-width: 600px) {
-	.component-list td {
-		border-bottom: 0 !important;
-	}
-	.component-list tr {
-		border-bottom: 1px solid #eeeeee;
-	}
 	.component-list td:nth-child(2) {
 		display: block;
 	}
+
 	.component-list .version-number {
 		display: block;
 	}
