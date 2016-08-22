@@ -40,7 +40,7 @@
 									{% if component.origami_type == 'module' %}<i class="fa fa-puzzle-piece"></i>
 									{% elseif component.origami_type == 'service' %}<i class="fa fa-bolt"></i>
 									{% else %}<i class="fa fa-exclamation-triangle"></i>{% endif %}
-									<span class="component-name" data-module-name--js data-name="{{component.module_name}}">{{component.module_name}}</span>
+									<span class="component-name" data-module-name--js data-name="{{component.module_name}}" data-keywords="{{component.keywords}}">{{ component.module_name }}</span>
 								</a>
 								<div class="description">{{component.description}}</div>
 							</td>
