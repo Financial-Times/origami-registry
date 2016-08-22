@@ -26,7 +26,7 @@ $(function() {
 					return filterMatch;
 				}
 			});
-			if (filterMatch && regex.test(row.find('[data-module-name--js]').attr('data-name'))) {
+			if (filterMatch && ((regex.test(row.find('[data-module-name--js]').attr('data-name'))) || (regex.test(row.find('[data-module-name--js]').attr('data-keywords'))))) {
 				if ($('#filter').val()) {
 					row.find('[data-module-name--js]').html(
 						row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')

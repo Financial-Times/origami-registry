@@ -14,7 +14,7 @@
 		"erusev/parsedown": "*",
 		"pimple/pimple": "dev-master",
 		"twig/twig": "1.*",
-		"masterminds/html5": "2",
+		"masterminds/html5": "^2.2.1",
 		"vierbergenlars/php-semver": "^3.0.0",
 		"ext-mbstring": "*",
 		"beberlei/metrics": "^2.0"
