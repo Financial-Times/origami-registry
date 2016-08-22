@@ -20,7 +20,7 @@ final class RepositoryDiscovery {
 
 		// Discover repos
 		foreach ($data->sources as $source) {
-			$api_query_start = 0;
+			$api_query_start = microtime(true);
 
 			$className = '\\GitAPIClients\\' . $source->api->type;
 			$users = isset($source->api->users) ? $source->api->users : null;

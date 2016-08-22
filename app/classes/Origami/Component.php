@@ -60,13 +60,13 @@ final class Component extends Model {
 		self::$app->logger->debug('Searching for new versions', array('component'=>$this->module_name));
 		$apiclass = '\\GitAPIClients\\'.$this->host_type;
 		$api = new $apiclass(self::$app->logger);
-		$discover_versions_start = 0;
+		$discover_versions_start = microtime(true);
 		$newversions = $api->discoverVersions($this->git_repo_url, array_keys($this->versions));
 
 		$discover_versions_diff = microtime(true) - $discover_versions_start;
 		self::$app->metrics->timing(self::$app->metrics_prefix . '.discoverVersions.apiRequest', $discover_versions_diff);
 
-		$update_versions_start = 0;
+		$update_versions_start = microtime(true);
 		foreach ($newversions as $version) {
 			$versionobj = ComponentVersion::findOrCreate($this, $version['tag_name']);
 
@@ -94,7 +94,7 @@ final class Component extends Model {
 		$versions = $this->versions;
 		if (empty($versions)) return;
 
-		$build_versions_start = 0;
+		$build_versions_start = microtime(true);
 
 		$version = $latest = end($versions);
 		while ($version && ($version->is_valid === null or !$unbuiltonly) && $depth) {
