@@ -37,7 +37,7 @@ You'll also need `gulp` installed globally to compile the front-end assets:
 npm install -g gulp
 ```
 
-Create a virtual machine to run the application's containers using `docker-machine`. The default size didn't appear to be large enough so this will create one with an increased disk size:
+Create a virtual machine to run the application's containers using `docker-machine`. The default size isn't large enough, so this will create one with an increased disk size:
 
 ```sh
 docker-machine create --driver virtualbox --virtualbox-disk-size "50000" dev
