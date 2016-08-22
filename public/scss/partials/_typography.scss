@@ -1,5 +1,16 @@
-@include oFontsInclude(MetricWeb, $weight: regular);
+a {
+	color: oColorsGetPaletteColor('dark-blue');
+	text-decoration: none;
 
+	&:hover,
+	&:focus {
+		color: oColorsGetPaletteColor('dark-blue');
+	}
+
+	&:visited {
+		color: oColorsGetPaletteColor('claret');
+	}
+}
 
 code,
 pre,
@@ -10,15 +21,15 @@ output {
 }
 
 code {
-	background-color: $o-techdocs-color-grey1;
-	color: $o-techdocs-color-green;
+	background-color: $o-registry-color-grey1;
+	color: $o-registry-color-green;
 	white-space: pre-wrap;
 }
 
 var {
 	font-style: italic;
 	white-space: nowrap;
-	color: $o-techdocs-color-purple;
+	color: $o-registry-color-purple;
 }
 
 pre { // Override defaults
@@ -26,9 +37,9 @@ pre { // Override defaults
 	overflow-x: auto;
 	margin: 0 0 10px;
 	padding: 9.5px;
-	border: 1px solid $o-techdocs-color-grey2;
-	background-color: $o-techdocs-color-grey1;
-	color: $o-techdocs-color-charcoal;
+	border: 1px solid $o-registry-color-grey2;
+	background-color: $o-registry-color-grey1;
+	color: $o-registry-color-charcoal;
 	word-wrap: inherit;
 	word-break: break-all;
 	font-size: 15px;
@@ -43,20 +54,15 @@ pre { // Override defaults
 		white-space: pre;
 		font-size: inherit;
 	}
-	li.l1,
-	li.l3,
-	li.l5,
-	li.l7,
-	li.l9 {
-		// Stripe rows if desired
-	}
 }
+
 pre.long-code {
 	overflow-y: scroll;
 	max-height: 340px;
 }
+
 pre.cli {
-	background: $o-techdocs-color-charcoal;
+	background: $o-registry-color-charcoal;
 
 	kbd,
 	output {
@@ -74,6 +80,30 @@ pre.cli {
 		}
 	}
 	output {
-		color: $o-techdocs-color-grey3;
+		color: $o-registry-color-grey3;
 	}
+}
+
+pre.quickstart-tag {
+	font-size: 16px;
+	word-break: normal;
+}
+
+pre.quickstart-tag code {
+	white-space: normal;
+}
+
+.bundlesize_js,
+.bundlesize_css {
+	font-weight: bold;
+	color: #029A77;
+}
+
+.bundlesize_css {
+	color: #CE6308;
+}
+
+.version-number {
+	font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+	font-size: 0.875em;
 }

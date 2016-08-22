@@ -1,0 +1,28 @@
+.o-registry__github-button {
+	@include oButtons;
+	@include oButtonsSize(big);
+	margin-top: 20px;
+	background-color: transparent;
+	border-color: #fff;
+	color: #fff;
+	transition: color background-color 0.4s ease-in;
+
+	@media (min-width: 900px) {
+		float: right;
+		margin-top: 0;
+	}
+
+	&:visited {
+		color: #fff;
+	}
+
+	&:hover {
+		color: #275e86;
+		background-color: #fff;
+		text-decoration: none;
+	}
+}
+
+.o-registry__github-button i {
+	margin-right: 10px;
+}

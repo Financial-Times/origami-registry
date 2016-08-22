@@ -11,42 +11,50 @@
 	vertical-align: baseline;
 	border-radius: .25em;
 }
+
 .label-active {
 	background-color: #06b406;
 }
+
 .label-maintained {
 	background-color: #5a8b50;
 }
+
 .label-deprecated {
 	background-color: #c75000;
 }
+
 .label-dead {
 	background-color: #555555;
 }
+
 .label-experimental {
 	background-color: #aa0000;
 }
+
 .label-unspecified {
 	background-color: #dd4444;
 }
+
 .label-fail {
 	background-color: #aa0000;
 }
+
 .label-pass {
 	background-color: #06b406;
 }
-
-[class^="badge-"],
-[class*=" badge-"] {
-	display: inline-block;
-	padding: 8px 12px;
-	border-radius: 5px;
-	color: white;
-	font-size: 14px;
+.label-css {
+	background-color: #0c72ba;
 }
-.badge-ok {
+.label-js {
+	background-color: #f7d736;
+	color: #000000;
+}
+
+.label-ok {
 	background-color: green;
 }
-.badge-danger {
+
+.label-danger {
 	background-color: red;
 }

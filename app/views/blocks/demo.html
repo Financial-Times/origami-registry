@@ -1,33 +1,28 @@
 <div class="demo-wrapper">
-	<h2 class="demo-title"><span class="activity">{{ demo.name }}</span> <a href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" class="jsbin-link">Open in JSBin <i class="fa fa-external-link"></i></a></h2>
-
+	<h2 class="demo-title">
+		<span class="activity">{{ demo.name }}</span>
+		<a href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" class="jsbin-link">open in JSBin <i class="fa fa-external-link"></i></a>
+	</h2>
 	{% if demo.description %}<div class="demo-subtitle">{{ demo.description }}</div>{% endif %}
 
-	<ul data-o-component="o-tabs" class="o-tabs o-tabs--alignright o-tabs--buttontabs o-tabs--big" role="tablist">
+	<ul data-o-component="o-tabs" class="o-tabs o-tabs--alignright o-tabs--buttontabs demo-tabs" role="tablist">
 		<li role="tab" aria-selected="true"><a href="#demo-{{ demo.name|slugify}}">Demo</a></li>
 		<li role="tab"><a href="#code-{{ demo.name|slugify}}">HTML</a></li>
-		<li role="tab"><a href="#embed-{{ demo.name|slugify}}">Embed</a></li>
 	</ul>
 	<div id="demo-{{ demo.name|slugify}}" class="o-tabs__tabpanel">
-		<div class="demo-frame-container">
-			<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
-		</div>
+		{% if force_old_demo_url %}
+			<div class="demo-frame-container">
+				<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/files/{{module_name}}@{{tag_name}}/{{demo.path}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
+			</div>
+		{% else %}
+			<div class="demo-frame-container">
+				<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
+			</div>
+		{% endif %}
 	</div>
 	<div id="code-{{ demo.name|slugify}}" class="o-tabs__tabpanel">
 		<div class="demo-source-container">
 			<pre class="demo-source" data-src="/components/{{module_name}}@{{tag_name}}/demos/code/{{demo.name}}"></pre>
 		</div>
 	</div>
-	<div id="embed-{{ demo.name|slugify}}" class="o-tabs__tabpanel">
-		<pre class="demo-embed-code" onclick="this.select();"><!-- Put the following line *once* at the top of your page -->
-&lt;script src="http://registry.origami.ft.com/embedapi">&lt;/script>
-<!-- Put the following line where you want the demo to show -->
-&lt;iframe style="width: 100%;" frameborder="0" scrolling="no" src="http://{{SERVER.HTTP_HOST}}/components/{{module_name}}@{{tag_name}}/demos/visual/{{demo.name}}?embed=1">&lt;/iframe></pre>
-	</div>
-
-	{% if force_old_demo_url %}
-		<div class="demo-frame-container">
-			<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/files/{{module_name}}@{{tag_name}}/{{demo.path}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
-		</div>
-	{% endif %}
 </div>
