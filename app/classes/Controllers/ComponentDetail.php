@@ -97,6 +97,42 @@ class ComponentDetail extends BaseController {
 			$this->addViewData('force_old_demo_url', true);
 		}
 
+		// Get all components for the internal navigation
+		$viewdata = array(
+				'primitives' => array(
+					'title' => 'Primitives',
+					'modules' => array(),
+				),
+				'component' => array(
+					'title' => 'Components',
+					'modules' => array(),
+				),
+				'layouts' => array(
+					'title' => 'Layouts',
+					'modules' => array(),
+				),
+				'utilities' => array(
+					'title' => 'Utilities',
+					'modules' => array(),
+				),
+			);
+
+		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
+			if ($component->latest_stable_version) {
+				$viewdata[$component->origami_group]['modules'][] = array_merge(
+					$component->toArray(),
+					$component->latest_stable_version->toArray()
+				);
+			} elseif($component->latest_version) {
+				$viewdata[$component->origami_group]['modules'][] = array_merge(
+					$component->toArray(),
+					$component->latest_version->toArray()
+				);
+			}
+		}
+
+		$this->addViewData('components', $viewdata);
+
 		// Render templates and return response
 		$this->resp->setCacheTTL(isset($this->routeargs['version']) ? 3600 : 0);
 		if ($this->routeargs['format'] === 'json') {

@@ -3,9 +3,9 @@
 {% block content %}
 
 <div class="o-registry-container">
-	<form class="filter-bar">
+	<form action="#" class="filter-bar" aria-hidden="true">
 		<div class="o-forms-group">
-			<input id="filter" type="text" class="o-forms-text" name="filter" placeholder="Type to filter by name" autofocus />
+			<input id="filter" type="text" class="o-forms-text" name="filter" placeholder="Type to filter by name" autofocus autocomplete="off" />
 		</div>
 
 		<div class="o-forms-group filter-bar__checkboxes filter-bar__checkboxes--type">
@@ -31,12 +31,12 @@
 		<tbody>
 		{% for group in components %}
 			{% if group.modules is not empty %}
-				<tr class="component-list__group-title">
+				<tr class="component-list__group-title js-searchable">
 					<td><h3>{{group.title}}</h3></td><td></td><td></td><td></td>
 				</tr>
 
 				{% for component in group.modules %}
-					<tr class="component-list__component searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}">
+					<tr class="component-list__component js-searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}">
 						<td>
 							<a href="/components/{{component.module_name}}@{{component.tag_name}}">
 								{% if component.origami_type == 'module' %}<i class="fa fa-puzzle-piece"></i>

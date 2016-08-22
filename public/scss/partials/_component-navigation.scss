@@ -20,3 +20,9 @@
 	padding: 5px 20px;
 	text-decoration: none;
 }
+
+.component-navigation__item a:hover,
+.component-navigation__item.focused a {
+	background-color: #a9cadc;
+	color: #333;
+}
