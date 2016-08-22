@@ -16,6 +16,7 @@ final class RepositoryDiscovery {
 	public static function search($data, $app) {
 
 		$metrics = $app->metrics;
+		$metrics_prefix = $app->metrics_prefix;
 		$app->logger->info('Beginning Origami component discovery');
 
 		// Discover repos
@@ -37,13 +38,13 @@ final class RepositoryDiscovery {
 					$component->host_type = $source->api->type;
 					$components[$repository['name']] = $component;
 					$foundcount++;
-					$metrics->increment($this->app->metrics_prefix . 'discovery.found');
+					$metrics->increment($metrics_prefix . 'discovery.found');
 				}
 			}
 
 			$api_query_diff = microtime(true) - $api_query_start;
 
-			$metrics->timing($this->app->metrics_prefix . 'discovery. ' .$source->api->type. '.apiRequest', $api_query_diff);
+			$metrics->timing($metrics_prefix . 'discovery. ' .$source->api->type. '.apiRequest', $api_query_diff);
 			$app->logger->info('Searched '.$source->name.', found repositories: '.$foundcount);
 		}
 
@@ -58,12 +59,12 @@ final class RepositoryDiscovery {
 				$component->datetime_last_discovered = new \DateTime();
 				$component->save();
 				$component->discoverVersions();
-				$metrics->increment($this->app->metrics_prefix . 'discovery.origami');
+				$metrics->increment($metrics_prefix . 'discovery.origami');
 				if ($component->latest_version and $component->latest_version->is_valid === null) {
 					$component->buildVersions();
 					if ($component->latest_version->is_valid) {
 						$newlist[$component->module_name] = $component;
-						$metrics->increment($this->app->metrics_prefix . 'discovery.new_component');
+						$metrics->increment($metrics_prefix . 'discovery.new_component');
 					}
 				}
 			}
