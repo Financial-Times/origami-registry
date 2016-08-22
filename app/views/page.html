@@ -44,6 +44,9 @@
 			</div>
 		</div>
 	</header>
+
+	{% block content %}{% endblock %}
+
 	<div class="o-header__drawer--services o-header__drawer o--if-js" id="o-header-drawer" data-o-header-drawer="" data-o-header-drawer--no-js="">
 		<div class="o-header__drawer-inner">
 			<div class="o-header__drawer-tools">
@@ -67,9 +70,6 @@
 			</nav>
 		</div>
 	</div>
-
-	{% block content %}{% endblock %}
-
 	<footer class="o-registry-footer">
 		<div class="o-registry-container">
 			<div class="o-registry-footer__inner">
