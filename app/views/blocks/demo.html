@@ -1,14 +1,15 @@
 <div class="demo-wrapper">
 	<h2 class="demo-title">
 		<span class="activity">{{ demo.name }}</span>
-		<a href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" class="jsbin-link">open in JSBin <i class="fa fa-external-link"></i></a>
 	</h2>
 	{% if demo.description %}<div class="demo-subtitle">{{ demo.description }}</div>{% endif %}
 
-	<ul data-o-component="o-tabs" class="o-tabs o-tabs--alignright o-tabs--buttontabs demo-tabs" role="tablist">
+	<ul data-o-component="o-tabs" class="o-tabs o-tabs--buttontabs demo-tabs" role="tablist">
 		<li role="tab" aria-selected="true"><a href="#demo-{{ demo.name|slugify}}">Demo</a></li>
 		<li role="tab"><a href="#code-{{ demo.name|slugify}}">HTML</a></li>
+		<li class="jsbin-link"><a href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}">open in JSBin <i class="fa fa-external-link"></i></a></li>
 	</ul>
+
 	<div id="demo-{{ demo.name|slugify}}" class="o-tabs__tabpanel">
 		{% if force_old_demo_url %}
 			<div class="demo-frame-container">

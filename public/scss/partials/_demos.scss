@@ -39,7 +39,7 @@
 }
 
 .demo-title {
-	margin: 0;
+	margin: 0 0 20px;
 	font-weight: bold;
 	text-transform: capitalize;
 	font-size: 17px;
@@ -120,7 +120,8 @@
 }
 
 .jsbin-link {
-	display: inline;
+	float: right;
+	list-style: none;
 	margin-left: 15px;
 	font-size: 12px;
 	font-weight: normal;
