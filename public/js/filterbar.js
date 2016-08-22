@@ -3,16 +3,18 @@
 'use strict';
 
 $(function() {
+	var $filterBar = $('.filter-bar');
 	var $componentList = $('.component-navigation__list');
 	var itemSelector = 'li';
 
+	// Change the selector if we're on the component-listing page
 	if ($componentList.length === 0) {
 		$componentList = $('.component-list tbody');
 		itemSelector = 'tr';
 	}
 
 	function filterRows() {
-		var rows = $('.searchable');
+		var rows = $('.js-searchable');
 		var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
 		rows.hide();
 		rows.filter(function () {
@@ -40,8 +42,6 @@ $(function() {
 	}
 
 	function navigateRows(key) {
-
-
 		var rows = $componentList.find(itemSelector + ':visible'),
 			current = rows.filter('.focused'),
 			index = rows.index(current),
@@ -86,10 +86,16 @@ $(function() {
 		$componentList.find('.focused').removeClass('focused');
 	}
 
-	$('.filter-bar').on('submit', function(e) { e.preventDefault(); });
+	// Show the filter bar and register event handlers
+	if ($filterBar.length) {
+		$filterBar.attr('aria-hidden', false);
 
-	$('.filter-bar #filter').on('keyup', filterEvent);
-	$('.filter-bar input:checkbox').on('change', filterEvent);
+		$filterBar.on('submit', function(e) { e.preventDefault(); });
 
-	filterRows();
+		$('.filter-bar #filter').on('keyup', filterEvent);
+		$('.filter-bar input:checkbox').on('change', filterEvent);
+
+		// Run the filter script to filter out modules based on default checkboxes
+		filterRows();
+	}
 });

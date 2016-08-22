@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="o-registry-container">
-	<form class="filter-bar">
+	<form class="filter-bar" aria-hidden="true">
 		<div class="grid-row">
 			<div class="grid-col--full">
 				<div class="o-forms-group">
@@ -40,12 +40,12 @@
 			<tbody>
 			{% for group in components %}
 				{% if group.modules is not empty %}
-					<tr class="component-group searchable">
+					<tr class="component-group js-searchable">
 						<td><h3>{{group.title}}</h3></td><td></td><td></td>
 					</tr>
 
 					{% for component in group.modules %}
-						<tr class="component searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}">
+						<tr class="component js-searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}">
 							<td>
 								<a href="/components/{{component.module_name}}@{{component.tag_name}}">
 									{% if component.origami_type == 'module' %}<i class="fa fa-puzzle-piece"></i>

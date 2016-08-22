@@ -1,5 +1,5 @@
 <nav class="component-side-nav">
-	<form action="" class="filter-bar">
+	<form action="" class="filter-bar" aria-hidden="true">
 		<div class="o-forms-group">
 			<label for="module-search" aria-hidden="true">Seach modules</label>
 			<input type="text" class="o-forms-text" id="filter" autocomplete="off" placeholder="Type to filter by name">
@@ -9,11 +9,11 @@
 	<ul class="component-navigation__list">
 		{% for group in components %}
 			{% if group.modules is not empty %}
-				<li class="component-navigation__item searchable">
+				<li class="component-navigation__item js-searchable">
 					<h3 class="component-navigation__title">{{group.title}}</h3>
 				</li>
 				{% for component in group.modules %}
-					<li class="component-navigation__item searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}"><a data-module-name--js data-name="{{component.module_name}}" href="/components/{{component.module_name}}@{{component.tag_name}}">{{component.module_name}}</a></li>
+					<li class="component-navigation__item js-searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}"><a data-module-name--js data-name="{{component.module_name}}" href="/components/{{component.module_name}}@{{component.tag_name}}">{{component.module_name}}</a></li>
 				{% endfor %}
 			{% endif %}
 		{% endfor %}
