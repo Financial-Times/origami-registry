@@ -38,10 +38,10 @@ class ComponentListing extends BaseController {
 			);
 
 		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
-			// $cat = $component->origami_category;
-			// if ($cat === '') {
+			$cat = $component->origami_category;
+			if (!$cat) {
 				$cat = 'uncategorised';
-			// }
+			}
 
 			if ($component->latest_stable_version) {
 				$viewdata[$cat]['modules'][] = array_merge(
