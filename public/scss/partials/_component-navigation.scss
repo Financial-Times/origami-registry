@@ -1,28 +1,35 @@
-.component-navigation {
-	list-style: none;
-	padding-left: 0;
-}
-
 .component-navigation__list {
 	list-style: none;
 	padding-left: 0;
 }
 
 .component-navigation__title {
-	margin: 10px 0 5px;
-	padding: 8px 20px;
+	margin: 50px 0 5px;
+	padding: 0 15px;
 	font-size: 16px;
-	color: #333;
 }
 
 .component-navigation__item a {
 	display: block;
-	padding: 5px 20px;
+	padding: 5px 15px;
+	color: #fff;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 .component-navigation__item a:hover,
 .component-navigation__item.focused a {
-	background-color: #a9cadc;
-	color: #333;
+	background-color: #505050;
+}
+
+.o-forms-label--component-nav {
+	color: #fff;
+	font-size: 14px;
+}
+
+.o-forms-text--component-nav {
+	height: auto;
+	margin-top: 7px;
+	font-size: 12px;
+	border-radius: 0;
 }
