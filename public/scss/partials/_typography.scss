@@ -1,14 +1,14 @@
 a {
-	color: oColorsGetPaletteColor('dark-blue');
+	color: oColorsGetPaletteColor('teal-1');
 	text-decoration: none;
 
 	&:hover,
 	&:focus {
-		color: oColorsGetPaletteColor('dark-blue');
+		color: oColorsGetPaletteColor('teal-1');
 	}
 
 	&:visited {
-		color: oColorsGetPaletteColor('claret');
+		color: oColorsGetPaletteColor('teal-1');
 	}
 }
 
