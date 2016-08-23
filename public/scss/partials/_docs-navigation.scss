@@ -1,27 +1,24 @@
 .docs-navigation {
 	list-style: none;
+	width: 100%;
 	margin: 0 0 20px;
 	padding: 0;
+	text-align: center;
 
 	li {
-		margin-bottom: 2px;
+		display: inline-block;
+
+		&:not(:last-child) a {
+			border-right: 1px solid oColorsGetPaletteColor('teal-1');
+		}
 	}
 
 	a {
-		display: block;
-		padding: 10px 15px;
-		color: #fff;
-		font-size: 16px;
-		text-decoration: none;
-		background-color: #598caf;
-		transition: background-color 0.4s ease-in;
-
-		&:hover {
-			background-color: #275e86;
-		}
+		padding: 0 5px;
+		font-size: 12px;
 
 		i {
-			font-size: 12px;
+			font-size: 10px;
 			font-weight: bold;
 		}
 	}

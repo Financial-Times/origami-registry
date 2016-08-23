@@ -41,6 +41,10 @@
 		margin-left: 0;
 		margin-right: 40px;
 	}
+
+	.component-detail__section--highlight a {
+		border-bottom: 1px dashed oColorsGetPaletteColor('teal-1');
+	}
 }
 
 .component-detail__header,

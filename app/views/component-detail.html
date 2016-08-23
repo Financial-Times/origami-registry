@@ -18,15 +18,15 @@
 
 		<div class="component-detail__info">
 			<section class="component-detail__section" id="section-usage">
-				<a href="{{repo_home_url}}" class="o-buttons o-buttons--big o-registry__github-button"><i class="fa fa-github"></i>View on Github</a>
+				<a href="{{repo_home_url}}" class="o-buttons o-buttons--big o-registry__github-button"><i class="fa fa-github"></i>View on GitHub</a>
 				<ul class="docs-navigation">
-					<li><a href="#more-information">Component information</a></li>
-					<li><a href="{{repo_home_url}}#readme">Readme <i class="fa fa-external-link"></i></a></li>
-					{% if has_css %}
-						<li><a href="http://codedocs.webservices.ft.com/v1/sassdoc/{{module_name}}@{{tag_name}}">SassDoc <i class="fa fa-external-link"></i></a></li>
-					{% endif %}
-					{% if has_js %}
-						<li><a href="http://codedocs.webservices.ft.com/v1/jsdoc/{{module_name}}@{{tag_name}}">JSDoc <i class="fa fa-external-link"></i></a></li>
+					<li><a href="#more-information">Component information</a></li><!--
+					--><li><a href="{{repo_home_url}}#readme">Readme <i class="fa fa-external-link"></i></a></li><!--
+					-->{% if has_css %}<!--
+						--><li><a href="http://codedocs.webservices.ft.com/v1/sassdoc/{{module_name}}@{{tag_name}}">SassDoc <i class="fa fa-external-link"></i></a></li><!--
+					-->{% endif %}<!--
+					-->{% if has_js %}<!--
+						--><li><a href="http://codedocs.webservices.ft.com/v1/jsdoc/{{module_name}}@{{tag_name}}">JSDoc <i class="fa fa-external-link"></i></a></li>
 					{% endif %}
 				</ul>
 
