@@ -13,7 +13,7 @@
 	bottom: 5px;
 	right: 0;
 	list-style: none;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: normal;
 	text-transform: none;
 	text-decoration: none;
@@ -21,13 +21,13 @@
 
 .demo__jsbin-link i {
 	margin-left: 1px;
-	font-size: 10px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
 .demo__tabs {
 	clear: both;
-	font-size: 12px;
+	font-size: 14px;
 
 	&.o-tabs--buttontabs[data-o-tabs--js] [role=tab] {
 		color: #2e6e9e;
@@ -50,11 +50,11 @@
 	margin: 0 0 5px;
 	font-weight: bold;
 	text-transform: capitalize;
-	font-size: 17px;
+	font-size: 18px;
 }
 
 .demo__subtitle {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .demo__frame-container {

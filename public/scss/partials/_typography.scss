@@ -1,6 +1,23 @@
+// @font-face declarations for Metric regular / italic
+@include oFontsInclude(MetricWeb, $weight: regular);
+@include oFontsInclude(MetricWeb, $weight: semibold);
+
+h1 {
+	font-weight: 400;
+}
+
+h2,
+h3 {
+	@include oTypographySansDataBold(l);
+	font-size: 26px;
+}
+
+h3 {
+	font-size: 19px;
+}
+
 a {
 	color: oColorsGetPaletteColor('teal-1');
-	font-weight: bold;
 	text-decoration: none;
 
 	&:hover,

@@ -32,7 +32,6 @@
 	th,
 	td {
 		padding: 12px 10px;
-		font-size: 14px;
 	}
 
 	th {
@@ -56,8 +55,7 @@
 
 	h3 {
 		margin: 0;
-		font-size: 14px;
-		font-weight: normal;
+		font-size: 16px;
 	}
 }
 
@@ -80,14 +78,14 @@
 
 .component-list__component-description {
 	padding-left: 16px;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 1.5;
 	color: #777777;
 }
 
 .component-list__component-name {
+	@include oTypographySansDataBold(m);
 	font-size: 16px;
-	font-weight: bold;
 }
 
 /* Mobile styles */

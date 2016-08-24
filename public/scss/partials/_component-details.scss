@@ -23,7 +23,10 @@
 		margin-right: 20px;
 		padding-right: 30px;
 		border-right: 1px solid #cec6b9;
+	}
 
+	@media (min-width: 1200px) {
+		width: calc(75% - 290px);
 	}
 }
 
@@ -45,7 +48,13 @@
 		margin-right: 40px;
 	}
 
+	@media (min-width: 1200px) {
+		width: calc(25% - 40px);
+	}
+
 	.component-detail__section--highlight a {
+		@include oTypographySansDataBold(m);
+		font-size: 16px;
 		border-bottom: 1px dashed oColorsGetPaletteColor('teal-1');
 	}
 }
@@ -80,7 +89,7 @@
 	[class^="label-"],
 	[class*=" label-"] {
 		position: relative;
-		top: 5px;
+		top: 8px;
 		margin-left: 5px;
 	}
 }
