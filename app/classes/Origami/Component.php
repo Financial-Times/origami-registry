@@ -60,8 +60,13 @@ final class Component extends Model {
 		self::$app->logger->debug('Searching for new versions', array('component'=>$this->module_name));
 		$apiclass = '\\GitAPIClients\\'.$this->host_type;
 		$api = new $apiclass(self::$app->logger);
+		$discover_versions_start = microtime(true);
 		$newversions = $api->discoverVersions($this->git_repo_url, array_keys($this->versions));
 
+		$discover_versions_diff = microtime(true) - $discover_versions_start;
+		self::$app->metrics->timing(self::$app->metrics_prefix . '.discoverVersions.apiRequest', $discover_versions_diff);
+
+		$update_versions_start = microtime(true);
 		foreach ($newversions as $version) {
 			$versionobj = ComponentVersion::findOrCreate($this, $version['tag_name']);
 
@@ -70,12 +75,16 @@ final class Component extends Model {
 				$versionobj->save();
 				$this->data['versions'][$version['tag_name']] = $versionobj;
 
+				self::$app->metrics->increment(self::$app->metrics_prefix . 'component.discoverVersions.new');
 				self::$app->logger->info('Discovered new version', array(
 					'module_name' => $this->module_name,
 					'tag' => $version['tag_name'],
 				));
 			}
 		}
+
+		$update_versions_diff = microtime(true) - $update_versions_start;
+		self::$app->metrics->timing(self::$app->metrics_prefix . '.discoverVersions.updateDB', $update_versions_diff);
 
 		$this->_initialiseVersions();
 	}
@@ -84,6 +93,8 @@ final class Component extends Model {
 	public function buildVersions($unbuiltonly = true, $depth = 5) {
 		$versions = $this->versions;
 		if (empty($versions)) return;
+
+		$build_versions_start = microtime(true);
 
 		$version = $latest = end($versions);
 		while ($version && ($version->is_valid === null or !$unbuiltonly) && $depth) {
@@ -114,6 +125,7 @@ final class Component extends Model {
 				if (!$version->is_valid and $unbuiltonly) break;
 			} catch (\Exception $e) {
 				if ($e->getMessage() === 'Tag not found') {
+					self::$app->metrics->increment(self::$app->metrics_prefix . 'component.buildVersions.delete');
 					$version->delete();
 					return;
 				}
@@ -132,6 +144,9 @@ final class Component extends Model {
 		}
 
 		$versiontags = array_keys($versions);
+
+		$build_versions_diff = microtime(true) - $build_versions_start;
+		self::$app->metrics->timing(self::$app->metrics_prefix . '.buildVersions.timing', $build_versions_diff);
 		self::$app->logger->info('buildVersions', array(
 			'module' => $this->module_name,
 			'latest_tag' => end($versiontags),
