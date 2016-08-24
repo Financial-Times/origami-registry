@@ -86,9 +86,12 @@ final class RepositoryDiscovery {
 		}
 
 		// Remove components that have not been seen for a while
+		/** AO: Removing this deletion query while we're having problems with the Registry updates.
+				Will reinstate when things start to clear up.
 		$app->db_write->query('SET foreign_key_checks = 0;');
 		$app->db_write->query('DELETE c, cv, d, cd FROM components c LEFT JOIN componentversions cv ON c.id=cv.component_id LEFT JOIN demos d ON c.id=d.componentversion_id LEFT JOIN componentdependencies cd ON cv.id=cd.parent_version_id WHERE c.datetime_last_discovered < (NOW() - INTERVAL 3 DAY);');
 		$app->db_write->query('SET foreign_key_checks = 1;');
+		**/
 
 		$app->logger->info('Scan complete');
 	}
