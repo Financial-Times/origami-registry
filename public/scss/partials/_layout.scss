@@ -2,11 +2,7 @@
 	@include oGridContainer;
 	clear: both;
 	position: relative;
-	max-width: $o-registry-max-width;
-
-	.o-registry-page--component-detail & {
-		max-width: 100%;
-	}
+	max-width: 100%;
 }
 
 .sidebar {
