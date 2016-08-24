@@ -19,8 +19,11 @@
 
 	@media (min-width: 900px) {
 		float: left;
-		width: calc(70% - 280px);
-		margin-right: 0;
+		width: calc(70% - 290px);
+		margin-right: 20px;
+		padding-right: 30px;
+		border-right: 1px solid #cec6b9;
+
 	}
 }
 
@@ -37,7 +40,7 @@
 
 	@media (min-width: 900px) {
 		float: right;
-		width: calc(25% - 40px);
+		width: calc(30% - 40px);
 		margin-left: 0;
 		margin-right: 40px;
 	}
@@ -55,7 +58,7 @@
 }
 
 .component-detail__header {
-	margin-bottom: 30px;
+	padding-bottom: 30px;
 }
 
 .component-detail__description {

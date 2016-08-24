@@ -1,3 +1,29 @@
+.component-list__main {
+	width: 90%;
+	margin: 40px auto;
+
+	@media (min-width: 900px) {
+		float: left;
+		width: calc(70% - 70px);
+		margin-right: 20px;
+		margin-left: 40px;
+		padding-right: 30px;
+		border-right: 1px solid #cec6b9;
+	}
+}
+
+.component-list__sidebar {
+	width: 90%;
+	margin: 40px auto;
+
+	@media (min-width: 900px) {
+		float: right;
+		width: calc(30% - 40px);
+		margin-left: 0;
+		margin-right: 40px;
+	}
+}
+
 .component-list {
 	width: 100%;
 	margin-bottom: 40px;
@@ -44,7 +70,7 @@
 	cursor: pointer;
 
 	&:hover td {
-		background: #f8f8f8;
+		background: #fff1e0;
 	}
 
 	a {

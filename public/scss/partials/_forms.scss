@@ -1,10 +1,6 @@
 // Include all the styles for radio and checkboxes
 @include oFormsRadioCheckbox;
 
-.o-forms-group {
-	@include oFormsGroup;
-}
-
 .o-forms-label {
 	@include oFormsLabel;
 
