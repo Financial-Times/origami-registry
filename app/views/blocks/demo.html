@@ -15,11 +15,11 @@
 	<div id="demo-{{ demo.name|slugify}}" class="o-tabs__tabpanel">
 		{% if force_old_demo_url %}
 			<div class="demo__frame-container">
-				<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/files/{{module_name}}@{{tag_name}}/{{demo.path}}" class="demo__frame" allowTransparency="true" scrolling="no"></iframe>
+				<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/files/{{module_name}}@{{tag_name}}/{{demo.path}}" title="demo: {{demo.name}}" class="demo__frame" allowTransparency="true" scrolling="no"></iframe>
 			</div>
 		{% else %}
 			<div class="demo__frame-container">
-				<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" class="demo__frame" allowTransparency="true" scrolling="no"></iframe>
+				<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" title="demo: {{demo.name}}" class="demo__frame" allowTransparency="true" scrolling="no"></iframe>
 			</div>
 		{% endif %}
 	</div>

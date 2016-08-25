@@ -13,16 +13,17 @@
 	bottom: 5px;
 	right: 0;
 	list-style: none;
-	font-size: 14px;
-	font-weight: normal;
+	font-size: 15px;
+	font-weight: 600;
 	text-transform: none;
 	text-decoration: none;
+	background-color: #fff;
 }
 
 .demo__jsbin-link i {
 	margin-left: 1px;
 	font-size: 12px;
-	font-weight: bold;
+	font-weight: 600;
 }
 
 .demo__tabs {
@@ -57,11 +58,11 @@
 }
 
 .demo__header {
-	margin: 0 0 20px;
+	margin: 0 0 15px;
 }
 
 .demo__title {
-	margin: 0 0 5px;
+	margin: 0;
 	font-weight: bold;
 	text-transform: capitalize;
 	font-size: 26px;
@@ -70,6 +71,7 @@
 
 .demo__footer {
 	padding: 10px 0;
+	color: #4a4a4a;
 }
 
 .demo__frame-container {

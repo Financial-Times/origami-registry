@@ -13,7 +13,7 @@
 }
 
 .label-active {
-	background-color: #06b406;
+	background-color: #008a00;
 }
 
 .label-maintained {
@@ -41,11 +41,17 @@
 }
 
 .label-pass {
-	background-color: #06b406;
+	background-color: #008a00;
+
+	a {
+		color: #fff;
+	}
 }
+
 .label-css {
 	background-color: #0c72ba;
 }
+
 .label-js {
 	background-color: #f7d736;
 	color: #000000;
