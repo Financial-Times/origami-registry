@@ -86,7 +86,7 @@
 		<dt>Dependents</dt>
 		<dd>
 			{% if not dependents %}
-				<span style="color: #bbb">None</span>
+				<span>None</span>
 			{% endif %}
 <!-- No indentation, to ensure there's no space in between items: -->
 {% for dependent in dependents %}<span class="component-detail__dependent">{% if dependent.id %}<a href="/components/{{dependent.module_name}}">{% endif %}{{dependent.module_name}}{% if dependent.id %}</a>{% endif %}</span>{% endfor %}
