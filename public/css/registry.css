@@ -230,7 +230,7 @@ body {
 .demo-frame {
 	box-sizing: border-box;
 	width: 100% !important; /* Prevent overrides from embed API */
-	height: 0px;
+	height: 100%;
 	margin: 0;
 	padding: 0;
 	display: block;
