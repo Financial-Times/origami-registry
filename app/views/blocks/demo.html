@@ -1,7 +1,6 @@
 <div class="demo">
 	<header class="demo__header">
 		<h2 class="demo__title"><span class="activity">{{ demo.name }}</span></h2>
-		{% if demo.description %}<div class="demo__subtitle">{{ demo.description }}</div>{% endif %}
 	</header>
 
 	<div class="demo__navigation">
@@ -29,4 +28,10 @@
 			<pre class="demo__source" data-src="/components/{{module_name}}@{{tag_name}}/demos/code/{{demo.name}}"></pre>
 		</div>
 	</div>
+
+	{% if demo.description %}
+		<footer class="demo__footer">
+			{{ demo.description }}
+		</footer>
+	{% endif %}
 </div>

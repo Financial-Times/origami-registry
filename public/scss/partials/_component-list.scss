@@ -77,14 +77,14 @@
 }
 
 .component-list__component-description {
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.5;
 	color: #777777;
 }
 
 .component-list__component-name {
 	@include oTypographySansDataBold(m);
-	font-size: 16px;
+	font-size: 18px;
 }
 
 /* Mobile styles */

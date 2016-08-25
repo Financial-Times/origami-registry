@@ -27,18 +27,32 @@
 
 .demo__tabs {
 	clear: both;
-	font-size: 14px;
 
 	&.o-tabs--buttontabs[data-o-tabs--js] [role=tab] {
-		color: #2e6e9e;
+		position: relative;
+		top: 1px;
+		margin-right: 5px;
+		color: #4a4a4a;
+		font-size: 14px;
+		text-transform: uppercase;
+		border-color: #cec6b9;
+		background-color: #cec6b9;
+		border-radius: 6px 6px 0 0;
+		border-left-width: 1px;
 	}
 
 	&.o-tabs--buttontabs[data-o-tabs--js] [role=tab][aria-selected=true] {
-		background-color: rgba(#2e6e9e, 0.2) !important;
+		color: #27757b;
+		background-color: #fff !important;
+		border-bottom: 1px solid #fff;
+
+		a {
+			font-weight: 600;
+		}
 	}
 
 	&.o-tabs--buttontabs[data-o-tabs--js][role=tablist] {
-		border-bottom-color: #275e86;
+		border-bottom-color: #cec6b9;
 	}
 }
 
@@ -50,19 +64,17 @@
 	margin: 0 0 5px;
 	font-weight: bold;
 	text-transform: capitalize;
-	font-size: 18px;
+	font-size: 26px;
+	color: #505050;
 }
 
-.demo__subtitle {
-	font-size: 14px;
+.demo__footer {
+	padding: 10px 0;
 }
 
 .demo__frame-container {
-	border-left: 1px solid #E8E8E8;
-	border-right: 1px solid #E8E8E8;
-	border-bottom: 1px solid #E8E8E8;
-	background: #fff1e0;
-	padding: 12px;
+	border-bottom: 1px solid #cec6b9;
+	padding: 12px 0;
 }
 
 .demo__frame {
@@ -81,9 +93,7 @@
 .demo__source {
 	position: relative;
 	display: block;
-	border-left: 1px solid #E8E8E8;
-	border-right: 1px solid #E8E8E8;
-	border-bottom: 1px solid #E8E8E8;
+	border-bottom: 1px solid #cec6b9;
 	max-height: 300px !important;
 	overflow: auto;
 }
