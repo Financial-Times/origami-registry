@@ -15,10 +15,13 @@ final class RepositoryDiscovery {
 
 	public static function search($data, $app) {
 
+		$metrics = $app->metrics;
+		$metrics_prefix = $app->metrics_prefix;
 		$app->logger->info('Beginning Origami component discovery');
 
 		// Discover repos
 		foreach ($data->sources as $source) {
+			$api_query_start = microtime(true);
 
 			$className = '\\GitAPIClients\\' . $source->api->type;
 			$users = isset($source->api->users) ? $source->api->users : null;
@@ -35,8 +38,13 @@ final class RepositoryDiscovery {
 					$component->host_type = $source->api->type;
 					$components[$repository['name']] = $component;
 					$foundcount++;
+					$metrics->increment($metrics_prefix . 'discovery.found');
 				}
 			}
+
+			$api_query_diff = microtime(true) - $api_query_start;
+
+			$metrics->timing($metrics_prefix . 'discovery. ' .$source->api->type. '.apiRequest', $api_query_diff);
 			$app->logger->info('Searched '.$source->name.', found repositories: '.$foundcount);
 		}
 
@@ -51,10 +59,12 @@ final class RepositoryDiscovery {
 				$component->datetime_last_discovered = new \DateTime();
 				$component->save();
 				$component->discoverVersions();
+				$metrics->increment($metrics_prefix . 'discovery.origami');
 				if ($component->latest_version and $component->latest_version->is_valid === null) {
 					$component->buildVersions();
 					if ($component->latest_version->is_valid) {
 						$newlist[$component->module_name] = $component;
+						$metrics->increment($metrics_prefix . 'discovery.new_component');
 					}
 				}
 			}
@@ -86,9 +96,12 @@ final class RepositoryDiscovery {
 		}
 
 		// Remove components that have not been seen for a while
+		/** AO: Removing this deletion query while we're having problems with the Registry updates.
+				Will reinstate when things start to clear up.
 		$app->db_write->query('SET foreign_key_checks = 0;');
 		$app->db_write->query('DELETE c, cv, d, cd FROM components c LEFT JOIN componentversions cv ON c.id=cv.component_id LEFT JOIN demos d ON c.id=d.componentversion_id LEFT JOIN componentdependencies cd ON cv.id=cd.parent_version_id WHERE c.datetime_last_discovered < (NOW() - INTERVAL 3 DAY);');
 		$app->db_write->query('SET foreign_key_checks = 1;');
+		**/
 
 		$app->logger->info('Scan complete');
 	}

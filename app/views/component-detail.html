@@ -55,7 +55,9 @@
 			{% if demos %}
 				<section class="component-detail__section" id="section-demos">
 					{% for demo in demos %}
-						{% include "blocks/demo.html" %}
+						{% if not demo.hidden %}
+							{% include "blocks/demo.html" %}
+						{% endif %}
 					{% endfor %}
 				</section>
 			{% endif %}

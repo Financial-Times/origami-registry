@@ -32,6 +32,7 @@ final class Refresh extends BaseController {
 
 			} catch (\Exception $e) {
 				if ($e->getMessage() === 'Tag not found') {
+					$this->app->metrics->increment($this->app->metrics_prefix . 'component.refresh.delete');
 					$this->version->delete();
 					$this->resp->setJSON("/components");
 					return;
