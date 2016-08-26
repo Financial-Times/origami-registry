@@ -51,37 +51,39 @@
 			<div data-o-grid-colspan="9" class="demos-wrap">
 		{% endif %}
 			{% for demo in demos %}
-				<div class="demo-container{% if demo.expanded %} visible{% endif %} with-source" id="demo-{{ demo.name|slugify}}">
-					<div class="demo-header">
-						<span class="demo-title activity">{{ demo.name }}</span>
-						{% if not force_old_demo_url %}
-						<ul class="demo-tools">
-							<li><a target="_blank" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" title="Open this demo in a new window"><i class="fa fa-expand"></i></a></li>
-							<li><a href="/components/{{module_name}}@{{tag_name}}/demos/visual/{{demo.name}}" title="Embed this demo on another webpage" class="demo-embed-link o-overlay-trigger" data-o-overlay-src="#overlay-template-{{ demo.name|slugify}}"  data-o-overlay-id="overlay-template-{{ demo.name|slugify}}" data-o-overlay-arrow-position="bottom" data-o-overlay-compact="true"><i class="fa fa-file-code-o"></i></a>
-								<script type="text/template" id="overlay-template-{{ demo.name|slugify}}">
-								<textarea class="demo-embed-code" onclick="this.select();"><!-- Put the following line *once* at the top of your page -->
-&lt;script src="http://registry.origami.ft.com/embedapi">&lt;/script>
+				{% if not demo.hidden %}
+					<div class="demo-container with-source" id="demo-{{ demo.name|slugify}}">
+						<div class="demo-header">
+							<span class="demo-title activity">{{ demo.name }}</span>
+							{% if not force_old_demo_url %}
+							<ul class="demo-tools">
+								<li><a target="_blank" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" title="Open this demo in a new window"><i class="fa fa-expand"></i></a></li>
+								<li><a href="/components/{{module_name}}@{{tag_name}}/demos/visual/{{demo.name}}" title="Embed this demo on another webpage" class="demo-embed-link o-overlay-trigger" data-o-overlay-src="#overlay-template-{{ demo.name|slugify}}"  data-o-overlay-id="overlay-template-{{ demo.name|slugify}}" data-o-overlay-arrow-position="bottom" data-o-overlay-compact="true"><i class="fa fa-file-code-o"></i></a>
+									<script type="text/template" id="overlay-template-{{ demo.name|slugify}}">
+									<textarea class="demo-embed-code" onclick="this.select();"><!-- Put the following line *once* at the top of your page -->
+	&lt;script src="http://registry.origami.ft.com/embedapi">&lt;/script>
 
-<!-- Put the following line where you want the demo to show -->
-&lt;iframe style="width: 100%;" frameborder="0" scrolling="no" src="http://{{SERVER.HTTP_HOST}}/components/{{module_name}}@{{tag_name}}/demos/visual/{{demo.name}}?embed=1">&lt;/iframe></textarea>
-								</script>
-							</li>
-							<li><a target="_blank" href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" title="Experiment with this demo in JS Bin"><i class="fa fa-wrench"></i></a></li>
-						</ul>
+	<!-- Put the following line where you want the demo to show -->
+	&lt;iframe style="width: 100%;" frameborder="0" scrolling="no" src="http://{{SERVER.HTTP_HOST}}/components/{{module_name}}@{{tag_name}}/demos/visual/{{demo.name}}?embed=1">&lt;/iframe></textarea>
+									</script>
+								</li>
+								<li><a target="_blank" href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" title="Experiment with this demo in JS Bin"><i class="fa fa-wrench"></i></a></li>
+							</ul>
+							{% endif %}
+							{% if demo.description %}<div class="demo-subtitle">{{ demo.description }}</div>{% endif %}
+						</div>
+						{% if force_old_demo_url %}
+						<div class="demo-frame-container">
+							<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/files/{{module_name}}@{{tag_name}}/{{demo.path}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
+						</div>
+						{% else %}
+						<div class="demo-frame-container">
+							<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
+						</div>
+						<pre class="demo-source" data-src="/components/{{module_name}}@{{tag_name}}/demos/code/{{demo.name}}"></pre>
 						{% endif %}
-						{% if demo.description %}<div class="demo-subtitle">{{ demo.description }}</div>{% endif %}
 					</div>
-					{% if force_old_demo_url %}
-					<div class="demo-frame-container">
-						<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/files/{{module_name}}@{{tag_name}}/{{demo.path}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
-					</div>
-					{% else %}
-					<div class="demo-frame-container">
-						<iframe src="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" class="demo-frame" allowTransparency="true" scrolling="no"></iframe>
-					</div>
-					<pre class="demo-source" data-src="/components/{{module_name}}@{{tag_name}}/demos/code/{{demo.name}}"></pre>
-					{% endif %}
-				</div>
+				{% endif %}
 			{% endfor %}
 
 		{% if demos|length > 1 %}
@@ -90,7 +92,7 @@
 				<h4 style="margin-top: 0">Show/hide demos</h4>
 				<ul class="demo-selector">
 				{% for demo in demos %}
-					<input type="checkbox" name="demos" value="{{ demo.name|slugify}}" class="o-forms-checkbox o-forms-checkbox--small" id="toggle-{{ demo.name|slugify}}"{% if demo.expanded %} checked{% endif %}><label for="toggle-{{ demo.name|slugify}}" class="o-forms-label">{{ demo.name }}</label>
+					<input type="checkbox" name="demos" value="{{ demo.name|slugify}}" class="o-forms-checkbox o-forms-checkbox--small" id="toggle-{{ demo.name|slugify}}"{% if not demo.hidden %} checked{% endif %}><label for="toggle-{{ demo.name|slugify}}" class="o-forms-label">{{ demo.name }}</label>
 				{% endfor %}
 				</ul>
 
