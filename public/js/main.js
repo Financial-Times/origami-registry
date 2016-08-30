@@ -21,4 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	gistIt();
 	highlight();
+
+	if ($('.js-expanded__sidebar').length) {
+		var sidebarHeight = $('.js-expanded__sidebar').height(),
+			navHeight = 0;
+
+		$('.js-expanded__sidebar').removeClass('sidebar--has-scroll');
+
+		$('.js-expanded__sidebar').children().each(function() {
+			navHeight += parseInt($(this).height());
+		});
+
+		if (sidebarHeight < navHeight) {
+			$('.js-expanded__main').css('minHeight',navHeight);
+		}
+	}
 });
