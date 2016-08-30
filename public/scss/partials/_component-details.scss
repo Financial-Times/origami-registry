@@ -7,49 +7,51 @@
 
 .component-detail__main,
 .component-detail__header {
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
+	width: 100%;
+	margin-top: 20px;
+	padding-left: 45px;
+	padding-right: 45px;
 
 	@media (min-width: 600px) {
-		width: calc(100% - 300px);
-		margin-left: 260px;
-		margin-right: 40px;
+		width: calc(100% - 290px);
+		margin-left: 250px;
+		margin-right: 20px;
+		padding: 0;
 	}
 
 	@media (min-width: 900px) {
 		float: left;
-		width: calc(70% - 290px);
-		margin-right: 20px;
+		width: calc(70% - 220px);
+		margin-top: 0;
 		padding-right: 30px;
 		border-right: 1px solid #cec6b9;
 	}
 
 	@media (min-width: 1200px) {
-		width: calc(75% - 290px);
+		width: calc(75% - 220px);
 	}
 }
 
 .component-detail__info {
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
+	width: 100%;
+	padding-left: 45px;
+	padding-right: 45px;
 
 	@media (min-width: 600px) {
-		width: calc(100% - 300px);
-		margin-left: 260px;
-		margin-right: 40px;
+		width: calc(100% - 290px);
+		margin-left: 250px;
+		margin-right: 20px;
+		padding: 0;
 	}
 
 	@media (min-width: 900px) {
 		float: right;
-		width: calc(30% - 40px);
+		width: calc(30% - 70px);
 		margin-left: 0;
-		margin-right: 40px;
 	}
 
 	@media (min-width: 1200px) {
-		width: calc(25% - 40px);
+		width: calc(25% - 70px);
 	}
 
 	.component-detail__section h3 {
