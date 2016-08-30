@@ -23,10 +23,11 @@ a {
 	&:hover,
 	&:focus {
 		color: oColorsGetPaletteColor('teal-1');
+		text-decoration: underline;
 	}
 
 	&:visited {
-		color: oColorsGetPaletteColor('teal-1');
+		color: darken(oColorsGetPaletteColor('teal-1'), 15%);
 	}
 }
 
