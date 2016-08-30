@@ -7,14 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	{% if noindex %}<meta name="robots" content="NOINDEX" />{% endif %}
 
-	<!-- Load tech docs styles from build service -->
-	<link rel="stylesheet" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/bundles/css?modules=o-forms@^1.0.0,o-fonts@^1.6.4,o-techdocs@^4.1.1,o-ft-icons@^2.3.4,o-date@^1.1.1,o-grid@^3.0.3,o-overlay@^1.4.1" />
-
 	<!-- Font awesome for module and component icons -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" />
 
 	<!-- Registry-specific styles -->
-	<link rel="stylesheet" href="/css/registry.css" />
+	<link rel="stylesheet" href="/main.css" />
 
 	<!-- Google Analytics tracking code -->
 	<script>
@@ -30,53 +27,62 @@
 	<!-- Embed API needed before DOM so that inline iframes can use it if they load quickly -->
 	<script src="/embedapi"></script>
 </head>
-<body class="o-techdocs">
-
-	<header data-o-component="o-header" class="o-header">
-		<div class="o-header__container">
-			<div class="o-header__inner">
-				<div class="o-header__primary">
-					<div class="o-header__primary__left">
-						<a class="o-header__logo" href="/">
-							<span class="origami-logo"></span>
-							<h1 class="o-header__title"><a href="//origami.ft.com">Origami</a></h1>
-						</a>
-					</div>
-					<nav class="o-header__primary__right o-hierarchical-nav o-header__nav--primary-theme" data-o-component="o-hierarchical-nav">
-						<ul data-o-hierarchical-nav-level="1"><!--
-							--><li data-priority="1"><a href="//origami.ft.com/docs/developer-guide/">Docs</a></li><!--
-							--><li data-priority="1"><a href="//origami.ft.com/docs/component-spec/">Spec</a></li><!--
-							--><li data-priority="1" aria-selected="true"><a href="/">Registry</a></li><!--
-							--><li data-more class="o-hierarchical-nav__parent" aria-hidden="true"><a><span class="o-hierarchical-nav__more--if-some">More <i class="o-hierarchical-nav__parent__down-arrow"></i></span><span class="o-hierarchical-nav__more--if-all">Menu <i class="o-hierarchical-nav__parent__down-arrow"></i></span></a></li><!--
-						--></ul>
-					</nav>
-				</div>
-				<div class="o-header__secondary"></div>
+<body class="{{body_class}}">
+	<header class="o-header-services" data-o-component="o-header">
+		<div class="o-header-services__top o-header-services__container">
+			<div class="o-header-services__hamburger">
+				<a class="o-header-services__hamburger-icon" href="#o-header-drawer" aria-controls="o-header-drawer"><span class="o-header__visually-hidden">Menu</span></a>
+			</div>
+			<div class="o-header-services__ftlogo"></div>
+			<div class="o-header-services__title">
+				<h1 class="o-header-services__product-name"><a href="http://origami.ft.com">Origami</a></h1>
+			</div>
+			<div class="o-header-services__related-content">
+				<a class="o-header-services__related-content-link" href="//origami.ft.com/docs/developer-guide/">Docs</a>
+				<a class="o-header-services__related-content-link" href="//origami.ft.com/docs/component-spec/">Specs</a>
+				<a class="o-header-services__related-content-link" href="/components">Components</a>
 			</div>
 		</div>
 	</header>
 
-	<div class="o-techdocs-layout">
-		<div class="o-techdocs-main o-techdocs-main--fullwidth">
-{% block content %}{% endblock %}
+	{% block content %}{% endblock %}
+
+	<div class="o-header__drawer--services o-header__drawer o--if-js" id="o-header-drawer" data-o-header-drawer="" data-o-header-drawer--no-js="">
+		<div class="o-header__drawer-inner">
+			<div class="o-header__drawer-tools">
+				<span>Origami</span>
+				<button type="button" class="o-header__drawer-tools-close" aria-controls="o-header-drawer">
+					<span class="o-header__visually-hidden">Close</span>
+				</button>
+			</div>
+			<nav class="o-header__drawer-menu o-header__drawer-menu--primary" role="navigation" aria-label="Primary navigation">
+				<ul class="o-header__drawer-menu-list">
+					<li class="o-header__drawer-menu-item">
+						<a class="o-header__drawer-menu-link" href="//origami.ft.com/docs/developer-guide/">Docs</a>
+					</li>
+					<li class="o-header__drawer-menu-item">
+						<a class="o-header__drawer-menu-link" href="//origami.ft.com/docs/component-spec/">Specs</a>
+					</li>
+					<li class="o-header__drawer-menu-item">
+						<a class="o-header__drawer-menu-link" href="/components">Components</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</div>
-
-	<footer class="o-techdocs-footer">
-		<div class="o-techdocs-footer__inner">
-		  <div class="footer-logo">
-				<span class="origami-logo"></span>Origami
+	<footer class="o-registry-footer">
+		<div class="o-registry-container">
+			<div class="o-registry-footer__inner">
+				<div class="origami-logo origami-logo--footer">
+					<span class="origami-logo__icon"></span>Origami
+				</div>
+				<p>Help or advice for FT staff on any aspect of Origami is available from <a href="mailto:origami.support@ft.com">origami.support@ft.com</a> (public users please instead <a href="https://github.com/Financial-Times/ft-origami/issues">raise an issue on the repository</a>)</p>
+				<p>&copy; THE FINANCIAL TIMES LTD {{"now"|date('Y')}}. FT and 'Financial Times' are trademarks of The Financial Times Ltd.</p>
 			</div>
-			<p>Help or advice for FT staff on any aspect of Origami is available from <a href="mailto:origami.support@ft.com">origami.support@ft.com</a> (public users please instead <a href="https://github.com/Financial-Times/ft-origami/issues">raise an issue on the repository</a>)</p>
-			<p>&copy; THE FINANCIAL TIMES LTD {{"now"|date('Y')}}. FT and 'Financial Times' are trademarks of The Financial Times Ltd.</p>
-	  </div>
+		</div>
 	</footer>
 
-	<script src="//{{ SERVER.BUILD_SERVICE_HOST }}/v2/bundles/js?modules=o-techdocs@^4.1.1,o-date@^1.1.1,o-grid@^3.0.3,o-overlay@^1.4.1"></script>
 	<script src="/js/libs/jquery.min.js"></script>
-	<script src="/js/filterbar.js"></script>
-	<script src="/js/demos.js"></script>
-	<script src="/js/tabs.js"></script>
-	<script src="/js/click-helper.js"></script>
+	<script src="/main.js"></script>
 </body>
 </html>

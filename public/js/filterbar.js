@@ -1,13 +1,21 @@
 /* global $ */
 
-'use strict';
-
 $(function() {
+	var $filterBar = $('.filter-bar');
+	var $componentList = $('.component-navigation__list');
+	var itemSelector = 'li';
+
+	// Change the selector if we're on the component-listing page
+	if ($componentList.length === 0) {
+		$componentList = $('.component-list tbody');
+		itemSelector = 'tr';
+	}
+
 	function filterRows() {
-		var rows = $('.searchable');
+		var rows = $('.js-searchable');
 		var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
 		rows.hide();
-		rows.filter(function () {
+		var filteredRows = rows.filter(function () {
 			var row = $(this);
 			var filterMatch = true;
 			$('.filter-bar input:checkbox').each(function () {
@@ -26,9 +34,45 @@ $(function() {
 				}
 				return true;
 			}
-		}).show();
+			var elem = row.find('[data-module-name--js]').attr('data-name');
+			if (filterMatch && elem && regex.test(elem)) {
+				if ($('#filter').val()) {
+					row.find('[data-module-name--js]').html(
+						row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
+					);
+				} else {
+					row.find('[data-module-name--js]').html(row.find('[data-module-name--js]').attr('data-name'));
+				}
 
+				return true;
+			}
+		});
+		filteredRows.show();
+		var emptySearch = $('.empty-search');
+		filteredRows.length === 0 ? emptySearch.attr('aria-hidden', 'false') : emptySearch.attr('aria-hidden', 'true');
 		return rows;
+	}
+
+	function navigateRows(key) {
+		var rows = $componentList.find(itemSelector + ':visible'),
+			current = rows.filter('.focused'),
+			index = rows.index(current),
+			select = 0;
+
+		if (key === 40) { // Down
+			if (index !== (rows.length - 1) && index >= 0) {
+				select = index + 1;
+			}
+		} else { // Up
+			if (index > 0) {
+				select = index - 1;
+			} else {
+				select = rows.length - 1;
+			}
+		}
+
+		$(current).removeClass('focused');
+		$(rows[select]).addClass('focused');
 	}
 
 	function filterEvent(e){
@@ -36,15 +80,34 @@ $(function() {
 
 		var rows = filterRows();
 
-		if (e.keyCode && e.keyCode === 13 && $('#filter').val() && rows.find(':visible:eq(0)').length){
-			location.href = rows.find(':visible:eq(0) a').attr('href');
+		// If using the up/down arrow keys, navigate the user through the list of components
+		if (e.keyCode && (e.keyCode === 40 || e.keyCode === 38) && rows.find(':visible:eq(0)').length) {
+			navigateRows(e.keyCode);
+			return;
 		}
+
+		if (e.keyCode && e.keyCode === 13 && $('#filter').val() && rows.find(':visible:eq(0)').length) {
+			if ($componentList.find('.focused').length) {
+				location.href = $componentList.find('.focused a').attr('href');
+			} else {
+				location.href = rows.find('a:visible').eq(0).attr('href');
+			}
+		}
+
+		// If the user has pressed any other key, disable the focused element
+		$componentList.find('.focused').removeClass('focused');
 	}
 
-	$('.filter-bar').on('submit', function(e) { e.preventDefault(); });
+	// Show the filter bar and register event handlers
+	if ($filterBar.length) {
+		$filterBar.attr('aria-hidden', false);
 
-	$('.filter-bar #filter').on('keyup', filterEvent);
-	$('.filter-bar input:checkbox').on('change', filterEvent);
+		$filterBar.on('submit', function(e) { e.preventDefault(); });
 
-	filterRows();
+		$('.filter-bar #filter').on('keyup', filterEvent);
+		$('.filter-bar input:checkbox').on('change', filterEvent);
+
+		// Run the filter script to filter out modules based on default checkboxes
+		filterRows();
+	}
 });

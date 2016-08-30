@@ -1,0 +1,31 @@
+// Include all the styles for radio and checkboxes
+@include oFormsRadioCheckbox;
+
+.o-forms-label {
+	@include oFormsLabel;
+
+	&--inline {
+		display: inline-block;
+		margin-right: 5px;
+	}
+}
+
+.o-forms-checkbox {
+	@include oFormsRadioCheckbox;
+
+	&+.o-forms-label {
+		display: inline-block;
+		margin-left: 5px;
+		margin-right: 10px;
+	}
+}
+
+.o-forms-text {
+	@include oFormsCommonField;
+}
+
+.version-select {
+	@include oFormsCommonField;
+	@include oFormsSelect;
+	width: 140px;
+}

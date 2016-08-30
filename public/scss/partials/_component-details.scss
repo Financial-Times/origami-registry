@@ -1,0 +1,158 @@
+.component-detail {
+	position: relative;
+	min-height: 85vh;
+	clear: both;
+	float: left;
+	width: 100%;
+}
+
+.component-detail__main,
+.component-detail__header {
+	width: 100%;
+	margin-top: 20px;
+	padding-left: 45px;
+	padding-right: 45px;
+
+	@media (min-width: 600px) {
+		width: calc(100% - 290px);
+		margin-left: 250px;
+		margin-right: 20px;
+		padding: 0;
+	}
+
+	@media (min-width: 900px) {
+		float: left;
+		width: calc(70% - 220px);
+		margin-top: 0;
+		padding-right: 30px;
+		border-right: 1px solid #cec6b9;
+	}
+
+	@media (min-width: 1200px) {
+		width: calc(75% - 220px);
+	}
+}
+
+.component-detail__info {
+	width: 100%;
+	padding-left: 45px;
+	padding-right: 45px;
+
+	@media (min-width: 600px) {
+		width: calc(100% - 290px);
+		margin-left: 250px;
+		margin-right: 20px;
+		padding: 0;
+	}
+
+	@media (min-width: 900px) {
+		float: right;
+		width: calc(30% - 70px);
+		margin-left: 0;
+	}
+
+	@media (min-width: 1200px) {
+		width: calc(25% - 70px);
+	}
+
+	.component-detail__section h3 {
+		margin-bottom: 0;
+
+		& + p {
+			margin-top: 0;
+		}
+	}
+
+	.component-detail__section--highlight a {
+		@include oTypographySansDataBold(m);
+		font-size: 16px;
+		border-bottom: 1px dashed oColorsGetPaletteColor('teal-1');
+	}
+}
+
+.component-detail__header,
+.component-detail__info {
+	@media (min-width: 900px) {
+		margin-top: 30px;
+	}
+}
+
+.component-detail__header {
+	padding-bottom: 30px;
+}
+
+.component-detail__description {
+	@media (min-width: 900px) {
+		float: left;
+	}
+
+	h1 {
+		float: left;
+		margin: 0 5px 0 0;
+		line-height: 1;
+	}
+
+	p {
+		clear: left;
+		margin: 0;
+	}
+
+	[class^="label-"],
+	[class*=" label-"] {
+		position: relative;
+		top: 8px;
+		margin-left: 5px;
+	}
+}
+
+.component-detail__warning {
+	margin-top: 20px !important;
+}
+
+.component-detail__section {
+	max-width: 100%;
+	clear: both;
+	margin-bottom: 40px;
+
+	&--highlight {
+		margin-bottom: 20px;
+		padding: 10px 15px;
+		background-color: #eeeeee;
+	}
+
+	h2 {
+		margin-top: 0;
+	}
+}
+
+.component-detail__information {
+	clear: both;
+	overflow: hidden;
+	margin-bottom: 0;
+
+	dt {
+		clear: left;
+		float: left;
+		width: 23%;
+		margin: 0 2% 5px 0;
+		font-weight: bold;
+	}
+
+	dd {
+		float: left;
+		width: 75%;
+		margin: 0 0 5px;
+	}
+}
+
+.component-detail__dependent + .component-detail__dependent:before {
+	content: ', ';
+}
+
+.component-detail__dependencies {
+	border-collapse: collapse;
+
+	td {
+		padding-right: 10px;
+	}
+}

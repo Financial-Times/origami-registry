@@ -32,6 +32,7 @@ class ComponentDetail extends BaseController {
 		$versions = array_reverse($versions);
 		$versionlist = array();
 		$unstabledone = false;
+
 		foreach ($versions as $version) {
 			if ($unstabledone and !$version->isStable()) continue;
 			$versionlist[] = array_merge($version->toArray(), array(
@@ -39,6 +40,7 @@ class ComponentDetail extends BaseController {
 			));
 			if (!$version->isStable()) $unstabledone = true;
 		}
+
 		$this->addViewData('versions', $versionlist);
 
 		// Check dependencies
@@ -60,12 +62,15 @@ class ComponentDetail extends BaseController {
 			}
 			$dependencies[] = $dep;
 		}
+
 		$this->addViewData('dependencies', $dependencies);
 
 		$this->addViewData('demos', $this->version->demos);
 		$this->addViewData('dependents', $this->version->dependents);
 
 		$this->addViewData('title', $this->component->module_name);
+		$this->addViewData('body_class', 'o-registry-page--component-detail');
+
 		$this->addViewData('repo_home_url', str_replace('.git', '', $this->component->git_repo_url));
 		$this->addViewData('latest_version', $this->component->latest_version->tag_name);
 		$this->addViewData('latest_datetime_created', $this->component->latest_version->datetime_created);
@@ -92,13 +97,58 @@ class ComponentDetail extends BaseController {
 			$this->addViewData('force_old_demo_url', true);
 		}
 
+		// Get all components for the internal navigation
+		$viewdata = array(
+				'primitives' => array(
+					'title' => 'Primitives',
+					'modules' => array(),
+				),
+				'components' => array(
+					'title' => 'Components',
+					'modules' => array(),
+				),
+				'layouts' => array(
+					'title' => 'Layouts',
+					'modules' => array(),
+				),
+				'utilities' => array(
+					'title' => 'Utilities',
+					'modules' => array(),
+				),
+				'uncategorised' => array(
+					'title' => 'Uncategorised',
+					'modules' => array(),
+				),
+			);
+
+		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
+			$cat = $component->origami_category;
+			if (!$cat) {
+				$cat = 'uncategorised';
+			}
+
+			if ($component->latest_stable_version) {
+				$viewdata[$cat]['modules'][] = array_merge(
+					$component->toArray(),
+					$component->latest_stable_version->toArray()
+				);
+			} elseif($component->latest_version) {
+				$viewdata[$cat]['modules'][] = array_merge(
+					$component->toArray(),
+					$component->latest_version->toArray()
+				);
+			}
+		}
+
+		$this->addViewData('components', $viewdata);
+
 		// Render templates and return response
 		$this->resp->setCacheTTL(isset($this->routeargs['version']) ? 3600 : 0);
 		if ($this->routeargs['format'] === 'json') {
 			$this->resp->setJSON($this->viewdata);
 		} else {
 			$this->app->metrics->increment($this->app->metrics_prefix . 'serve.ComponentDetail');
-			$this->renderView('component_detail');
+			$this->renderView('component-detail');
 		}
 	}
 }

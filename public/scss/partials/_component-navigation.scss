@@ -1,0 +1,35 @@
+.component-navigation__list {
+	list-style: none;
+	padding-left: 0;
+}
+
+.component-navigation__title {
+	margin: 50px 0 5px;
+	padding: 0 20px;
+	font-size: 20px;
+}
+
+.component-navigation__item a {
+	display: block;
+	padding: 5px 20px;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.component-navigation__item a:hover,
+.component-navigation__item.focused a {
+	background-color: #505050;
+}
+
+.o-forms-label--component-nav {
+	color: #fff;
+	font-size: 16px;
+}
+
+.o-forms-text--component-nav {
+	height: auto;
+	margin-top: 7px;
+	font-size: 14px;
+	border-radius: 0;
+}

@@ -38,10 +38,10 @@ class ComponentListing extends BaseController {
 			);
 
 		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
-			// $cat = $component->origami_category;
-			// if ($cat === '') {
+			$cat = $component->origami_category;
+			if (!$cat) {
 				$cat = 'uncategorised';
-			// }
+			}
 
 			if ($component->latest_stable_version) {
 				$viewdata[$cat]['modules'][] = array_merge(
@@ -58,6 +58,7 @@ class ComponentListing extends BaseController {
 
 		$this->addViewData('components', $viewdata);
 		$this->addViewData('title', 'Components');
+		$this->addViewData('body_class', 'o-registry-page--component-listing');
 
 		$cron_interval = 60*60*4;
 		$this->addViewData('cron_last_complete', $this->app->db_read->querySingle("SELECT FROM_UNIXTIME(meta_value) FROM meta WHERE meta_key=%s", 'cron_last_complete'));
@@ -65,6 +66,6 @@ class ComponentListing extends BaseController {
 		$this->resp->setCacheTTL(300);
 
 		$this->app->metrics->increment($this->app->metrics_prefix . 'serve.ComponentListing');
-		$this->renderView('component_listing');
+		$this->renderView('component-listing');
 	}
 }

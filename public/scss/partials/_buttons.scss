@@ -1,0 +1,13 @@
+a.o-registry__github-button {
+	@include oButtons;
+	@include oButtonsSize(big);
+	@include oButtonsTheme(standout);
+	width: 100%;
+	margin-bottom: 15px;
+	color: #fff;
+	text-transform: none;
+}
+
+a.o-registry__github-button i {
+	margin-right: 10px;
+}

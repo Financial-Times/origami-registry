@@ -1,0 +1,26 @@
+.docs-navigation {
+	list-style: none;
+	width: 100%;
+	margin: 0 0 20px;
+	padding: 0;
+	text-align: center;
+
+	li {
+		display: inline-block;
+
+		&:not(:last-child) a {
+			border-right: 1px solid oColorsGetPaletteColor('teal-1');
+		}
+	}
+
+	a {
+		@include oTypographySansDataBold(m);
+		padding: 0 5px;
+		font-size: 16px;
+
+		i {
+			font-size: 10px;
+			font-weight: bold;
+		}
+	}
+}

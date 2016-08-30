@@ -1,0 +1,19 @@
+.o-registry-container {
+	@include oGridContainer;
+	clear: both;
+	position: relative;
+	max-width: 100%;
+}
+
+.sidebar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 220px;
+	height: 100%;
+	padding-top: 30px;
+	color: #fff;
+	background-color: #727272;
+	overflow-y: auto;
+	box-shadow: inset 0 -15px 15px -15px rgba(#000, 0.3);
+}

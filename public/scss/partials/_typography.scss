@@ -1,0 +1,132 @@
+// @font-face declarations for Metric regular / italic
+@include oFontsInclude(MetricWeb, $weight: regular);
+@include oFontsInclude(MetricWeb, $weight: semibold);
+
+h1 {
+	font-weight: 400;
+}
+
+h2,
+h3 {
+	@include oTypographySansDataBold(l);
+	font-size: 26px;
+}
+
+h3 {
+	font-size: 19px;
+}
+
+a {
+	color: oColorsGetPaletteColor('teal-1');
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		color: oColorsGetPaletteColor('teal-1');
+	}
+
+	&:visited {
+		color: oColorsGetPaletteColor('teal-1');
+	}
+}
+
+code,
+pre,
+var,
+kbd,
+output {
+	font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+
+code {
+	background-color: $o-registry-color-grey1;
+	color: $o-registry-color-green;
+	white-space: pre-wrap;
+}
+
+var {
+	font-style: italic;
+	white-space: nowrap;
+	color: $o-registry-color-purple;
+}
+
+pre { // Override defaults
+	display: block;
+	overflow-x: auto;
+	margin: 0 0 10px;
+	padding: 9.5px;
+	border: 1px solid $o-registry-color-grey2;
+	background-color: $o-registry-color-grey1;
+	color: $o-registry-color-charcoal;
+	word-wrap: inherit;
+	word-break: break-all;
+	font-size: 15px;
+	line-height: 1.5;
+	tab-size: 4;
+
+	> code {
+		padding: 0;
+		border: 0;
+		background-color: transparent;
+		color: inherit;
+		white-space: pre;
+		font-size: inherit;
+	}
+}
+
+pre.long-code {
+	overflow-y: scroll;
+	max-height: 340px;
+}
+
+pre.cli {
+	background: $o-registry-color-charcoal;
+
+	kbd,
+	output {
+		padding-left: 15px;
+		display: inline-block;
+	}
+	kbd {
+		color: white;
+
+		// scss-lint:disable NestingDepth
+		&:before {
+			content: '>';
+			margin-left: -15px;
+			float: left;
+		}
+	}
+	output {
+		color: $o-registry-color-grey3;
+	}
+}
+
+pre.quickstart-tag {
+	font-size: 16px;
+	word-break: normal;
+}
+
+pre.quickstart-tag code {
+	white-space: normal;
+}
+
+.bundlesize_js,
+.bundlesize_css {
+	font-weight: bold;
+	color: #029A77;
+}
+
+.bundlesize_css {
+	color: #CE6308;
+}
+
+.version-number {
+	font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+	font-size: 0.875em;
+}
+
+.o-registry-last-scan {
+	color: #515151;
+	font-size: 14px;
+}

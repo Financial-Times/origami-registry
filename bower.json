@@ -1,0 +1,25 @@
+{
+  "name": "Registry",
+  "homepage": "http://registry.origami.ft.com",
+  "authors": [
+    "Origami"
+  ],
+  "description": "Origami component registry; lists modules and web services with build status details, etc.",
+  "main": "public/index.php",
+  "license": "MIT",
+  "dependencies": {
+    "o-forms": "^2.0.4",
+    "o-fonts": "^2.1.2",
+    "o-icons": "^4.2.1",
+    "o-tabs": "^2.3.3",
+    "o-buttons": "^4.0.1",
+    "o-date": "^2.5.0",
+    "o-overlay": "^1.8.5",
+    "o-labels": "^1.0.5",
+    "o-grid": "^4.2.0",
+    "o-hierarchical-nav": "^4.0.0",
+    "o-table": "^5.0.1",
+    "o-header-services": "^1.0.0-beta.6",
+    "highlight.js": "Financial-Times/highlight.js-shim"
+  }
+}

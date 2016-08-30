@@ -1,0 +1,15 @@
+.o-registry-section {
+	max-width: 100%;
+	clear: both;
+	margin-bottom: 40px;
+
+	&--highlight {
+		margin-bottom: 20px;
+		padding: 10px 15px;
+		background-color: #eeeeee;
+	}
+
+	h2 {
+		margin-top: 0;
+	}
+}

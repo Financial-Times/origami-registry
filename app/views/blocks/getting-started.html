@@ -1,0 +1,39 @@
+<h2>Quick start</h2>
+
+<div id="quickstart-bs">
+	<h3>Using the build service</h3>
+
+	<p>Add the following token to your
+	{% if has_js and has_css %}<code>script</code> and <code>link</code> tags
+	{% elseif has_js %}<code>script</code> tag
+	{% elseif has_css %}<code>link</code> tag{% endif %}
+	(<a class="o-overlay-trigger" data-o-overlay-id="overlay" data-o-overlay-src="#how-do-i-build-service" data-o-overlay-heading-shaded="true" data-o-overlay-heading-title="Using the Build Service" data-o-overlay-zindex="20" aria-pressed="false" aria-haspopup="true" href="#how-do-i-build-service">how do I do that?</a>):</p>
+	<pre class="quickstart-tag"><code>{{module_name}}@^{{tag_name}}</code></pre>
+
+	<p>For more information see the <a href="http://origami.ft.com/docs/developer-guide/modules/build-service/">Origami build service</a>.</p>
+</div>
+
+
+<div id="quickstart-manual">
+	<h3>Using a manual build process</h3>
+
+	<p>Run the following command in the root directory of your project, to add this dependency to your <code>bower.json</code> file:</p>
+
+	<pre class="quickstart-tag"><code class="lang-json">bower install --save "{{module_name}}"@"^{{tag_name}}"</code></pre>
+
+	<p>For more information see the <a href="http://origami.ft.com/docs/developer-guide/building-modules/">Origami build process</a>.</p>
+</div>
+
+<script type="text/template" id="how-do-i-build-service">
+	<h4>Loading assets using the build service</h4>
+	<p>To load this module add the following {% if has_js and has_css %}<code>&lt;script></code> and <code>&lt;link></code> tags {% elseif has_js %}<code>&lt;script></code> tag {% elseif has_css %}<code>&lt;link></code> tag{% endif %} to your page:
+	</p>
+
+	<pre><code class="lang-html">{% if has_css %}&lt;link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules={{module_name}}@^{{tag_name}}" />{% endif %}<br>{% if has_js %}&lt;script src="https://build.origami.ft.com/v2/bundles/js?modules={{module_name}}@^{{tag_name}}">&lt;/script>{% endif %}</code></pre>
+
+	<p>You should have <strong>only one</strong> (Origami related) <code>&lt;script&gt;</code> and one <code>&lt;link&gt;</code> tag in your page, even if you want to load more than one component. <br>You can request all components you need in a single request, by adding more modules to the link and/or script URLs like so:</p>
+
+	<pre><code class="lang-html">https://build.origami.ft.com/v2/bundles/css?modules={{module_name}}@^{{tag_name}},module@version,module@version</code></pre>
+
+	<p>For full build service options see the <a href="http://origami.ft.com/docs/developer-guide/build-service/#api-reference">build service API docs</a></p>
+</script>

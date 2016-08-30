@@ -1,0 +1,66 @@
+[class^="label-"],
+[class*=" label-"] {
+	display: inline;
+	padding: 0.2em 0.6em 0.3em;
+	font-size: 75%;
+	font-weight: bold;
+	line-height: 1;
+	color: #ffffff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+}
+
+.label-active {
+	background-color: #008a00;
+}
+
+.label-maintained {
+	background-color: #5a8b50;
+}
+
+.label-deprecated {
+	background-color: #c75000;
+}
+
+.label-dead {
+	background-color: #555555;
+}
+
+.label-experimental {
+	background-color: #aa0000;
+}
+
+.label-unspecified {
+	background-color: #dd4444;
+}
+
+.label-fail {
+	background-color: #aa0000;
+}
+
+.label-pass {
+	background-color: #008a00;
+
+	a {
+		color: #fff;
+	}
+}
+
+.label-css {
+	background-color: #0c72ba;
+}
+
+.label-js {
+	background-color: #f7d736;
+	color: #000000;
+}
+
+.label-ok {
+	background-color: green;
+}
+
+.label-danger {
+	background-color: red;
+}

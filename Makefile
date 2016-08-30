@@ -3,17 +3,36 @@ deploy: build
 	@heroku docker:release --app origami-registry-eu
 	@rm -f ./appversion
 
+deploy-qa: build
+	@git describe --tags > ./appversion
+	@heroku docker:release --app origami-registry-qa
+	@rm -f ./appversion
+
 build:
+	@# If the dev machine is 'saved' I had problems restarting it, so kill the machine and start again.
+	@if [[ "$$(docker-machine ls | grep dev)" == *"Saved"* ]]; then docker-machine kill dev; fi
 	@if [[ "$$(docker-machine ls | grep dev)" == *"Stopped"* ]]; then make _docker-start; else echo "Docker machine already running"; fi
 
-install:
+install: node_modules bower_components
 	@if [[ "$$(docker-machine ls | grep dev)" != *"dev"* ]]; then make _docker-create; else echo "Docker machine already created"; fi
 
 build-dev: build
 	@docker-compose build
+	@obt build --js=./public/js/main.js --sass=./public/scss/main.scss --env=production --buildFolder=./public
 
 run-dev:
 	@docker-compose up
+
+watch-dev:
+	@obt build --watch --js=./public/js/main.js --sass=./public/scss/main.scss --env=production --buildFolder=./public
+
+node_modules:
+	@echo "Running npm install"
+	@npm install
+
+bower_components:
+	@echo "Running bower install"
+	@bower install
 
 _docker-create:
 	@docker-machine create --driver virtualbox --virtualbox-disk-size "50000" dev

@@ -59,10 +59,14 @@ body {
 	background-color: red;
 }
 
+a.o-buttons.o-buttons--standout {
+	color: #fff;
+}
 
 /* Filter bar */
 
 .filter-bar {
+	margin-top:40px;
 	margin-bottom: 15px;
 }
 .filter-bar .o-forms-group {
@@ -76,7 +80,8 @@ body {
 	top: -2px; // Align with form labels
 }
 .highlight {
-	background-color: #FFD9C3;
+	background-color: #fff1e0;
+	color: #333;
 	font-weight: bold;
 }
 
@@ -133,17 +138,46 @@ body {
 /* Component detail header */
 
 .component-header {
-	margin: 0;
+	margin: 0 0 20px;
 }
 .component-build-metadata {
 	text-align: right;
 }
+
+.component-info-details {
+	clear: both;
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+.component-info-details dt,
+.component-info-details dd {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+.component-info-details dd {
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.component-info-details dd .bundlesize_js,
+.component-info-details dd .bundlesize_css {
+	display: block;
+}
+
+.version-title {
+	float: left;
+	font-size: 16px;
+	margin: 5px 10px 20px 0;
+}
+
 .version-select {
 	width: 120px;
+	float: left;
 	vertical-align: middle;
-	margin-left: 10px;
-	padding-top: 8px;
-	font-size: 20px;
 }
 .unstable-warning {
 	margin-top: 20px !important;
@@ -185,6 +219,10 @@ body {
 .demo-container {
 	display: none;
 	margin-bottom: 1.5em;
+}
+
+.demo-source-container {
+	max-width: 100%;
 }
 .demo-container.visible {
 	display:block;
@@ -277,7 +315,7 @@ body {
 	background-image: linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.1)), linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.1));
 }
 .demo-embed-code {
-	width: 400px;
+	width: 100%;
 	height: 160px;
 	font-family: monospace;
 	font-size: 13px;
@@ -306,9 +344,8 @@ body {
 
 
 .detail-section {
+	max-width: 100%;
 	clear: both;
-	margin-top: 40px;
-	margin-bottom: 40px;
 }
 .detail-modulelist__item + .detail-modulelist__item:before {
 	content: ', ';
@@ -383,4 +420,213 @@ body {
 }
 .demo-source:hover .auto-select-action {
 	display: block;
+}
+
+
+
+.component-navigation {
+	list-style: none;
+	padding-left: 0;
+}
+
+.component-navigation__group {
+
+}
+
+.component-navigation__list {
+	list-style: none;
+	padding-left: 0;
+}
+
+h3.component-navigation__title {
+	margin: 10px 0 5px;
+	padding: 8px 20px;
+	font-size: 16px;
+	background: #a9cadc;
+	color: #333;
+}
+
+.component-navigation__item {
+}
+
+.component-navigation__item a {
+	display: block;
+	padding: 5px 20px;
+	text-decoration: none;
+}
+
+.component-navigation__item a:hover {
+	background-color: #a9cadc;
+	color: #333;
+}
+
+
+.o-techdocs .o-header {
+	margin-bottom:0;
+}
+
+.component-side-nav {
+	position:absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 15%;
+	max-width: 250px;
+	padding: 10px 0;
+	background-color: #333;
+	color: #fff;
+	overflow-y: auto;
+}
+
+.component-side-nav .filter-bar {
+	margin-top: 0;
+}
+
+.component-side-nav a {
+	color: #fff;
+}
+
+.component-main {
+	float: left;
+	width: 60%;
+	margin-left: 15%;
+	padding: 50px 30px 0;
+}
+
+.component-info {
+	float: left;
+	width: 25%;
+	max-width: 350px;
+	padding-right: 30px;
+}
+
+.o-techdocs-new-layout {
+	width: 100%;
+	box-sizing: border-box;
+
+}
+
+.o-techdocs-new-layout *,
+.o-techdocs-new-layout *:after,
+.o-techdocs-new-layout *:before {
+	box-sizing: inherit;
+}
+
+.component-header {
+	float: left;
+}
+
+.component-description {
+	clear: both;
+	padding-top: 10px;
+}
+
+.o-techdocs-content .github-button {
+	float: right;
+}
+
+.o-techdocs-content .github-button i {
+	margin-right: 10px;
+}
+
+.hide-me {
+	display: none;
+}
+
+.grid-row {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.doc-links {
+	clear: both;
+	list-style: none;
+	padding-left: 0;
+}
+
+.doc-links li {
+	display: inline;
+	margin-right: 5px;
+}
+
+.doc-links li a {
+	color: #fff;
+	text-transform: none;
+}
+
+
+.detail-comp-info {
+	margin-top: 110px;
+	background-color: #fff1e0;
+	padding: 15px;
+	border-radius: 6px;
+}
+
+pre.quickstart-tag {
+	font-size: 16px;
+	word-break: normal;
+}
+
+pre.quickstart-tag code {
+	white-space: normal;
+}
+
+.o-overlay__content {
+	max-width: 600px;
+}
+
+.o-techdocs__aside--toggleable h4 {
+	margin-top: 0;
+}
+
+.jsbin-link {
+	float: right;
+	font-size: 14px;
+	line-height: 34px;
+	text-decoration: none;
+}
+
+.jsbin-link i {
+	margin-left: 5px;
+}
+
+
+.component-list-container {
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.component-filter-checkboxes {
+	float: left;
+	width: 65%;
+}
+
+.component-filter-checkboxes--left {
+	width: 35%;
+}
+
+
+.o-techdocs-content {
+	clear: left;
+}
+
+
+.full-component-details .component-details-row {
+	clear: left;
+	float: left;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.full-component-details .key {
+	float: left;
+	width: 23%;
+	margin-right: 2%;
+}
+
+.full-component-details .val {
+	float: left;
+	width: 75%
 }

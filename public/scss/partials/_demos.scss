@@ -1,0 +1,126 @@
+/* Demos */
+
+.demo {
+	margin-bottom: 40px;
+}
+
+.demo__navigation {
+	position: relative;
+}
+
+.demo__jsbin-link {
+	position: absolute;
+	bottom: 5px;
+	right: 0;
+	list-style: none;
+	font-size: 15px;
+	font-weight: 600;
+	text-transform: none;
+	text-decoration: none;
+	background-color: #fff;
+}
+
+.demo__jsbin-link i {
+	margin-left: 1px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.demo__tabs {
+	clear: both;
+
+	&.o-tabs--buttontabs[data-o-tabs--js] [role=tab] {
+		position: relative;
+		top: 1px;
+		margin-right: 5px;
+		color: #4a4a4a;
+		font-size: 14px;
+		text-transform: uppercase;
+		border-color: #cec6b9;
+		background-color: #cec6b9;
+		border-radius: 6px 6px 0 0;
+		border-left-width: 1px;
+	}
+
+	&.o-tabs--buttontabs[data-o-tabs--js] [role=tab][aria-selected=true] {
+		color: #27757b;
+		background-color: #fff !important;
+		border-bottom: 1px solid #fff;
+
+		a {
+			font-weight: 600;
+		}
+	}
+
+	&.o-tabs--buttontabs[data-o-tabs--js][role=tablist] {
+		border-bottom-color: #cec6b9;
+	}
+}
+
+.demo__header {
+	margin: 0 0 15px;
+}
+
+.demo__title {
+	margin: 0;
+	font-weight: bold;
+	text-transform: capitalize;
+	font-size: 26px;
+	color: #505050;
+}
+
+.demo__footer {
+	padding: 10px 0;
+	color: #4a4a4a;
+}
+
+.demo__frame-container {
+	border-bottom: 1px solid #cec6b9;
+	padding: 12px 0;
+}
+
+.demo__frame {
+	box-sizing: border-box;
+	width: 100% !important; /* Prevent overrides from embed API */
+	height: 0px;
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.demo__source-container {
+	max-width: 100%;
+}
+
+.demo__source {
+	position: relative;
+	display: block;
+	border-bottom: 1px solid #cec6b9;
+	max-height: 300px !important;
+	overflow: auto;
+}
+
+.demo__source--errors {
+	margin: 0 0 10px;
+	padding: 9.5px;
+	border: 1px solid #eeeeee;
+	background-color: #FFD3D3;
+	color: #222222;
+	font-size: 11px;
+	line-height: 1.5;
+}
+
+.demo__source--errors::before {
+	font-size: 81px;
+	float: right;
+	line-height: 1;
+	margin-right: 20px;
+	color: #ff0000;
+	content: '⚠';
+}
+
+.demo__auto-select-action {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}

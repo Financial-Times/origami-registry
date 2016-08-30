@@ -1,0 +1,21 @@
+<nav class="sidebar u-hide-on-mobile">
+	<form action="#" class="filter-bar" aria-hidden="true">
+		<div class="o-forms-group">
+			<label class="o-forms-label o-forms-label--component-nav" for="filter">Filter modules</label>
+			<input type="text" class="o-forms-text o-forms-text--component-nav" id="filter" autocomplete="off" placeholder="Type to filter by name">
+		</div>
+	</form>
+
+	<ul class="component-navigation__list">
+		{% for group in components %}
+			{% if group.modules is not empty %}
+				<li class="component-navigation__item js-searchable">
+					<h3 class="component-navigation__title">{{group.title}}</h3>
+				</li>
+				{% for component in group.modules %}
+					<li class="component-navigation__item js-searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}"><a data-module-name--js data-name="{{component.module_name}}" data-keywords="{{component.keywords}}" href="/components/{{component.module_name}}@{{component.tag_name}}">{{component.module_name}}</a></li>
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+</nav>

@@ -1,0 +1,95 @@
+<section class="component-detail__section" id="more-information">
+	<h2>Component information</h2>
+
+	<dl class="component-detail__information">
+		<dt><label class="o-forms-label o-forms-label--inline" for="version-select">Version:</label></dt>
+		<dd>
+			<select class="version-select" id="version-select" name="version-select" data-bind="position">
+				{% for version in versions %}
+					<option value="/components/{{module_name}}@{{version.tag_name}}" title="{{version.type}}"{% if version.tag_name == tag_name %} selected{% endif %}>{{version.tag_name}}{% if version.is_valid %} ✓{% endif %}</option>
+				{% endfor %}
+				<option value="/components/{{module_name}}/refresh" class="option-refresh">Rescan repo</option>
+			</select>
+		</dd>
+
+		<dt>Latest stable version:</dt>
+		<dd><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</dd>
+
+		<dt>Status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more</a>):</dt>
+		<dd><span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span>  (as of <span class="version-number">{{support_status_version}}</span>)</dd>
+
+		{% if origami_type == 'service' %}
+			<dt>Live URL:</dt>
+			<dd><a href="{{service_url}}">{{service_url}}</a></dd>
+		{% else %}
+			<dt>Bundle sizes:</dt>
+			<dd>
+				{% if bundlesize_js %}
+					<span class="bundlesize_js">{{bundlesize_js|bytes}} JavaScript</span>
+				{% endif %}
+				{% if bundlesize_css %}
+					<span class="bundlesize_css">{{bundlesize_css|bytes}} CSS</span>
+				{% endif %}
+			</dd>
+		{% endif %}
+
+		<dt>This version</dt>
+		<dd><span class="version-number">{{tag_name}}</span> ({{datetime_created|timediff}} old)</dd>
+
+		<dt>Support status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more):</a></dt>
+		<dd><span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span> (as of <span class="version-number">{{support_status_version}}</span>)</dd>
+
+		<dt>Installable?</dt>
+		<dd>
+			<span class="label-{% if is_valid %}pass{% endif %}{% if not is_valid %}fail{% endif %}">
+				{% if is_valid == 1 %}
+					OK
+				{% elseif is_valid == 0 %}
+					Not installable, fails build tests
+				{% else %}
+					Unknown
+				{% endif %}
+				<a href="https://{{ SERVER.BUILD_SERVICE_HOST }}/modules/{{module_name}}@{{tag_name}}" title="View build test results"><i class="fa fa-info-circle"></i></a>
+			</span>
+		</dd>
+
+		<dt>Last indexed</dt>
+		<dd>
+			{{datetime_last_cached|date('j M Y H:i:s')}} (<a href="/components/{{module_name}}@{{tag_name}}/refresh" class="link-refresh">Build now</a>)
+		</dd>
+
+		<dt>Dependencies</dt>
+		<dd>
+			{% if not dependencies %}
+				<span>None</span>
+			{% endif %}
+			{% if dependencies %}
+			<table class="component-details__dependencies">
+				{% for dependency in dependencies %}
+				<tr>
+					<td>{% if dependency.id %}<a href="/components/{{dependency.child_component_name}}">{% endif %}{{dependency.child_component_name}}{% if dependency.id %}</a>{% endif %}</td>
+					<td><span class='version-number'>{{dependency.child_component_target}}</span></td>
+					<td>
+						{% if dependency.uptodate %}
+						<span title='The latest version of the dependency can be used' class='label-active'>OK</span>
+						{% else %}
+						<span title='Forced by this constraint to use an older version of the dependency' class='label-experimental'>Out of date</span>
+						{% endif %}
+					</td>
+					<td><span title='Latest available version of the dependency' class='version-number'>{{dependency.latest}}</span></td>
+				</tr>
+				{% endfor %}
+			</table>
+			{% endif %}
+		</dd>
+
+		<dt>Dependents</dt>
+		<dd>
+			{% if not dependents %}
+				<span>None</span>
+			{% endif %}
+<!-- No indentation, to ensure there's no space in between items: -->
+{% for dependent in dependents %}<span class="component-detail__dependent">{% if dependent.id %}<a href="/components/{{dependent.module_name}}">{% endif %}{{dependent.module_name}}{% if dependent.id %}</a>{% endif %}</span>{% endfor %}
+		</dd>
+	</dl>
+</section>

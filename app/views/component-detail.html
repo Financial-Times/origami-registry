@@ -1,0 +1,77 @@
+{% extends "page.html" %}
+
+{% block content %}
+	<!-- Component ID: {{component_id}}, version ID: {{id}} -->
+	<div class="component-detail">
+		<!-- Nav -->
+		{% include "blocks/component-nav.html" %}
+
+		<div class="component-detail__header">
+			<div class="component-detail__description">
+				<h1>{{module_name}}</h1>
+				{% if has_css %}<span class="label-css">CSS</span>{% endif %}
+				{% if has_js %}<span class="label-js">JS</span>{% endif %}
+
+				<p>{{description}}</p>
+			</div>
+		</div>
+
+		<div class="component-detail__info">
+			<section class="component-detail__section" id="section-usage">
+				<a href="{{repo_home_url}}" class="o-buttons o-buttons--big o-registry__github-button"><i class="fa fa-github"></i>View on GitHub</a>
+				<ul class="docs-navigation">
+					<li><a href="#more-information">Component information</a></li><!--
+					--><li><a href="{{repo_home_url}}#readme">Readme <i class="fa fa-external-link"></i></a></li><!--
+					-->{% if has_css %}<!--
+						--><li><a href="http://codedocs.webservices.ft.com/v1/sassdoc/{{module_name}}@{{tag_name}}">SassDoc <i class="fa fa-external-link"></i></a></li><!--
+					-->{% endif %}<!--
+					-->{% if has_js %}<!--
+						--><li><a href="http://codedocs.webservices.ft.com/v1/jsdoc/{{module_name}}@{{tag_name}}">JSDoc <i class="fa fa-external-link"></i></a></li>
+					{% endif %}
+				</ul>
+
+				<div class="component-detail__section component-detail__section--highlight">
+					{% if origami_type == 'service' %}
+						<h3>Use the service</h3>
+						<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
+					{% endif %}
+
+					{% if origami_type == 'module' and (has_js or has_css) %}
+						{% include "blocks/getting-started.html" %}
+					{% endif %}
+				</div>
+			</section>
+		</div>
+
+		<div class="component-detail__main">
+
+			{% if not is_stable %}
+				<aside class='component-detail__warning'>
+					<h4>Warning: this version is unstable</h4>
+					<p>This is an unstable pre-release of an upcoming version of this component.  Its API may be subject to breaking changes.</p>
+				</aside>
+			{% endif %}
+
+			{% if demos %}
+				<section class="component-detail__section" id="section-demos">
+					{% for demo in demos %}
+						{% if not demo.hidden %}
+							{% include "blocks/demo.html" %}
+						{% endif %}
+					{% endfor %}
+				</section>
+			{% endif %}
+
+			{% include "blocks/component-information.html" %}
+
+			<section class="component-detail__section component-detail__section--highlight">
+				<h2>Contact</h2>
+
+				<p>To talk to the team you can contact the Origami team on Slack channel <a href="https://financialtimes.slack.com/messages/ft-origami/">#ft-origami</a> or directly by email at <a href="mailto:origami-support@ft.com">origami-support@ft.com</a></p>
+
+				<p><a href="{{support}}" class="o-buttons o-buttons--big o-buttons--standout">Report an issue</a></p>
+			</section>
+		</div>
+	</div>
+
+{% endblock %}
