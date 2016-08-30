@@ -86,14 +86,3 @@
 	@include oTypographySansDataBold(m);
 	font-size: 18px;
 }
-
-/* Mobile styles */
-@media (max-width: 600px) {
-	.component-list td:nth-child(2) {
-		display: block;
-	}
-
-	.component-list .version-number {
-		display: block;
-	}
-}
