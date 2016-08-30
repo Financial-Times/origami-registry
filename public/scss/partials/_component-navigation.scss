@@ -18,7 +18,8 @@
 }
 
 .component-navigation__item a:hover,
-.component-navigation__item.focused a {
+.component-navigation__item.focused a,
+.component-navigation__item.component-navigation__item--active a {
 	background-color: #505050;
 }
 
