@@ -6,8 +6,15 @@ a.o-registry__github-button {
 	margin-bottom: 15px;
 	color: #fff;
 	text-transform: none;
+
+	&:hover {
+		// color: oColorsGetColorFor(o-buttons-standout-normal, text);
+		background-color: lighten(oColorsGetColorFor(o-buttons-standout-normal, background), 3.7%);
+		border-color: oColorsGetColorFor(o-buttons-standout-hover, border);
+	}
 }
 
 a.o-registry__github-button i {
 	margin-right: 10px;
 }
+

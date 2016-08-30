@@ -67,6 +67,11 @@
 		@include oTypographySansDataBold(m);
 		font-size: 16px;
 		border-bottom: 1px dashed oColorsGetPaletteColor('teal-1');
+
+		&:hover {
+			text-decoration: none;
+			border-bottom-style: solid;
+		}
 	}
 }
 
