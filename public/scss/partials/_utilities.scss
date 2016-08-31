@@ -16,7 +16,7 @@
 
 /* Progress spinner */
 
-.u-activity::after {
+.js-activity::after {
 	content: '';
 	margin: 0 3px;
 	background: url(/images/loading.svg) no-repeat;
