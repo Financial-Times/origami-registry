@@ -80,7 +80,21 @@ open "http://$(docker-machine ip default):3000/"
 
 The MySQL database is accessible on port 3306, the settings for which are in the `.env` file.
 
-To watch and compile front-end assets during development, you can run:
+### Working with local assets
+
+We have a series of Make tasks to simplify working with local assets. To install all the dependencies from `npm` and `bower` run:
+
+```sh
+make install
+```
+
+To compile all assets you can run:
+
+```sh
+make build-dev
+```
+
+And finally to watch and compile front-end assets during development, you can run:
 
 ```sh
 make watch-dev
