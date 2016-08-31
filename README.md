@@ -10,7 +10,9 @@ Table of Contents
   * [Running Locally](#running-locally)
   * [Configuration](#configuration)
   * [Deployment](#deployment)
+  * [Trouble-Shooting](#trouble-shooting)
   * [License](#license)
+
 
 Requirements
 ------------
@@ -35,21 +37,39 @@ You'll also need `gulp` installed globally to compile the front-end assets:
 npm install -g gulp
 ```
 
-Create a virtual machine to run the application's containers using the Make task, this will also install all of the front-end dependencies with `npm` and `bower`.
+Create a virtual machine to run the application's containers using `docker-machine`. The default size isn't large enough, so this will create one with an increased disk size:
 
 ```sh
-make install
+docker-machine create --driver virtualbox --virtualbox-disk-size "50000" dev
 ```
+
 
 Running locally
 ---------------
 
 Before we can run the application, we'll need to create a `.env` file. You can copy the `sample.env` file to `.env` and fill in the missing values from the Origami Registry Configuration note in the shared folder on LastPass.
 
-In the working directory, use `docker-compose` to build and start a container. We have some Make tasks which simplify this:
+In the working directory, use `docker-machine` to start the development machine (if you've just created the machine you skip this step):
 
 ```sh
-make build-dev run-dev
+docker-machine start dev
+```
+
+Once started, put the machine's config into your environment. Both right now and on next login:
+
+```sh
+docker-machine env dev
+eval $(docker-machine env dev)
+echo "eval $(docker-machine env dev)" >> ~/.profile
+```
+
+*depending on your machine you might need to remove the `$` in the `eval` statement, after running the first line, there will be instructions in your command line.
+
+Then use `docker-compose` to build and start the container:
+
+```sh
+docker-compose build
+docker-compose up
 ```
 
 Now you can access the app over HTTP on port `3000`. If you're on a Mac, you'll need to use the IP of your Docker Machine, which you can get by running `docker-machine ip dev`:
@@ -60,7 +80,21 @@ open "http://$(docker-machine ip default):3000/"
 
 The MySQL database is accessible on port 3306, the settings for which are in the `.env` file.
 
-To watch and compile front-end assets during development, you can run:
+### Working with local assets
+
+We have a series of Make tasks to simplify working with local assets. To install all the dependencies from `npm` and `bower` run:
+
+```sh
+make install
+```
+
+To compile all assets you can run:
+
+```sh
+make build-dev
+```
+
+And finally to watch and compile front-end assets during development, you can run:
 
 ```sh
 make watch-dev
@@ -84,6 +118,7 @@ You should now be in a bash command line for the registry app. You can now run t
 php ./app/scripts/updateregistry
 ```
 
+
 Deploying
 ---------
 
@@ -92,6 +127,21 @@ You need to authenticate with Heroku (this app is `origami-registry-eu`) and use
 Then, run `make deploy`.
 
 See also the [architecture diagram](https://docs.google.com/drawings/d/1dP1nrX6H2VLQoeDt3Y1TWYOTZSUexESY3QUmPupMpxA/edit) in Google drive.
+
+
+Trouble-Shooting
+----------------
+
+We've outlined some common issues that can occur when running the Registry locally:
+
+### What do I do if the dependencies won't install?
+
+This is likely because you're on a different network which doesn't allow you access to the private FT repositories. Make sure you're connected to the internal network/wifi, then restart the `docker-machine` to make sure `docker-compose` has access to the correct network.
+
+### What can I do to fix `docker-compose` not starting?
+
+If you get an error when running `docker-compose up` the easiest solution is to kill the `docker-machine` and start the setup process again. Run `docker-machine kill dev` to stop the machine. Then make sure you're on the internal network, and start the [Running locally](#running-locally) process from the beginning.
+
 
 Configuration
 -------------
