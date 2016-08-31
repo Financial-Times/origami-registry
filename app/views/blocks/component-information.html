@@ -12,8 +12,10 @@
 			</select>
 		</dd>
 
-		<dt>Latest stable version:</dt>
-		<dd><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</dd>
+		{% if latest_stable_version %}
+			<dt>Latest stable version:</dt>
+			<dd><span class="version-number">{{latest_stable_version}}</span> ({{latest_stable_datetime_created|timediff}} old)</dd>
+		{% endif %}
 
 		<dt>Status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more</a>):</dt>
 		<dd><span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span>  (as of <span class="version-number">{{support_status_version}}</span>)</dd>
