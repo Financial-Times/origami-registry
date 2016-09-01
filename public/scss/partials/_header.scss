@@ -6,6 +6,11 @@
 	font-size: 17px;
 }
 
-.o-header-services__related-content a:hover {
+.o-header-services__product-name a:visited {
+	color: #fff;
+}
+
+.o-header-services__related-content a:hover,
+.o-header-services__product-name a:hover {
 	text-decoration: none;
 }
