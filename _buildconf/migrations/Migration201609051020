@@ -1,0 +1,18 @@
+<?php
+/**
+ * Add a recent commit count to each component to enable activity-based sorting
+ *
+ * @copyright The Financial Times Limited [All rights reserved]
+ */
+
+class Migration201609051020 extends Migrate {
+
+	public function preDeployUp() {
+		$sql = <<<'SQL'
+
+ALTER TABLE `demos` ADD `display_html` BOOLEAN  true  AFTER `hidden`;
+
+SQL;
+		$this->executeSql($sql);
+	}
+}
