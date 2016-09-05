@@ -3,7 +3,7 @@
 		<h2 class="demo__title"><span class="activity">{{ demo.name }}</span></h2>
 	</header>
 
-	{% if demo.display_html == null or demo.display_html == 1 %}
+	{% if not demo.display_html == 0 %}
 		<div class="demo__navigation">
 			<ul data-o-component="o-tabs" class="o-tabs o-tabs--buttontabs demo__tabs" role="tablist">
 				<li role="tab" aria-selected="true"><a href="#demo-{{ demo.name|slugify}}">Demo</a></li>
@@ -30,7 +30,7 @@
 		{% endif %}
 	</div>
 
-	{% if demo.display_html == null or demo.display_html == 1 %}
+	{% if not demo.display_html == 0 %}
 		<div id="code-{{ demo.name|slugify}}" class="o-tabs__tabpanel">
 			<div class="demo__source-container">
 				<pre class="demo__source" data-src="/components/{{module_name}}@{{tag_name}}/demos/code/{{demo.name}}"></pre>
