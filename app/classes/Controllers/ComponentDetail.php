@@ -97,50 +97,7 @@ class ComponentDetail extends BaseController {
 			$this->addViewData('force_old_demo_url', true);
 		}
 
-		// Get all components for the internal navigation
-		$viewdata = array(
-				'primitives' => array(
-					'title' => 'Primitives',
-					'modules' => array(),
-				),
-				'components' => array(
-					'title' => 'Components',
-					'modules' => array(),
-				),
-				'layouts' => array(
-					'title' => 'Layouts',
-					'modules' => array(),
-				),
-				'utilities' => array(
-					'title' => 'Utilities',
-					'modules' => array(),
-				),
-				'uncategorised' => array(
-					'title' => 'Uncategorised',
-					'modules' => array(),
-				),
-			);
-
-		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
-			$cat = $component->origami_category;
-			if (!$cat) {
-				$cat = 'uncategorised';
-			}
-
-			if ($component->latest_stable_version) {
-				$viewdata[$cat]['modules'][] = array_merge(
-					$component->toArray(),
-					$component->latest_stable_version->toArray()
-				);
-			} elseif($component->latest_version) {
-				$viewdata[$cat]['modules'][] = array_merge(
-					$component->toArray(),
-					$component->latest_version->toArray()
-				);
-			}
-		}
-
-		$this->addViewData('components', $viewdata);
+		$this->addViewData('components', Component::getOrigamiComponentsByCategory());
 
 		// Render templates and return response
 		$this->resp->setCacheTTL(isset($this->routeargs['version']) ? 3600 : 0);

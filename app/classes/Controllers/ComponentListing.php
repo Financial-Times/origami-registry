@@ -14,49 +14,7 @@ class ComponentListing extends BaseController {
 
 	public function get() {
 
-		$viewdata = array(
-				'primitives' => array(
-					'title' => 'Primitives',
-					'modules' => array(),
-				),
-				'components' => array(
-					'title' => 'Components',
-					'modules' => array(),
-				),
-				'layouts' => array(
-					'title' => 'Layouts',
-					'modules' => array(),
-				),
-				'utilities' => array(
-					'title' => 'Utilities',
-					'modules' => array(),
-				),
-				'uncategorised' => array(
-					'title' => 'Uncategorised',
-					'modules' => array(),
-				),
-			);
-
-		foreach (Component::findAll('c.is_origami IS TRUE') as $component) {
-			$cat = $component->origami_category;
-			if (!$cat) {
-				$cat = 'uncategorised';
-			}
-
-			if ($component->latest_stable_version) {
-				$viewdata[$cat]['modules'][] = array_merge(
-					$component->toArray(),
-					$component->latest_stable_version->toArray()
-				);
-			} elseif($component->latest_version) {
-				$viewdata[$cat]['modules'][] = array_merge(
-					$component->toArray(),
-					$component->latest_version->toArray()
-				);
-			}
-		}
-
-		$this->addViewData('components', $viewdata);
+		$this->addViewData('components', Component::getOrigamiComponentsByCategory());
 		$this->addViewData('title', 'Components');
 		$this->addViewData('body_class', 'o-registry-page--component-listing');
 

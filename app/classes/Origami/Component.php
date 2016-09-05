@@ -18,6 +18,7 @@ final class Component extends Model {
 
 	protected $fields = array('id', 'module_name', 'keywords', 'origami_category', 'git_repo_url', 'is_origami', 'host_type', 'datetime_last_discovered', 'recent_commit_count');
 	protected $datefields = array('datetime_last_discovered');
+	protected static $categories = array('primitives', 'components', 'layouts', 'utilities', 'uncategorised');
 
 	public function __construct() {
 		parent::__construct();
@@ -164,7 +165,37 @@ final class Component extends Model {
 		}
 	}
 
+	public static function getOrigamiComponentsByCategory() {
+		$components = array();
 
+		foreach(self::$categories as $category) {
+			$components[$category] = array(
+					'title' => $category,
+					'modules' => array(),
+				);
+		}
+
+		foreach (self::findAll('c.is_origami IS TRUE') as $component) {
+			$cat = $component->origami_category;
+			if (!$cat || !in_array($cat, self::$categories)) {
+				$cat = 'uncategorised';
+			}
+
+			if ($component->latest_stable_version) {
+				$components[$cat]['modules'][] = array_merge(
+					$component->toArray(),
+					$component->latest_stable_version->toArray()
+				);
+			} elseif ($component->latest_version) {
+				$components[$cat]['modules'][] = array_merge(
+					$component->toArray(),
+					$component->latest_version->toArray()
+				);
+			}
+		}
+
+		return $components;
+	}
 
 	public static function findOrCreate($name) {
 		$component = new self();
