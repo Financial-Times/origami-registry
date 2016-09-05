@@ -10,7 +10,7 @@ class Migration201609051020 extends Migrate {
 	public function preDeployUp() {
 		$sql = <<<'SQL'
 
-ALTER TABLE `demos` ADD `display_html` BOOLEAN  true  AFTER `hidden`;
+ALTER TABLE `demos` ADD `display_html` TINYINT(1) AFTER `hidden`;
 
 SQL;
 		$this->executeSql($sql);
