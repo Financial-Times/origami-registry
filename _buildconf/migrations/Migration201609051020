@@ -5,13 +5,12 @@
  * @copyright The Financial Times Limited [All rights reserved]
  */
 
-class Migration201608261518 extends Migrate {
+class Migration201609051020 extends Migrate {
 
 	public function preDeployUp() {
 		$sql = <<<'SQL'
 
-ALTER TABLE `demos` CHANGE COLUMN `hidden` `expanded` VARCHAR(128)  NULL;
-ALTER TABLE `demos` ADD `hidden` VARCHAR(128)  NULL  AFTER `expanded`;
+ALTER TABLE `demos` ADD `display_html` TINYINT(1) AFTER `hidden`;
 
 SQL;
 		$this->executeSql($sql);

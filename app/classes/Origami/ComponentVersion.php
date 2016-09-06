@@ -69,7 +69,7 @@ final class ComponentVersion extends Model {
 
 				// Backwards compat: remove reference to `title` column in next release
 				// and keep 'path' for use in older demos that are not compatible with demo endpoint
-				$this->data['demos'] = self::$app->db_read->queryAllRows('SELECT IF(name IS NULL, title, name) as name, path, description, hidden FROM demos WHERE componentversion_id=%d', $this->id);
+				$this->data['demos'] = self::$app->db_read->queryAllRows('SELECT IF(name IS NULL, title, name) as name, path, description, hidden, display_html FROM demos WHERE componentversion_id=%d', $this->id);
 			break;
 		}
 		return parent::__get($propertyName);
@@ -102,7 +102,7 @@ final class ComponentVersion extends Model {
 		}
 		if ($this->demos) {
 			foreach ($this->demos as $demo) {
-				self::$app->db_write->query('REPLACE INTO demos SET componentversion_id=%d, name=%s, path=%s, description=%s, hidden=%d', $this->id, $demo['name'], $demo['path'], $demo['description'], (integer)$demo['hidden']);
+				self::$app->db_write->query('REPLACE INTO demos SET componentversion_id=%d, name=%s, path=%s, description=%s, hidden=%d, display_html=%d', $this->id, $demo['name'], $demo['path'], $demo['description'], (integer)$demo['hidden'], (integer)$demo['display_html']);
 			}
 		}
 	}
@@ -244,8 +244,11 @@ final class ComponentVersion extends Model {
 						} else {
 							$demo = array_merge($demodefaults, (array)$demo);
 						}
-						if (isset($demo['hidden']))	{
+						if (isset($demo['hidden'])) {
 							$hidden = true;
+						}
+						if (!isset($demo['display_html'])) {
+							$demo['display_html'] = true;
 						}
 						$demo['hidden'] = $hidden;
 						if (empty($demo['name']) and !empty($demo['path'])) {
