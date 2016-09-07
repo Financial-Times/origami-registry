@@ -101,7 +101,7 @@ final class ComponentVersion extends Model {
 		}
 		if ($this->demos) {
 			foreach ($this->demos as $demo) {
-				self::$app->db_write->query('REPLACE INTO demos SET componentversion_id=%d, name=%s, path=%s, description=%s, hidden=%d, display_html=%d', $this->id, $demo['name'], $demo['path'], $demo['description'], (integer)$demo['hidden'], (integer)$demo['display_html']);
+				self::$app->db_write->query('REPLACE INTO demos SET componentversion_id=%d, title=%s, name=%s, path=%s, description=%s, hidden=%d, display_html=%d', $this->id, $demo['title'], $demo['name'], $demo['path'], $demo['description'], (integer)$demo['hidden'], (integer)$demo['display_html']);
 			}
 		}
 	}
