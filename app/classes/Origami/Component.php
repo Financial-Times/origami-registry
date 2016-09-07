@@ -106,7 +106,12 @@ final class Component extends Model {
 
 				$this->data['keywords'] = $latest->keywords;
 				$this->data['is_origami'] = $latest->is_valid;
-				$this->data['origami_category'] = $latest->origami_category;
+				if (empty($latest->origami_category) && $latest->origami_type === 'imageset') {
+					$this->data['origami_category'] = 'imageset';
+				} else {
+					$this->data['origami_category'] = $latest->origami_category;
+				}
+
 				$this->save();
 
 				// If this is the latest version of a module which is valid (or we're doing a deep scan), rebuild last REBUILD_DEPENDENTS_DEPTH versions of all direct dependents
