@@ -18,7 +18,7 @@ final class Component extends Model {
 
 	protected $fields = array('id', 'module_name', 'keywords', 'origami_category', 'git_repo_url', 'is_origami', 'host_type', 'datetime_last_discovered', 'recent_commit_count');
 	protected $datefields = array('datetime_last_discovered');
-	protected static $categories = array('primitives', 'components', 'layouts', 'utilities', 'uncategorised');
+	protected static $categories = array('primitives', 'components', 'layouts', 'utilities', 'imagesets', 'uncategorised');
 
 	public function __construct() {
 		parent::__construct();
