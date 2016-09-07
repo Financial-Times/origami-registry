@@ -12,8 +12,8 @@
 
 			<div class="demo__jsbin-link demo__external-links">
 				<span>Open in:</span>
-				<a class="" href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" target="_blank">JSBin <i class="fa fa-external-link"></i></a>
-				<a class="" href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" target="_blank">New tab <i class="fa fa-external-link"></i></a>
+				<a href="/components/{{module_name}}@{{tag_name}}/demos/edit/{{demo.name}}" target="_blank">JSBin <i class="fa fa-external-link"></i></a>
+				<a href="https://{{ SERVER.BUILD_SERVICE_HOST }}/v2/demos/{{module_name}}@{{tag_name}}/{{demo.name}}" target="_blank">New tab <i class="fa fa-external-link"></i></a>
 			</div>
 		</div>
 	{% endif %}
@@ -30,7 +30,7 @@
 		{% endif %}
 	</div>
 
-	{% if not demo.display_html == 0 %}
+	{% if demo.display_html == 1 or demo.display_html == null %}
 		<div id="code-{{ demo.name|slugify}}" class="o-tabs__tabpanel">
 			<div class="demo__source-container">
 				<pre class="demo__source" data-src="/components/{{module_name}}@{{tag_name}}/demos/code/{{demo.name}}"></pre>
