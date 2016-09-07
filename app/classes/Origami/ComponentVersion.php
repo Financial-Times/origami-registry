@@ -238,27 +238,34 @@ final class ComponentVersion extends Model {
 				}
 				if (isset($responseJson->origamiManifest->demos)) {
 					foreach ($responseJson->origamiManifest->demos as $demo) {
-						$hidden = false;
 						if (!is_object($demo)) {
 							$demo = array_merge($demodefaults, array('name' => $demo));
 						} else {
 							$demo = array_merge($demodefaults, (array)$demo);
 						}
-						if (isset($demo['hidden'])) {
-							$hidden = true;
+
+						if (empty($demo['hidden'])) {
+							$demo['hidden'] = false;
 						}
-						if (!isset($demo['display_html'])) {
+
+						if (empty($demo['display_html'])) {
 							$demo['display_html'] = true;
 						}
-						$demo['hidden'] = $hidden;
+
 						if (empty($demo['name']) and !empty($demo['path'])) {
 							$demo['name'] = basename($demo['path'], '.html');
 						} else if (empty($demo['name']) and !empty($demo['title'])) {
 							$demo['name'] = $demo['title'];
 						}
+
+						if (empty($demo['title']) and !empty($demo['name'])) {
+							$demo['title'] = $demo['name'];
+						}
+
 						if (empty($demo['description'])) {
 							$demo['description'] = null;
 						}
+
 						$this->data['demos'][] = $demo;
 					}
 				}
