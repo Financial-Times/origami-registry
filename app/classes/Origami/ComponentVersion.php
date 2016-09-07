@@ -66,10 +66,9 @@ final class ComponentVersion extends Model {
 			break;
 
 			case 'demos':
-
-				// Backwards compat: remove reference to `title` column in next release
-				// and keep 'path' for use in older demos that are not compatible with demo endpoint
-				$this->data['demos'] = self::$app->db_read->queryAllRows('SELECT IF(name IS NULL, title, name) as name, path, description, hidden, display_html FROM demos WHERE componentversion_id=%d', $this->id);
+				// Backwards compat: keep 'path' for use in older demos that are
+				// not compatible with demo endpoint
+				$this->data['demos'] = self::$app->db_read->queryAllRows('SELECT title, name, path, description, hidden, display_html FROM demos WHERE componentversion_id=%d', $this->id);
 			break;
 		}
 		return parent::__get($propertyName);
