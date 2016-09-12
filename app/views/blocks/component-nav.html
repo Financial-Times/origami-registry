@@ -13,7 +13,7 @@
 					<h3 class="component-navigation__title">{{group.title}}</h3>
 				</li>
 				{% for component in group.modules %}
-					{% if (component.support_status == 'active' or component.support_status == 'maintained') and component.origami_type != 'service' or  %}
+					{% if (component.support_status == 'active' or component.support_status == 'maintained') and component.origami_type != 'service' %}
 						<li class="component-navigation__item js-searchable type-{{component.origami_type}} support-{{component.support_status|slugify}}{% if component.module_name == module_name %} component-navigation__item--active{% endif %}"><a data-module-name--js data-name="{{component.module_name}}" data-keywords="{{component.keywords}}" href="/components/{{component.module_name}}@{{component.tag_name}}">{{component.module_name}}</a></li>
 					{% endif %}
 				{% endfor %}

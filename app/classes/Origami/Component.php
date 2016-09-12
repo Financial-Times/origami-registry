@@ -107,7 +107,7 @@ final class Component extends Model {
 				$this->data['keywords'] = $latest->keywords;
 				$this->data['is_origami'] = $latest->is_valid;
 				if (empty($latest->origami_category) && $latest->origami_type === 'imageset') {
-					$this->data['origami_category'] = 'imageset';
+					$this->data['origami_category'] = 'imagesets';
 				} else {
 					$this->data['origami_category'] = $latest->origami_category;
 				}
