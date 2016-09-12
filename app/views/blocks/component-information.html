@@ -23,7 +23,7 @@
 		{% if origami_type == 'service' %}
 			<dt>Live URL:</dt>
 			<dd><a href="{{service_url}}">{{service_url}}</a></dd>
-		{% else %}
+		{% elseif origami_type != 'imageset' %}
 			<dt>Bundle sizes:</dt>
 			<dd>
 				{% if bundlesize_js %}
@@ -41,57 +41,60 @@
 		<dt>Support status (<a href="http://origami.ft.com/docs/syntax/origamijson/">Learn more):</a></dt>
 		<dd><span class="label-{{support_status|slugify}}">{{support_status|capitalize}}</span> (as of <span class="version-number">{{support_status_version}}</span>)</dd>
 
-		<dt>Installable?</dt>
-		<dd>
-			<span class="label-{% if is_valid %}pass{% endif %}{% if not is_valid %}fail{% endif %}">
-				{% if is_valid == 1 %}
-					OK
-				{% elseif is_valid == 0 %}
-					Not installable, fails build tests
-				{% else %}
-					Unknown
+		{% if origami_type != 'imageset' %}
+
+			<dt>Last indexed</dt>
+			<dd>
+				{{datetime_last_cached|date('j M Y H:i:s')}} (<a href="/components/{{module_name}}@{{tag_name}}/refresh" class="link-refresh">Build now</a>)
+			</dd>
+
+			<dt>Installable?</dt>
+			<dd>
+				<span class="label-{% if is_valid %}pass{% endif %}{% if not is_valid %}fail{% endif %}">
+					{% if is_valid == 1 %}
+						OK
+					{% elseif is_valid == 0 %}
+						Not installable, fails build tests
+					{% else %}
+						Unknown
+					{% endif %}
+					<a href="https://{{ SERVER.BUILD_SERVICE_HOST }}/modules/{{module_name}}@{{tag_name}}" title="View build test results"><i class="fa fa-info-circle"></i></a>
+				</span>
+			</dd>
+
+			<dt>Dependencies</dt>
+			<dd>
+				{% if not dependencies %}
+					<span>None</span>
 				{% endif %}
-				<a href="https://{{ SERVER.BUILD_SERVICE_HOST }}/modules/{{module_name}}@{{tag_name}}" title="View build test results"><i class="fa fa-info-circle"></i></a>
-			</span>
-		</dd>
+				{% if dependencies %}
+				<table class="component-details__dependencies">
+					{% for dependency in dependencies %}
+					<tr>
+						<td>{% if dependency.id %}<a href="/components/{{dependency.child_component_name}}">{% endif %}{{dependency.child_component_name}}{% if dependency.id %}</a>{% endif %}</td>
+						<td><span class='version-number'>{{dependency.child_component_target}}</span></td>
+						<td>
+							{% if dependency.uptodate %}
+							<span title='The latest version of the dependency can be used' class='label-active'>OK</span>
+							{% else %}
+							<span title='Forced by this constraint to use an older version of the dependency' class='label-experimental'>Out of date</span>
+							{% endif %}
+						</td>
+						<td><span title='Latest available version of the dependency' class='version-number'>{{dependency.latest}}</span></td>
+					</tr>
+					{% endfor %}
+				</table>
+				{% endif %}
+			</dd>
 
-		<dt>Last indexed</dt>
-		<dd>
-			{{datetime_last_cached|date('j M Y H:i:s')}} (<a href="/components/{{module_name}}@{{tag_name}}/refresh" class="link-refresh">Build now</a>)
-		</dd>
-
-		<dt>Dependencies</dt>
-		<dd>
-			{% if not dependencies %}
-				<span>None</span>
-			{% endif %}
-			{% if dependencies %}
-			<table class="component-details__dependencies">
-				{% for dependency in dependencies %}
-				<tr>
-					<td>{% if dependency.id %}<a href="/components/{{dependency.child_component_name}}">{% endif %}{{dependency.child_component_name}}{% if dependency.id %}</a>{% endif %}</td>
-					<td><span class='version-number'>{{dependency.child_component_target}}</span></td>
-					<td>
-						{% if dependency.uptodate %}
-						<span title='The latest version of the dependency can be used' class='label-active'>OK</span>
-						{% else %}
-						<span title='Forced by this constraint to use an older version of the dependency' class='label-experimental'>Out of date</span>
-						{% endif %}
-					</td>
-					<td><span title='Latest available version of the dependency' class='version-number'>{{dependency.latest}}</span></td>
-				</tr>
-				{% endfor %}
-			</table>
-			{% endif %}
-		</dd>
-
-		<dt>Dependents</dt>
-		<dd>
-			{% if not dependents %}
-				<span>None</span>
-			{% endif %}
-<!-- No indentation, to ensure there's no space in between items: -->
-{% for dependent in dependents %}<span class="component-detail__dependent">{% if dependent.id %}<a href="/components/{{dependent.module_name}}">{% endif %}{{dependent.module_name}}{% if dependent.id %}</a>{% endif %}</span>{% endfor %}
-		</dd>
+			<dt>Dependents</dt>
+			<dd>
+				{% if not dependents %}
+					<span>None</span>
+				{% endif %}
+	<!-- No indentation, to ensure there's no space in between items: -->
+	{% for dependent in dependents %}<span class="component-detail__dependent">{% if dependent.id %}<a href="/components/{{dependent.module_name}}">{% endif %}{{dependent.module_name}}{% if dependent.id %}</a>{% endif %}</span>{% endfor %}
+			</dd>
+		{% endif %}
 	</dl>
 </section>
