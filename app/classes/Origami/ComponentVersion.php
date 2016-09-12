@@ -17,7 +17,7 @@ final class ComponentVersion extends Model {
 
 	private $component;
 
-	protected $fields = array('id', 'component_id', 'tag_name', 'datetime_last_cached', 'datetime_created', 'is_valid', 'description', 'origami_type', 'origami_category', 'origami_version', 'support', 'service_url', 'readme_gfm', 'support_status', 'ci_status', 'has_js', 'has_css', 'bundlesize_js', 'bundlesize_css');
+	protected $fields = array('id', 'component_id', 'tag_name', 'datetime_last_cached', 'datetime_created', 'is_valid', 'description', 'origami_type', 'origami_category', 'origami_version', 'support', 'service_url', 'readme_gfm', 'support_status', 'ci_status', 'has_js', 'has_css', 'bundlesize_js', 'bundlesize_css', 'image_list');
 	protected $datefields = array('datetime_last_cached', 'datetime_created');
 
 
@@ -90,7 +90,8 @@ final class ComponentVersion extends Model {
 		$this->data['is_valid'] = isset($this->data['is_valid']) ? (int)$this->data['is_valid'] : null;
 		$this->data['has_css'] = isset($this->data['has_css']) ? (int)$this->data['has_css'] : null;
 		$this->data['has_js'] = isset($this->data['has_js']) ? (int)$this->data['has_js'] : null;
-		self::$app->db_write->query('INSERT INTO componentversions SET {component_id}, {tag_name}, {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {datetime_created|date}, datetime_last_cached=NOW() ON DUPLICATE KEY UPDATE {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {datetime_created|date}, datetime_last_cached=NOW()', $this->data);
+
+		self::$app->db_write->query('INSERT INTO componentversions SET {component_id}, {tag_name}, {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {datetime_created|date}, datetime_last_cached=NOW() ON DUPLICATE KEY UPDATE {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {datetime_created|date}, datetime_last_cached=NOW()', $this->data);
 		if (!$this->id) {
 			$this->id = self::$app->db_write->querySingle('SELECT id FROM componentversions WHERE {component_id} AND {tag_name}', $this->data);
 		}
@@ -319,6 +320,44 @@ final class ComponentVersion extends Model {
 			return false;
 		}
 	}
+
+	public function buildImageList() {
+		$name = rawurlencode($this->component->module_name);
+		$url = 'https://raw.githubusercontent.com/Financial-Times/' . $name . '/master/imageList.json';
+
+		$request = new HTTPRequest($url);
+		$request->setTimeLimit(120);
+		$request->setMaxRetries(2);
+		$request->setRetryInterval(5);
+
+		self::$app->logger->notice('Query GitHub imageset json');
+
+		// Send the request
+		try {
+			$response = $request->send();
+		} catch (Exception $e) {
+			self::$app->logger->error('HTTP failure querying GitHub raw', $e->getMessage());
+			return false;
+		}
+
+		// A 200 status code implies that the request was successful, but the response may still indicate an error
+		if ($response->getResponseStatusCode() == 200) {
+			// Check if the response is well-formed JSON
+			if (($responseJson = json_decode($response->getBody())) === null) {
+				self::$app->logger->notice('Unable to decode GitHub raw response', array(
+					'component' => $name,
+					'json_error' => json_last_error(),
+					'response' => $response->getBody(),
+				));
+				return false;
+			}
+
+			if (isset($responseJson)) {
+				$this->image_list = json_encode($responseJson);
+			}
+		}
+	}
+
 
 	public function delete() {
 		self::$app->db_write->query('DELETE FROM demos WHERE componentversion_id=%d', $this->id);

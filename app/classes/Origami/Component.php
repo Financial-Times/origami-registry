@@ -102,6 +102,9 @@ final class Component extends Model {
 			$isnew = ($version->is_valid === null);
 			try {
 				$version->build();
+				if ($version->origami_type === 'imageset') {
+					$version->buildImageList();
+				}
 				$version->save();
 
 				$this->data['keywords'] = $latest->keywords;
