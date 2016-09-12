@@ -36,6 +36,19 @@
 						<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
 					{% endif %}
 
+					{% if origami_type == 'imageset' %}
+						<h3>Use the imageset</h3>
+						<p>Imageset images can be loaded directly using the imageservice. This shortcode for this imageset is: ...</p>
+
+						<h4>Download the full imageset</h4>
+
+						<p>To download the full imageset, download the repo from GitHub using the button below. You&rsquo;ll find all the image files in the <code>/src</code> folder.</p>
+
+						<a href="{{repo_home_url}}/archive/master.zip" class="o-buttons o-buttons--big o-registry__github-button">Download the imageset</a>
+
+
+					{% endif %}
+
 					{% if origami_type == 'module' and (has_js or has_css) %}
 						{% include "blocks/getting-started.html" %}
 					{% endif %}
