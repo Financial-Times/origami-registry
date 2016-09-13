@@ -353,6 +353,30 @@ final class ComponentVersion extends Model {
 			}
 
 			if (isset($responseJson)) {
+				$oiu_url = 'https://raw.githubusercontent.com/Financial-Times/origami-imageset-uploader/master/imageset-map.json';
+
+				$oiu_request = new HTTPRequest($oiu_url);
+				$oiu_request->setTimeLimit(120);
+				$oiu_request->setMaxRetries(2);
+				$oiu_request->setRetryInterval(5);
+
+				// Send the request
+				try {
+					$oiu_response = $oiu_request->send();
+				} catch (Exception $e) {
+					self::$app->logger->error('HTTP failure querying GitHub raw', $e->getMessage());
+					return false;
+				}
+
+				if ($oiu_response->getResponseStatusCode() == 200) {
+					$oui_json = json_decode($oiu_response->getBody());
+
+					if (property_exists($oui_json, $this->component->module_name)) {
+						$imageset_map_data = $oui_json->{$this->component->module_name};
+						$responseJson->imageset_data = $imageset_map_data;
+					}
+				}
+
 				$this->image_list = json_encode($responseJson);
 			}
 		}
