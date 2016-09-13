@@ -373,6 +373,12 @@ final class ComponentVersion extends Model {
 
 					if (property_exists($oui_json, $this->component->module_name)) {
 						$imageset_map_data = $oui_json->{$this->component->module_name};
+
+						if ($this->component->module_name === 'fticons') {
+							$scheme_version = '-v' . explode('.', $this->tag_name)[0];
+							$imageset_map_data->scheme .= $scheme_version;
+						}
+
 						$responseJson->imageset_data = $imageset_map_data;
 					}
 				}
