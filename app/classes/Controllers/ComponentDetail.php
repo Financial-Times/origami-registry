@@ -94,6 +94,12 @@ class ComponentDetail extends BaseController {
 
 		if ($this->version->image_list) {
 			$imageset_images = json_decode($this->version->image_list);
+			$this->addViewData('imageset_scheme', $imageset_images->imageset_data->scheme);
+			$this->addViewData('imageset_path', $imageset_images->imageset_data->pathToImages);
+			// Remove the imageset_data property so the following foreach works
+			// regardless of the property name of the images
+			unset($imageset_images->imageset_data);
+
 			foreach ($imageset_images as $imgset) {
 				$this->addViewData('imageset_list', $imgset);
 			}
