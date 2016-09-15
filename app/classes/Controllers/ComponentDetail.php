@@ -92,6 +92,19 @@ class ComponentDetail extends BaseController {
 		if ($this->version->has_css) $docs_sections++;
 		$this->addViewData('docs_sections', $docs_sections);
 
+		if ($this->version->image_list) {
+			$imageset_images = json_decode($this->version->image_list);
+			$this->addViewData('imageset_scheme', $imageset_images->imageset_data->scheme);
+			$this->addViewData('imageset_path', $imageset_images->imageset_data->pathToImages);
+			// Remove the imageset_data property so the following foreach works
+			// regardless of the property name of the images
+			unset($imageset_images->imageset_data);
+
+			foreach ($imageset_images as $imgset) {
+				$this->addViewData('imageset_list', $imgset);
+			}
+		}
+
 		// Certain older versions of o-colors cannot be demoed via the /demo endpoint
 		if ($this->component->module_name === 'o-colors' && version_compare($this->version->tag_name, '3.3.0', '<=')) {
 			$this->addViewData('force_old_demo_url', true);

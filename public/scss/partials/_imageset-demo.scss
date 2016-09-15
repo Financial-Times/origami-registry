@@ -1,0 +1,21 @@
+.imageset-demo {
+	width: 100%;
+	overflow: hidden; // Clearfix cheat
+
+	&__item {
+		float: left;
+		width: 200px;
+		padding: 0 20px 20px 0;
+	}
+
+	&__image {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin: 0;
+	}
+
+	&__title {
+		text-align: center;
+	}
+}

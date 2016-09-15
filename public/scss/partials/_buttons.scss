@@ -1,4 +1,4 @@
-a.o-registry__github-button {
+a.o-buttons.o-registry__github-button {
 	@include oButtons;
 	@include oButtonsSize(big);
 	@include oButtonsTheme(standout);
@@ -18,3 +18,13 @@ a.o-registry__github-button i {
 	margin-right: 10px;
 }
 
+
+a.o-buttons {
+	@include oButtons;
+	@include oButtonsSize(big);
+
+	&.o-buttons--wide {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+}

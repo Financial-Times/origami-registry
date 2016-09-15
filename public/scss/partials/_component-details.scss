@@ -63,7 +63,7 @@
 		}
 	}
 
-	.component-detail__section--highlight a {
+	.component-detail__section--highlight a:not(.o-buttons) {
 		@include oTypographySansDataBold(m);
 		font-size: 16px;
 		border-bottom: 1px dashed oColorsGetPaletteColor('teal-1');

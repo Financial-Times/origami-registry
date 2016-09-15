@@ -1,0 +1,16 @@
+<div class="demo demo--imageset">
+	<header class="demo__header">
+		<h2 class="demo__title">Image set</h2>
+	</header>
+
+	<div class="demo__frame-container">
+		<div class="imageset-demo">
+			{% for image in imageset_list %}
+				<div class="imageset-demo__item">
+					<img src="//image.webservices.ft.com/v1/images/raw/fticon-v1:{{image.name}}?source=origami-registry" alt="{{image.name}}" class="imageset-demo__image">
+					<p class="imageset-demo__title">{{image.name}}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

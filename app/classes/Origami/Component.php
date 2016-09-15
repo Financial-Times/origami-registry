@@ -18,7 +18,7 @@ final class Component extends Model {
 
 	protected $fields = array('id', 'module_name', 'keywords', 'origami_category', 'git_repo_url', 'is_origami', 'host_type', 'datetime_last_discovered', 'recent_commit_count');
 	protected $datefields = array('datetime_last_discovered');
-	protected static $categories = array('primitives', 'components', 'layouts', 'utilities', 'uncategorised');
+	protected static $categories = array('primitives', 'components', 'layouts', 'utilities', 'imagesets', 'uncategorised');
 
 	public function __construct() {
 		parent::__construct();
@@ -102,11 +102,19 @@ final class Component extends Model {
 			$isnew = ($version->is_valid === null);
 			try {
 				$version->build();
+				if ($version->origami_type === 'imageset') {
+					$version->buildImageList();
+				}
 				$version->save();
 
 				$this->data['keywords'] = $latest->keywords;
 				$this->data['is_origami'] = $latest->is_valid;
-				$this->data['origami_category'] = $latest->origami_category;
+				if (empty($latest->origami_category) && $latest->origami_type === 'imageset') {
+					$this->data['origami_category'] = 'imagesets';
+				} else {
+					$this->data['origami_category'] = $latest->origami_category;
+				}
+
 				$this->save();
 
 				// If this is the latest version of a module which is valid (or we're doing a deep scan), rebuild last REBUILD_DEPENDENTS_DEPTH versions of all direct dependents

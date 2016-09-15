@@ -36,6 +36,25 @@
 						<p><a href="{{service_url}}" class="btn btn-lg btn-primary active"><i class="glyphicon glyphicon-circle-arrow-right"></i> Load service</a> &nbsp; (services host their own documentation)</p>
 					{% endif %}
 
+					{% if origami_type == 'imageset' %}
+						<h2>Quick start</h2>
+
+						<h3>Use the image set</h3>
+						<p>Image set images can be loaded directly using the Image Service. This scheme for this image set is: <code>{{imageset_scheme}}</code></p>
+
+						<p>To load an image from this image set, use the following URL for the Image Service:</p>
+
+						<pre><code class="lang-html">//image.webservices.ft.com/v1/images/raw/{{imageset_scheme}}:{image-name}?source={your-source-here}</code></pre>
+
+						<h4>Download the full image set</h4>
+
+						<p>To download the full image set, download the repo from GitHub using the button below. You&rsquo;ll find all the image files in the <code>/{{imageset_path}}</code> folder.</p>
+
+						<a href="{{repo_home_url}}/archive/master.zip" class="o-buttons o-buttons--wide">Download the image set</a>
+
+
+					{% endif %}
+
 					{% if origami_type == 'module' and (has_js or has_css) %}
 						{% include "blocks/getting-started.html" %}
 					{% endif %}
@@ -50,6 +69,10 @@
 					<h4>Warning: this version is unstable</h4>
 					<p>This is an unstable pre-release of an upcoming version of this component.  Its API may be subject to breaking changes.</p>
 				</aside>
+			{% endif %}
+
+			{% if origami_type == 'imageset' and imageset_list %}
+				{% include "blocks/imageset-demo.html" %}
 			{% endif %}
 
 			{% if demos %}
