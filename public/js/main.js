@@ -3,6 +3,7 @@ require('o-date');
 require('o-tabs');
 require('o-overlay');
 require('o-header-services');
+var oViewport = require('o-viewport');
 
 require('./filterbar');
 require('./click-helper');
@@ -34,6 +35,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		if (sidebarHeight < navHeight) {
 			$('.js-expanded__main').css('minHeight',navHeight);
+		}
+	}
+
+	function updateStickyElement() {
+		var scrollTop = oViewport.getScrollPosition().top;
+
+		if (scrollTop > stickyTop) {
+			$('.js-sticky-sidebar').css({
+				"position": "fixed",
+				"right": "20px",
+				"top": "20px",
+				"z-index": "10",
+				"width": stickyWidth
+			});
+		} else {
+			$('.js-sticky-sidebar').removeAttr('style').css({'top': '0', 'position': 'relative'});
+		}
+	}
+
+	if ($('.js-sticky-sidebar').length) {
+		var stickySidebar = $('.js-sticky-sidebar');
+		var stickyTop = $('.js-sticky-sidebar').offset().top;
+		var stickyWidth = $('.js-sticky-sidebar').outerWidth();
+
+		oViewport.listenTo('scroll');
+
+		if (window.matchMedia("(min-width: 900px)")) {
+			document.body.addEventListener('oViewport.scroll', updateStickyElement, false);
+		} else {
+			document.body.removeEventListener('oViewport.scroll', updateStickyElement, false);
 		}
 	}
 });

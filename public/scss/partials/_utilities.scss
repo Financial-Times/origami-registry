@@ -26,3 +26,9 @@
 	border-radius: 3px;
 	vertical-align: middle;
 }
+
+
+.js-sticky-sidebar {
+	top: 0;
+	transition: top 0.2s ease;
+}
