@@ -8,6 +8,7 @@ $(function() {
 	// with different options - and to save duplicating code
 	var regex;
 	var filterWithCheckboxes = true;
+	var lowResultLimit = 2;
 
 	// Change the selector if we're on the component-listing page
 	if ($componentList.length === 0) {
@@ -61,8 +62,8 @@ $(function() {
 
 		var filteredRows = rows.filter(rowsFilter, this);
 
-		if (filteredRows.length < 3) {
-			console.log('here');
+		if (filteredRows.length <= lowResultLimit) {
+			// Remove the checkboxes from the search to widen results
 			filterWithCheckboxes = false;
 			filteredRows = rows.filter(rowsFilter, this);
 		}
