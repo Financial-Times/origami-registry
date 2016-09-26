@@ -6,8 +6,7 @@ var oViewport = require('o-viewport');
 
 $(function() {
 	var stickySidebar = $('.js-sticky-sidebar'),
-		stickyTop = 0,
-		stickyWidth = 0;
+		stickyTop = 0;
 
 	function updateStickyElement() {
 		var scrollTop = oViewport.getScrollPosition().top;
@@ -21,7 +20,6 @@ $(function() {
 
 	function initStickyElement() {
 		stickyTop = $(stickySidebar).offset().top;
-		stickyWidth = $(stickySidebar).outerWidth();
 
 		if (window.matchMedia("(min-width: 900px)").matches) {
 			oViewport.listenTo('scroll');
