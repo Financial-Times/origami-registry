@@ -4,6 +4,10 @@ $(function() {
 	var $filterBar = $('.filter-bar');
 	var $componentList = $('.component-navigation__list');
 	var itemSelector = 'li';
+	// Define some globals to allow the filtering function to work
+	// with different options - and to save duplicating code
+	var regex;
+	var filterWithCheckboxes = true;
 
 	// Change the selector if we're on the component-listing page
 	if ($componentList.length === 0) {
@@ -11,44 +15,60 @@ $(function() {
 		itemSelector = 'tr';
 	}
 
-	function filterRows() {
-		var rows = $('.js-searchable');
-		var regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
-		rows.hide();
-		var filteredRows = rows.filter(function () {
-			var row = $(this);
-			var filterMatch = true;
+	function rowsFilter() {
+		var row = $(this);
+		var filterMatch = true;
+
+		if (filterWithCheckboxes) {
 			$('.filter-bar input:checkbox').each(function () {
 				if (!this.checked && row.hasClass(this.name + '-' + this.value)) {
 					filterMatch = false;
 					return filterMatch;
 				}
 			});
-			if (filterMatch && ((regex.test(row.find('[data-module-name--js]').attr('data-name'))) || (regex.test(row.find('[data-module-name--js]').attr('data-keywords'))))) {
-				if ($('#filter').val()) {
-					row.find('[data-module-name--js]').html(
-						row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
-					);
-				} else {
-					row.find('[data-module-name--js]').html(row.find('[data-module-name--js]').attr('data-name'));
-				}
-				return true;
-			}
-			var elem = row.find('[data-module-name--js]').attr('data-name');
-			if (filterMatch && elem && regex.test(elem)) {
-				if ($('#filter').val()) {
-					row.find('[data-module-name--js]').html(
-						row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
-					);
-				} else {
-					row.find('[data-module-name--js]').html(row.find('[data-module-name--js]').attr('data-name'));
-				}
+		}
 
-				return true;
+		if (filterMatch && ((regex.test(row.find('[data-module-name--js]').attr('data-name'))) || (regex.test(row.find('[data-module-name--js]').attr('data-keywords'))))) {
+			if ($('#filter').val() && row.find('[data-module-name--js]').length) {
+				row.find('[data-module-name--js]').html(
+					row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
+				);
+			} else {
+				row.find('[data-module-name--js]').html(row.find('[data-module-name--js]').attr('data-name'));
 			}
-		});
-		filteredRows.show();
+			return true;
+		}
+		var elem = row.find('[data-module-name--js]').attr('data-name');
+		if (filterMatch && elem && regex.test(elem)) {
+			if ($('#filter').val() && row.find('[data-module-name--js]').length) {
+				row.find('[data-module-name--js]').html(
+					row.find('[data-module-name--js]').attr('data-name').replace(regex, '$1<span class="highlight">$2</span>$3')
+				);
+			} else {
+				row.find('[data-module-name--js]').html(row.find('[data-module-name--js]').attr('data-name'));
+			}
+
+			return true;
+		}
+	}
+
+	function filterRows() {
+		var rows = $('.js-searchable');
 		var emptySearch = $('.empty-search');
+
+		rows.hide();
+		regex = new RegExp("^(.*?)("+$('#filter').val()+")(.*?)$", 'i');
+
+		var filteredRows = rows.filter(rowsFilter, this);
+
+		if (filteredRows.length < 3) {
+			console.log('here');
+			filterWithCheckboxes = false;
+			filteredRows = rows.filter(rowsFilter, this);
+		}
+
+		filteredRows.show();
+		filterWithCheckboxes = true;
 		filteredRows.length === 0 ? emptySearch.attr('aria-hidden', 'false') : emptySearch.attr('aria-hidden', 'true');
 		return rows;
 	}
