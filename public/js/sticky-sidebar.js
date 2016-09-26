@@ -13,15 +13,9 @@ $(function() {
 		var scrollTop = oViewport.getScrollPosition().top;
 
 		if (scrollTop > stickyTop) {
-			$(stickySidebar).css({
-				"position": "fixed",
-				"right": "20px",
-				"top": "20px",
-				"z-index": "10",
-				"width": stickyWidth
-			});
+			$(stickySidebar).addClass('js-sticky-sidebar--active');
 		} else {
-			$(stickySidebar).removeAttr('style').css({'top': '0', 'position': 'relative'});
+			$(stickySidebar).removeClass('js-sticky-sidebar--active');
 		}
 	}
 
