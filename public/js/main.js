@@ -1,13 +1,13 @@
 // Require module
-require('o-date');
-require('o-tabs');
-require('o-overlay');
-require('o-header-services');
+import 'o-date';
+import 'o-tabs';
+import 'o-overlay';
+import 'o-header-services';
 
-require('./filterbar');
-require('./click-helper');
-require('./demos');
-require('./sticky-sidebar');
+import './filterbar';
+import './click-helper';
+import './demos';
+import './sticky-sidebar';
 
 import { gistIt } from './gist-it';
 import highlight from './highlight';
