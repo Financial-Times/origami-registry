@@ -26,3 +26,25 @@
 	border-radius: 3px;
 	vertical-align: middle;
 }
+
+
+.js-sticky-sidebar {
+	position: relative;
+	top: 0;
+	transition: top 0.2s ease;
+
+	&--active {
+		position: fixed;
+		right: 20px;
+		top: 20px;
+		z-index: 10;
+
+		@media (min-width: 900px) {
+			width: calc(30% - 70px);
+		}
+
+		@media (min-width: 1200px) {
+			width: calc(25% - 70px);
+		}
+	}
+}

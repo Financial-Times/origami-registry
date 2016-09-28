@@ -20,6 +20,8 @@
     "o-hierarchical-nav": "^4.0.0",
     "o-table": "^5.0.1",
     "o-header-services": "^1.0.0-beta.6",
-    "highlight.js": "Financial-Times/highlight.js-shim"
+    "highlight.js": "Financial-Times/highlight.js-shim",
+    "o-viewport": "^3.0.1",
+    "o-autoinit": "^1.2.0"
   }
 }
