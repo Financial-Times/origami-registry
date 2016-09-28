@@ -3,18 +3,22 @@ require('o-date');
 require('o-tabs');
 require('o-overlay');
 require('o-header-services');
+require('o-autoinit');
 
 require('./filterbar');
 require('./click-helper');
 require('./demos');
-require('./sticky-sidebar');
 
+import stickySidebar from './sticky-sidebar';
 import { gistIt } from './gist-it';
 import highlight from './highlight';
 
 document.addEventListener('DOMContentLoaded', function() {
-	gistIt();
-	highlight();
+
+	if ($('.demo__source').length) {
+		gistIt();
+		highlight();
+	}
 
 	if ($('.js-expanded__sidebar').length) {
 		var sidebarHeight = $('.js-expanded__sidebar').height(),
@@ -29,5 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (sidebarHeight < navHeight) {
 			$('.js-expanded__main').css('minHeight',navHeight);
 		}
+	}
+
+	if ($('.js-sticky-sidebar').length) {
+		stickySidebar();
 	}
 });

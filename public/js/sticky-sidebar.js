@@ -3,39 +3,33 @@
 'use strict';
 
 module.exports = function() {
-	var oViewport = require('o-viewport');
+	var oViewport = require('o-viewport'),
+		stickySidebar = $('.js-sticky-sidebar'),
+		stickyTop = 0;
 
-	$(function() {
-		var stickySidebar = $('.js-sticky-sidebar'),
-			stickyTop = 0;
+	function updateStickyElement() {
+		var scrollTop = oViewport.getScrollPosition().top;
 
-		function updateStickyElement() {
-			var scrollTop = oViewport.getScrollPosition().top;
-
-			if (scrollTop > stickyTop) {
-				$(stickySidebar).addClass('js-sticky-sidebar--active');
-			} else {
-				$(stickySidebar).removeClass('js-sticky-sidebar--active');
-			}
+		if (scrollTop > stickyTop) {
+			$(stickySidebar).addClass('js-sticky-sidebar--active');
+		} else {
+			$(stickySidebar).removeClass('js-sticky-sidebar--active');
 		}
+	}
 
-		function initStickyElement() {
-			stickyTop = $(stickySidebar).offset().top;
+	function initStickyElement() {
+		stickyTop = $(stickySidebar).offset().top;
 
-			if (window.matchMedia("(min-width: 900px)").matches) {
-				oViewport.listenTo('scroll');
-				document.body.addEventListener('oViewport.scroll', updateStickyElement, false);
-			} else {
-				document.body.removeEventListener('oViewport.scroll', updateStickyElement, false);
-			}
+		if (window.matchMedia("(min-width: 900px)").matches) {
+			oViewport.listenTo('scroll');
+			document.body.addEventListener('oViewport.scroll', updateStickyElement, false);
+		} else {
+			document.body.removeEventListener('oViewport.scroll', updateStickyElement, false);
 		}
+	}
 
-		if ($(stickySidebar).length) {
-			oViewport.listenTo(['scroll', 'resize']);
+	oViewport.listenTo(['scroll', 'resize']);
 
-			initStickyElement();
-			document.body.addEventListener('oViewport.resize', initStickyElement, false);
-		}
-	});
-
+	initStickyElement();
+	document.body.addEventListener('oViewport.resize', initStickyElement, false);
 }
