@@ -12,7 +12,11 @@
 				{% if has_css %}<span class="label-css">CSS</span>{% endif %}
 				{% if has_js %}<span class="label-js">JS</span>{% endif %}
 
-				<p>{{description}}</p>
+				{% if design_guidelines %}
+					{{design_guidelines|markdown|raw}}
+				{% else %}
+					<p>{{description}}</p>
+				{% endif%}
 			</div>
 		</div>
 
