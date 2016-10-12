@@ -1,11 +1,19 @@
 .imageset-demo {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	flex-flow: wrap;
 	width: 100%;
 	overflow: hidden; // Clearfix cheat
 
 	&__item {
-		float: left;
-		width: 200px;
-		padding: 0 20px 20px 0;
+		flex: 0 1 50%;
+		padding: 0 20px 0;
+		margin-bottom: 20px;
+
+		@media (min-width: 900px) {
+			flex-basis: 30%;
+		}
 	}
 
 	&__image {
