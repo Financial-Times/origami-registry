@@ -69,7 +69,7 @@ a.o-buttons.o-buttons--standout {
 	margin-top:40px;
 	margin-bottom: 15px;
 }
-.filter-bar .o-forms-group {
+.filter-bar .o-forms {
 	margin-bottom: 10px;
 }
 .filter-bar-label {
@@ -304,7 +304,7 @@ a.o-buttons.o-buttons--standout {
 .demo-selector {
 	padding: 0;
 }
-.demo-selector .o-forms-checkbox + .o-forms-label {
+.demo-selector .o-forms__checkbox + .o-forms__label {
 	display: block;
 }
 .transparency-checkerboard {

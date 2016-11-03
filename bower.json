@@ -8,7 +8,7 @@
   "main": "public/index.php",
   "license": "MIT",
   "dependencies": {
-    "o-forms": "^2.0.4",
+    "o-forms": "^3.0.0",
     "o-fonts": "^2.1.2",
     "o-icons": "^4.2.1",
     "o-tabs": "^2.3.3",
