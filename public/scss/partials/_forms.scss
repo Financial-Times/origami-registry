@@ -1,7 +1,7 @@
 // Include all the styles for radio and checkboxes
 @include oFormsRadioCheckbox;
 
-.o-forms-label {
+.o-forms__label {
 	@include oFormsLabel;
 
 	&--inline {
@@ -10,17 +10,17 @@
 	}
 }
 
-.o-forms-checkbox {
+.o-forms__checkbox {
 	@include oFormsRadioCheckbox;
 
-	&+.o-forms-label {
+	&+.o-forms__label {
 		display: inline-block;
 		margin-left: 5px;
 		margin-right: 10px;
 	}
 }
 
-.o-forms-text {
+.o-forms__text {
 	@include oFormsCommonField;
 }
 
