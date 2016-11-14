@@ -74,8 +74,12 @@
 }
 
 .demo__footer {
-	padding: 10px 0;
+	padding: 10px 0 0;
 	color: #4a4a4a;
+
+	p {
+		margin-top: 0;
+	}
 }
 
 .demo__frame-container {
