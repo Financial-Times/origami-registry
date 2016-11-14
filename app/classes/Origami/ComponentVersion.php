@@ -17,7 +17,7 @@ final class ComponentVersion extends Model {
 
 	private $component;
 
-	protected $fields = array('id', 'component_id', 'tag_name', 'datetime_last_cached', 'datetime_created', 'is_valid', 'description', 'origami_type', 'origami_category', 'origami_version', 'support', 'service_url', 'readme_gfm', 'support_status', 'ci_status', 'has_js', 'has_css', 'bundlesize_js', 'bundlesize_css', 'image_list');
+	protected $fields = array('id', 'component_id', 'tag_name', 'datetime_last_cached', 'datetime_created', 'is_valid', 'description', 'origami_type', 'origami_category', 'origami_version', 'support', 'service_url', 'readme_gfm', 'support_status', 'ci_status', 'has_js', 'has_css', 'bundlesize_js', 'bundlesize_css', 'image_list', 'design_guidelines');
 	protected $datefields = array('datetime_last_cached', 'datetime_created');
 
 
@@ -91,7 +91,7 @@ final class ComponentVersion extends Model {
 		$this->data['has_css'] = isset($this->data['has_css']) ? (int)$this->data['has_css'] : null;
 		$this->data['has_js'] = isset($this->data['has_js']) ? (int)$this->data['has_js'] : null;
 
-		self::$app->db_write->query('INSERT INTO componentversions SET {component_id}, {tag_name}, {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {datetime_created|date}, datetime_last_cached=NOW() ON DUPLICATE KEY UPDATE {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {datetime_created|date}, datetime_last_cached=NOW()', $this->data);
+		self::$app->db_write->query('INSERT INTO componentversions SET {component_id}, {tag_name}, {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {design_guidelines}, {datetime_created|date}, datetime_last_cached=NOW() ON DUPLICATE KEY UPDATE {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {design_guidelines}, {datetime_created|date}, datetime_last_cached=NOW()', $this->data);
 		if (!$this->id) {
 			$this->id = self::$app->db_write->querySingle('SELECT id FROM componentversions WHERE {component_id} AND {tag_name}', $this->data);
 		}
@@ -229,6 +229,9 @@ final class ComponentVersion extends Model {
 					$readme = preg_replace('/\!?\[[^\[\]]+\]\(https?:\/\/travis-ci.org\/[^\)]+\)/i', '', $readme);
 
 					$this->readme_gfm = $readme;
+				}
+				if (isset($responseJson->designGuidelines)) {
+					$this->design_guidelines = $responseJson->designGuidelines;
 				}
 				$this->data['demos'] = array();
 				if (isset($responseJson->origamiManifest->demosDefaults)) {
