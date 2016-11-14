@@ -12,6 +12,10 @@
 		@media (min-width: 900px) {
 			flex-basis: 30%;
 		}
+
+		@media (min-width: 1100px) {
+			flex-basis: 25%;
+		}
 	}
 
 	&__image {
