@@ -230,15 +230,21 @@ final class ComponentVersion extends Model {
 
 					$this->readme_gfm = $readme;
 				}
-				if (isset($responseJson->designGuidelines)) {
-					$this->design_guidelines = $responseJson->designGuidelines;
+
+				if (isset($responseJson->designGuidelines) && $responseJson->designGuidelines !== false) {
+					$this->data['design_guidelines'] = $responseJson->designGuidelines;
+				} else {
+					$this->data['design_guidelines'] = null;
 				}
+
 				$this->data['demos'] = array();
+
 				if (isset($responseJson->origamiManifest->demosDefaults)) {
 					$demodefaults = (array)$responseJson->origamiManifest->demosDefaults;
 				} else {
 					$demodefaults = array();
 				}
+
 				if (isset($responseJson->origamiManifest->demos)) {
 					foreach ($responseJson->origamiManifest->demos as $demo) {
 						if (!is_object($demo)) {
