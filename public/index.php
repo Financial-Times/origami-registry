@@ -64,6 +64,12 @@ $router->dispatch($req, $resp);
 $serveDiff = microtime(true) - $serveStart;
 $app->metrics->timing($app->metrics_prefix . 'serve.all.time', $serveDiff);
 
+// How many questions
+$questions_count = $app->db_read->queryRow('SHOW STATUS LIKE %s', 'Questions');
+$app->logger->info('Questions count', $questions_count);
+$app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_count['Value']);
+
+
 /* Serve the response */
 
 $resp->serve();
