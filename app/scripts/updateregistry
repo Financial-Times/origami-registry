@@ -52,6 +52,11 @@ if (!$module_sources) {
     $app->metrics->timing($app->metrics_prefix . 'updatescript.time', $updateTimeDiff);
 }
 
+// How many questions
+$questions_count = $app->db_read->queryRow('SHOW STATUS LIKE %s', 'Questions');
+$app->logger->info('Questions count', $questions_count);
+$app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_count['Value']);
+
 // Flush the metrics to graphite at the end of every run
 // Use "@" to catch/dismiss any errors this throws as it shouldn't effect the running of the service.
 // Would work the same as doing try { ... } catch {}, except fsockopen doesn't throw exceptions.
