@@ -16,6 +16,8 @@ $app = new ServicesContainer();
 Model::useDI($app);
 
 $serveStart = microtime(true);
+// get initial questions count
+$init_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questions');
 
 $router = new \FTLabs\Routing\Router($app, array(
 	"controllersuffix" => ''
@@ -65,9 +67,10 @@ $serveDiff = microtime(true) - $serveStart;
 $app->metrics->timing($app->metrics_prefix . 'serve.all.time', $serveDiff);
 
 // How many questions
-$questions_count = $app->db_read->queryRow('SHOW STATUS LIKE %s', 'Questions');
-$app->logger->info('Questions count', $questions_count);
-$app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_count['Value']);
+$final_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questions');
+$questions_diff = intval($final_questions['Value']) - intval($init_questions['Value']);
+$app->logger->info('Questions count', array( 'value' => $questions_diff ) );
+$app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_diff);
 
 
 /* Serve the response */
