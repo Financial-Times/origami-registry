@@ -18,6 +18,8 @@ use \Psr\Log\LogLevel;
 $app->db_read->setReconnectOnFail();
 $app->db_write->setReconnectOnFail();
 
+$init_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questions');
+
 $app->logger->setHandlerMinSeverity('stop', LogLevel::EMERGENCY);
 
 $updateTimeStart = microtime(true);
@@ -53,9 +55,10 @@ if (!$module_sources) {
 }
 
 // How many questions
-$questions_count = $app->db_read->queryRow('SHOW STATUS LIKE %s', 'Questions');
-$app->logger->info('Questions count', $questions_count);
-$app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_count['Value']);
+$final_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questions');
+$questions_diff = intval($final_questions['Value']) - intval($init_questions['Value']);
+$app->logger->info('Questions count', array( 'value' => $questions_diff ) );
+$app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_diff);
 
 // Flush the metrics to graphite at the end of every run
 // Use "@" to catch/dismiss any errors this throws as it shouldn't effect the running of the service.
