@@ -380,19 +380,39 @@ final class ComponentVersion extends Model {
 				if ($oiu_response->getResponseStatusCode() == 200) {
 					$oui_json = json_decode($oiu_response->getBody());
 
-					if (property_exists($oui_json, $this->component->module_name)) {
-						$imageset_map_data = $oui_json->{$this->component->module_name};
+					if (property_exists($oui_json, $name)) {
+						$imageset_map_data = $oui_json->{$name};
 
-						if ($this->component->module_name === 'fticons') {
+						if ($name === 'fticons') {
 							$scheme_version = '-v' . explode('.', $this->tag_name)[0];
 							$imageset_map_data->scheme .= $scheme_version;
 						}
 
 						$responseJson->imageset_data = $imageset_map_data;
 					}
+				} else {
+					$logdata = array(
+						'component' => $name,
+						'status_code' => $oiu_response->getResponseStatusCode(),
+					);
+					if (!in_array($oiu_response->getResponseStatusCode(), array(404,403))) {
+						$logdata['response'] = $oiu_response->getBody();
+					}
+					self::$app->logger->notice('Bad imageset uploader HTTP response', $logdata);
 				}
 
-				$this->image_list = json_encode($responseJson);
+				$image_list = json_encode($responseJson);
+
+				if ($image_list) {
+					$this->image_list = $image_list;
+				} else {
+					$logdata = array(
+						'component' => $name,
+						'error' => 'unable to build image_list',
+						'image_list' => $image_list,
+					);
+					self::$app->logger->error('Unable to build image_list', $logdata);
+				}
 			}
 		}
 	}
