@@ -401,7 +401,18 @@ final class ComponentVersion extends Model {
 					self::$app->logger->notice('Bad imageset uploader HTTP response', $logdata);
 				}
 
-				$this->image_list = json_encode($responseJson);
+				$image_list = json_encode($responseJson);
+
+				if ($image_list) {
+					$this->image_list = $image_list;
+				} else {
+					$logdata = array(
+						'component' => $name,
+						'error' => 'unable to build image_list',
+						'image_list' => $image_list,
+					);
+					self::$app->logger->error('Unable to build image_list', $logdata);
+				}
 			}
 		}
 	}
