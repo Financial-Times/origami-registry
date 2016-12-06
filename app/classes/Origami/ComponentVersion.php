@@ -59,16 +59,28 @@ final class ComponentVersion extends Model {
 
 			case 'dependencies':
 				$this->data['dependencies'] = self::$app->db_read->queryAllRows('SELECT components.id, componentdependencies.child_component_name, componentdependencies.child_component_target FROM componentdependencies LEFT OUTER JOIN (components INNER JOIN componentversions ON components.id = componentversions.component_id) ON componentdependencies.child_component_name = components.module_name WHERE componentdependencies.parent_version_id = ' . $this->id . ' GROUP BY componentdependencies.child_component_name ORDER BY componentdependencies.child_component_name ASC');
+
+				self::$app->logger->info('Read query', array(
+					'query' => 'componentVersion __get - dependencies',
+				));
 			break;
 
 			case 'dependents':
 				$this->data['dependents'] = self::$app->db_read->queryAllRows('SELECT DISTINCT components.id, components.module_name FROM componentdependencies INNER JOIN (componentversions INNER JOIN components ON componentversions.component_id = components.id) ON componentdependencies.parent_version_id = componentversions.id WHERE componentdependencies.child_component_name = %s ORDER BY components.module_name ASC', $this->component->module_name);
+
+				self::$app->logger->info('Read query', array(
+					'query' => 'componentVersion __get - dependants',
+				));
 			break;
 
 			case 'demos':
 				// Backwards compat: keep 'path' for use in older demos that are
 				// not compatible with demo endpoint
 				$this->data['demos'] = self::$app->db_read->queryAllRows('SELECT title, name, path, description, hidden, display_html FROM demos WHERE componentversion_id=%d', $this->id);
+
+				self::$app->logger->info('Read query', array(
+					'query' => 'componentVersion __get - demos',
+				));
 			break;
 		}
 		return parent::__get($propertyName);
@@ -92,17 +104,34 @@ final class ComponentVersion extends Model {
 		$this->data['has_js'] = isset($this->data['has_js']) ? (int)$this->data['has_js'] : null;
 
 		self::$app->db_write->query('INSERT INTO componentversions SET {component_id}, {tag_name}, {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {design_guidelines}, {datetime_created|date}, datetime_last_cached=NOW() ON DUPLICATE KEY UPDATE {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {design_guidelines}, {datetime_created|date}, datetime_last_cached=NOW()', $this->data);
+
+		self::$app->logger->info('Write query', array(
+			'query' => 'componentVersion save',
+		));
+
 		if (!$this->id) {
 			$this->id = self::$app->db_write->querySingle('SELECT id FROM componentversions WHERE {component_id} AND {tag_name}', $this->data);
+
+			self::$app->logger->info('Write query', array(
+				'query' => 'componentVersion save - select id',
+			));
 		}
 		if ($this->dependencies) {
 			foreach ($this->dependencies as $dep) {
 				self::$app->db_write->query('REPLACE INTO componentdependencies SET parent_version_id=%d, child_component_name=%s, child_component_target=%s', $this->id, $dep['child_component_name'], $dep['child_component_target']);
+
+				self::$app->logger->info('Write query', array(
+					'query' => 'componentVersion save - dependencies',
+				));
 			}
 		}
 		if ($this->demos) {
 			foreach ($this->demos as $demo) {
 				self::$app->db_write->query('REPLACE INTO demos SET componentversion_id=%d, title=%s, name=%s, path=%s, description=%s, hidden=%d, display_html=%d', $this->id, $demo['title'], $demo['name'], $demo['path'], $demo['description'], (integer)$demo['hidden'], (integer)$demo['display_html']);
+
+				self::$app->logger->info('Write query', array(
+					'query' => 'componentVersion save - demos',
+				));
 			}
 		}
 	}
@@ -422,6 +451,10 @@ final class ComponentVersion extends Model {
 		self::$app->db_write->query('DELETE FROM demos WHERE componentversion_id=%d', $this->id);
 		self::$app->db_write->query('DELETE FROM componentdependencies WHERE parent_version_id=%d', $this->id);
 		self::$app->db_write->query('DELETE FROM componentversions WHERE id=%d', $this->id);
+
+		self::$app->logger->info('Delete query', array(
+			'query' => 'componentVersion Delete',
+		));
 		$this->id = null;
 	}
 
@@ -449,6 +482,11 @@ final class ComponentVersion extends Model {
 	 */
 	public static function findOrCreate(Component &$parentComponent, $tag_name) {
 		$row = self::$app->db_read->queryRow('SELECT *, TRIM(LEADING %s FROM tag_name) AS tag_name FROM componentversions WHERE component_id = %d AND tag_name=%s', 'v', $parentComponent->id, $tag_name);
+
+		self::$app->logger->info('Read query', array(
+			'query' => 'componentVersion findorCreate',
+		));
+
 		if ($row) {
 			return self::_createFromDatabaseRow($row, $parentComponent);
 		} else {
@@ -472,6 +510,10 @@ final class ComponentVersion extends Model {
 			$version = self::_createFromDatabaseRow($row, $parentComponent);
 			$versions[$row['tag_name']] = $version;
 		}
+		self::$app->logger->info('Read query', array(
+			'query' => 'componentVersion findAllForComponent',
+		));
+
 		uksort($versions, "version_compare");
 		return $versions;
 	}

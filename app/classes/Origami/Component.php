@@ -50,8 +50,17 @@ final class Component extends Model {
 	public function save() {
 		$this->data['is_origami'] = isset($this->data['is_origami']) ? (int)$this->data['is_origami'] : null;
 		self::$app->db_write->query('INSERT INTO components SET {module_name}, {keywords}, {is_origami}, {origami_category}, {git_repo_url}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date} ON DUPLICATE KEY UPDATE {keywords}, {git_repo_url}, {is_origami}, {origami_category}, {host_type}, {recent_commit_count}, {datetime_last_discovered|date}', $this->data);
+
+		self::$app->logger->info('Write query', array(
+			'query' => 'component - save',
+		));
+
 		if (!$this->id) {
 			$this->id = self::$app->db_write->querySingle('SELECT id FROM components WHERE {module_name}', $this->data);
+
+			self::$app->logger->info('Write query', array(
+				'query' => 'component - save - select id',
+			));
 		}
 	}
 
@@ -209,17 +218,26 @@ final class Component extends Model {
 		$component = new self();
 		$component->module_name = $name;
 		$data = self::$app->db_read->queryRow('SELECT * FROM components WHERE module_name = %s LIMIT 1', $name);
+		self::$app->logger->info('Read query', array(
+			'query' => 'component - findOrCreate',
+		));
 		if ($data) $component->edit($data);
 		return $component;
 	}
 
 	public static function getByID($id) {
 		$data = self::$app->db_read->queryRow('SELECT * FROM components WHERE id = %d LIMIT 1', $id);
+		self::$app->logger->info('Read query', array(
+			'query' => 'component - getByID',
+		));
 		return ($data) ? self::_createFromDatabaseRow($data) : null;
 	}
 
 	public static function find($name) {
 		$data = self::$app->db_read->queryRow('SELECT * FROM components WHERE module_name = %s LIMIT 1', $name);
+		self::$app->logger->info('Read query', array(
+			'query' => 'component - find',
+		));
 		return ($data) ? self::_createFromDatabaseRow($data) : null;
 	}
 
@@ -228,6 +246,11 @@ final class Component extends Model {
 		if (empty($sql) or !is_string($sql)) $sql = '';
 		if (empty($data) or !is_array($data)) $data = array();
 		$results = self::$app->db_read->queryAllRows('SELECT c.*, MAX(cv.datetime_created) as latest_version_release_date FROM components c LEFT JOIN componentversions cv ON c.id=cv.component_id WHERE '.$sql.' GROUP BY c.id ORDER BY module_name ASC', $data);
+
+		self::$app->logger->info('Read query', array(
+			'query' => 'component - findAll',
+		));
+
 		foreach ($results as $data) {
 			$components[] = self::_createFromDatabaseRow($data);
 		}
