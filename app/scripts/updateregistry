@@ -25,12 +25,12 @@ $app->logger->setHandlerMinSeverity('stop', LogLevel::EMERGENCY);
 $updateTimeStart = microtime(true);
 // Clean up any previous scripts that terminated without finishing
 $app->db_write->query('DELETE FROM meta WHERE meta_key=%s and updated < (NOW() - INTERVAL 1 DAY)', 'cron_running_host');
-self::$app->logger->info('Write query', array(
+$app->logger->info('Write query', array(
 	'query' => 'updateregistry - delete meta',
 ));
 
 $module_sources = $app->db_read->querySingle("SELECT meta_value FROM meta WHERE meta_key=%s", 'module_sources');
-self::$app->logger->info('Read query', array(
+$app->logger->info('Read query', array(
 	'query' => 'updateregistry - get sources meta',
 ));
 $module_sources = @json_decode($module_sources);
@@ -40,20 +40,20 @@ if (!$module_sources) {
 
 	// Run no more than one discovery process at a time, across all servers on the same environment
 	$blocker = $app->db_write->query('INSERT IGNORE INTO meta SET meta_value=%s, meta_key=%s, updated=NOW()', trim(`hostname`), 'cron_running_host');
-	self::$app->logger->info('Write query', array(
+	$app->logger->info('Write query', array(
 		'query' => 'updateregistry - add blocker',
 	));
 
 	if ($blocker->getAffectedRows()) {
 		$app->db_write->query('REPLACE INTO meta SET meta_value=UNIX_TIMESTAMP(), meta_key=%s, updated=NOW()', 'cron_last_start');
-		self::$app->logger->info('Write query', array(
+		$app->logger->info('Write query', array(
 			'query' => 'updateregistry - set updated meta',
 		));
 
 		try {
 			RepositoryDiscovery::search($module_sources, $app);
 			$app->db_write->query('REPLACE INTO meta SET meta_value=UNIX_TIMESTAMP(), meta_key=%s, updated=NOW()', 'cron_last_complete');
-			self::$app->logger->info('Write query', array(
+			$app->logger->info('Write query', array(
 				'query' => 'updateregistry - updated meta',
 			));
 
@@ -62,7 +62,7 @@ if (!$module_sources) {
 		}
 
 		$app->db_write->query('DELETE FROM meta WHERE meta_key=%s', 'cron_running_host');
-		self::$app->logger->info('Write query', array(
+		$app->logger->info('Write query', array(
 			'query' => 'updateregistry - delete blocker meta',
 		));
 
