@@ -71,6 +71,7 @@ $final_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questi
 $questions_diff = intval($final_questions['Value']) - intval($init_questions['Value']);
 $app->logger->info('Questions count', array( 'value' => $questions_diff ) );
 $app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_diff);
+$app->metrics->measure($app->metrics_prefix . 'db.final_questions', intval($final_questions['Value']));
 
 
 /* Serve the response */
