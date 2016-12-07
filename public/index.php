@@ -69,27 +69,10 @@ $app->metrics->timing($app->metrics_prefix . 'serve.all.time', $serveDiff);
 // How many questions
 $final_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questions');
 $questions_diff = intval($final_questions['Value']) - intval($init_questions['Value']);
-$app->logger->info('Questions count', array( 'diff' => $questions_diff, 'total-questions' => $final_questions['Value'] ) );
-
-$final_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questions');
-$db_com = array();
-$db_com['select'] = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Com_select')['Value'];
-$db_com['update'] = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Com_update')['Value'];
-$db_com['insert'] = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Com_insert')['Value'];
-$db_com['insert_select'] = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Com_insert_select')['Value'];
-$db_com['replace'] = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Com_replace')['Value'];
-$db_com['replace_select'] = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Com_replace_select')['Value'];
-$db_com['set_option'] = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Com_set_option')['Value'];
-$db_com['update_multi'] = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Com_update_multi')['Value'];
-
-$app->logger->info('Index DB Com variables', $db_com );
-
+$app->logger->info('Questions count', array( 'value' => $questions_diff ) );
 $app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_diff);
-$app->metrics->measure($app->metrics_prefix . 'db.total_questions', $final_questions['Value']);
+$app->metrics->measure($app->metrics_prefix . 'db.final_questions', intval($final_questions['Value']));
 
-foreach($db_com as $com_key => $com_value) {
-	$app->metrics->measure($app->metrics_prefix . 'db.' . $com_key, $com_value);
-}
 
 /* Serve the response */
 
