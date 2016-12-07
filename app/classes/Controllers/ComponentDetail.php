@@ -110,13 +110,12 @@ class ComponentDetail extends BaseController {
 			$this->addViewData('force_old_demo_url', true);
 		}
 
-		$this->addViewData('components', Component::getOrigamiComponentsByCategory());
-
 		// Render templates and return response
 		$this->resp->setCacheTTL(isset($this->routeargs['version']) ? 3600 : 0);
 		if ($this->routeargs['format'] === 'json') {
 			$this->resp->setJSON($this->viewdata);
 		} else {
+			$this->addViewData('components', Component::getOrigamiComponentsByCategory());
 			$this->app->metrics->increment($this->app->metrics_prefix . 'serve.ComponentDetail');
 			$this->renderView('component-detail');
 		}
