@@ -18,8 +18,6 @@ use \Psr\Log\LogLevel;
 $app->db_read->setReconnectOnFail();
 $app->db_write->setReconnectOnFail();
 
-$init_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questions');
-
 $app->logger->setHandlerMinSeverity('stop', LogLevel::EMERGENCY);
 
 $updateTimeStart = microtime(true);
@@ -57,9 +55,6 @@ if (!$module_sources) {
 
 // How many questions
 $final_questions = $app->db_read->queryRow('SHOW GLOBAL STATUS LIKE %s', 'Questions');
-$questions_diff = intval($final_questions['Value']) - intval($init_questions['Value']);
-$app->logger->info('Questions count', array( 'path' => 'updateregistry', 'value' => $questions_diff ) );
-$app->metrics->measure($app->metrics_prefix . 'db.questions', $questions_diff);
 $app->metrics->measure($app->metrics_prefix . 'db.final_questions', intval($final_questions['Value']));
 
 // Flush the metrics to graphite at the end of every run
