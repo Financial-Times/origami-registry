@@ -7,7 +7,7 @@
 		<div class="imageset-demo">
 			{% for image in imageset_list %}
 				<div class="imageset-demo__item">
-					<img src="https://www.ft.com/__origami/service/image/v2/images/raw/{{imageset_scheme}}:{{image.name}}%3Fcache-bust%3D{{"now"|date("U")}}?source=origami-registry" alt="{{image.name}}" class="imageset-demo__image">
+					<img src="https://www.ft.com/__origami/service/image/v2/images/raw/{{imageset_scheme}}:{{image.name}}%3Fcache-bust%3D{{"now"|floor(time()/600)}}?source=origami-registry" alt="{{image.name}}" class="imageset-demo__image">
 					<p class="imageset-demo__title">{{image.name}}</p>
 				</div>
 			{% endfor %}
