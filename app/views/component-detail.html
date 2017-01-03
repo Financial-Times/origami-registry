@@ -12,7 +12,11 @@
 				{% if has_css %}<span class="label-css">CSS</span>{% endif %}
 				{% if has_js %}<span class="label-js">JS</span>{% endif %}
 
-				<p>{{description}}</p>
+				{% if design_guidelines %}
+					{{design_guidelines|markdown|raw}}
+				{% else %}
+					<p>{{description}}</p>
+				{% endif%}
 			</div>
 		</div>
 
@@ -44,7 +48,7 @@
 
 						<p>To load an image from this image set, use the following URL for the Image Service:</p>
 
-						<pre><code class="lang-html">//www.ft.com/__origami/service/image/v2/images/raw/{{imageset_scheme}}:{image-name}?source={your-source-here}</code></pre>
+						<pre><code class="lang-html">https://www.ft.com/__origami/service/image/v2/images/raw/{{imageset_scheme}}:{image-name}?source={your-source-here}</code></pre>
 
 						<h4>Download the full image set</h4>
 

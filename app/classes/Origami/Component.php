@@ -14,7 +14,7 @@ use \FTLabs\MySqlQueryException;
 
 final class Component extends Model {
 
-	const REBUILD_DEPENDENTS_DEPTH = 30;
+	const REBUILD_DEPENDENTS_DEPTH = 10;
 
 	protected $fields = array('id', 'module_name', 'keywords', 'origami_category', 'git_repo_url', 'is_origami', 'host_type', 'datetime_last_discovered', 'recent_commit_count');
 	protected $datefields = array('datetime_last_discovered');

@@ -17,7 +17,7 @@ final class ComponentVersion extends Model {
 
 	private $component;
 
-	protected $fields = array('id', 'component_id', 'tag_name', 'datetime_last_cached', 'datetime_created', 'is_valid', 'description', 'origami_type', 'origami_category', 'origami_version', 'support', 'service_url', 'readme_gfm', 'support_status', 'ci_status', 'has_js', 'has_css', 'bundlesize_js', 'bundlesize_css', 'image_list');
+	protected $fields = array('id', 'component_id', 'tag_name', 'datetime_last_cached', 'datetime_created', 'is_valid', 'description', 'origami_type', 'origami_category', 'origami_version', 'support', 'service_url', 'readme_gfm', 'support_status', 'ci_status', 'has_js', 'has_css', 'bundlesize_js', 'bundlesize_css', 'image_list', 'design_guidelines');
 	protected $datefields = array('datetime_last_cached', 'datetime_created');
 
 
@@ -91,7 +91,7 @@ final class ComponentVersion extends Model {
 		$this->data['has_css'] = isset($this->data['has_css']) ? (int)$this->data['has_css'] : null;
 		$this->data['has_js'] = isset($this->data['has_js']) ? (int)$this->data['has_js'] : null;
 
-		self::$app->db_write->query('INSERT INTO componentversions SET {component_id}, {tag_name}, {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {datetime_created|date}, datetime_last_cached=NOW() ON DUPLICATE KEY UPDATE {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {datetime_created|date}, datetime_last_cached=NOW()', $this->data);
+		self::$app->db_write->query('INSERT INTO componentversions SET {component_id}, {tag_name}, {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {design_guidelines}, {datetime_created|date}, datetime_last_cached=NOW() ON DUPLICATE KEY UPDATE {is_valid}, {description}, {origami_type}, {origami_version}, {support}, {service_url}, {readme_gfm}, {support_status}, {ci_status}, {has_js}, {has_css}, {bundlesize_js}, {bundlesize_css}, {image_list}, {design_guidelines}, {datetime_created|date}, datetime_last_cached=NOW()', $this->data);
 		if (!$this->id) {
 			$this->id = self::$app->db_write->querySingle('SELECT id FROM componentversions WHERE {component_id} AND {tag_name}', $this->data);
 		}
@@ -230,12 +230,21 @@ final class ComponentVersion extends Model {
 
 					$this->readme_gfm = $readme;
 				}
+
+				if (isset($responseJson->designGuidelines) && $responseJson->designGuidelines !== false) {
+					$this->data['design_guidelines'] = $responseJson->designGuidelines;
+				} else {
+					$this->data['design_guidelines'] = null;
+				}
+
 				$this->data['demos'] = array();
+
 				if (isset($responseJson->origamiManifest->demosDefaults)) {
 					$demodefaults = (array)$responseJson->origamiManifest->demosDefaults;
 				} else {
 					$demodefaults = array();
 				}
+
 				if (isset($responseJson->origamiManifest->demos)) {
 					foreach ($responseJson->origamiManifest->demos as $demo) {
 						if (!is_object($demo)) {
@@ -371,19 +380,39 @@ final class ComponentVersion extends Model {
 				if ($oiu_response->getResponseStatusCode() == 200) {
 					$oui_json = json_decode($oiu_response->getBody());
 
-					if (property_exists($oui_json, $this->component->module_name)) {
-						$imageset_map_data = $oui_json->{$this->component->module_name};
+					if (property_exists($oui_json, $name)) {
+						$imageset_map_data = $oui_json->{$name};
 
-						if ($this->component->module_name === 'fticons') {
+						if ($name === 'fticons') {
 							$scheme_version = '-v' . explode('.', $this->tag_name)[0];
 							$imageset_map_data->scheme .= $scheme_version;
 						}
 
 						$responseJson->imageset_data = $imageset_map_data;
 					}
+				} else {
+					$logdata = array(
+						'component' => $name,
+						'status_code' => $oiu_response->getResponseStatusCode(),
+					);
+					if (!in_array($oiu_response->getResponseStatusCode(), array(404,403))) {
+						$logdata['response'] = $oiu_response->getBody();
+					}
+					self::$app->logger->notice('Bad imageset uploader HTTP response', $logdata);
 				}
 
-				$this->image_list = json_encode($responseJson);
+				$image_list = json_encode($responseJson);
+
+				if ($image_list) {
+					$this->image_list = $image_list;
+				} else {
+					$logdata = array(
+						'component' => $name,
+						'error' => 'unable to build image_list',
+						'image_list' => $image_list,
+					);
+					self::$app->logger->error('Unable to build image_list', $logdata);
+				}
 			}
 		}
 	}
