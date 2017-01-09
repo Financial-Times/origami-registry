@@ -103,6 +103,8 @@ class ComponentDetail extends BaseController {
 			foreach ($imageset_images as $imgset) {
 				$this->addViewData('imageset_list', $imgset);
 			}
+
+			$this->addViewData('imageset_cachebust', floor(time()/600) );
 		}
 
 		// Certain older versions of o-colors cannot be demoed via the /demo endpoint
