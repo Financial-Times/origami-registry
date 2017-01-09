@@ -257,7 +257,7 @@ final class ComponentVersion extends Model {
 							$demo['hidden'] = false;
 						}
 
-						if (empty($demo['display_html'])) {
+						if (!isset($demo['display_html'])) {
 							$demo['display_html'] = true;
 						}
 
