@@ -117,7 +117,7 @@ class Health extends BaseController {
 			unset($check['fn']);
 		}
 
-		$this->resp->setCacheTTL(5);
+		$this->resp->setCacheTTL(600); // Set health to 10 mins
 
 		if ($this->req->getPath() == '/__gtg') {
 			if ($gtgok) {
