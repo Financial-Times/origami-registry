@@ -11,6 +11,7 @@ web:
     volumes:
         - ./app:/app/user/app
         - ./public:/app/user/public
+        - ./data:/app/user/data
     # For dev, use the start.sh script - this wraps running the migrations
     # with starting the apache process
     command: './start.sh'

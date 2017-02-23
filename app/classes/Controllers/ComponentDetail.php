@@ -93,15 +93,31 @@ class ComponentDetail extends BaseController {
 		$this->addViewData('docs_sections', $docs_sections);
 
 		if ($this->version->image_list) {
-			$imageset_images = json_decode($this->version->image_list);
-			$this->addViewData('imageset_scheme', $imageset_images->imageset_data->scheme);
-			$this->addViewData('imageset_path', $imageset_images->imageset_data->pathToImages);
-			// Remove the imageset_data property so the following foreach works
-			// regardless of the property name of the images
-			unset($imageset_images->imageset_data);
+			$imageset_manifest = json_decode($this->version->image_list);
 
-			foreach ($imageset_images as $imgset) {
-				$this->addViewData('imageset_list', $imgset);
+			// The new manifest format
+			if (isset($imageset_manifest->sourceDirectory)) {
+
+				$semver_version = new version($this->version->tag_name);
+				$scheme_with_version = $imageset_manifest->scheme . '-v' . $semver_version->getMajor();
+
+				$this->addViewData('imageset_scheme', $scheme_with_version);
+				$this->addViewData('imageset_path', $imageset_manifest->sourceDirectory);
+				$this->addViewData('imageset_list', $imageset_manifest->images);
+
+			// The old manifest format
+			} else {
+				$imageset_images = json_decode($this->version->image_list);
+				$this->addViewData('imageset_scheme', $imageset_images->imageset_data->scheme);
+				$this->addViewData('imageset_path', $imageset_images->imageset_data->pathToImages);
+
+				// Remove the imageset_data property so the following foreach works
+				// regardless of the property name of the images
+				unset($imageset_images->imageset_data);
+
+				foreach ($imageset_images as $imgset) {
+					$this->addViewData('imageset_list', $imgset);
+				}
 			}
 
 			$this->addViewData('imageset_cachebust', floor(time()/600) );

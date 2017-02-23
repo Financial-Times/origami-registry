@@ -1,0 +1,34 @@
+{
+	"o-icons": {
+		"scheme": "fticonold",
+		"pathToImages": "svg"
+	},
+	"fticons": {
+		"scheme": "fticon",
+		"pathToImages": "svg"
+	},
+	"logo-images": {
+		"scheme": "ftlogo",
+		"pathToImages": "src"
+	},
+	"headshot-images": {
+		"scheme": "fthead",
+		"pathToImages": "src"
+	},
+	"social-images": {
+		"scheme": "ftsocial",
+		"pathToImages": "src"
+	},
+	"podcast-logos": {
+		"scheme": "ftpodcast",
+		"pathToImages": "src"
+	},
+	"origami-specialist-title-logos": {
+		"scheme": "specialisttitle",
+		"pathToImages": "src"
+	},
+	"origami-brand-images": {
+		"scheme": "ftbrand",
+		"pathToImages": "src"
+	}
+}

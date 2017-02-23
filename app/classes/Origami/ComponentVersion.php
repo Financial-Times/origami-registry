@@ -13,6 +13,8 @@ use \FTLabs\HTTPRequest;
 use \FTLabs\MySqlConnection;
 use \FTLabs\MySqlQueryException;
 
+use vierbergenlars\SemVer\version;
+
 final class ComponentVersion extends Model {
 
 	private $component;
@@ -332,21 +334,37 @@ final class ComponentVersion extends Model {
 
 	public function buildImageList() {
 		$name = rawurlencode($this->component->module_name);
-		$url = 'https://raw.githubusercontent.com/Financial-Times/' . $name . '/master/imageList.json';
+		$url = 'https://raw.githubusercontent.com/Financial-Times/' . $name . '/master/imageset.json';
+		$legacyUrl = 'https://raw.githubusercontent.com/Financial-Times/' . $name . '/master/imageList.json';
+		$isLegacy = false;
 
 		$request = new HTTPRequest($url);
 		$request->setTimeLimit(120);
 		$request->setMaxRetries(2);
 		$request->setRetryInterval(5);
 
-		self::$app->logger->notice('Query GitHub imageset json');
-
 		// Send the request
+		self::$app->logger->notice('Query GitHub imageset json');
 		try {
 			$response = $request->send();
 		} catch (Exception $e) {
 			self::$app->logger->error('HTTP failure querying GitHub raw', $e->getMessage());
-			return false;
+		}
+
+		// Try the legacy URL
+		if (!isset($response) || $response->getResponseStatusCode() != 200) {
+			self::$app->logger->notice('Query GitHub legacy imageset json');
+			$isLegacy = true;
+			$legacyRequest = new HTTPRequest($legacyUrl);
+			$legacyRequest->setTimeLimit(120);
+			$legacyRequest->setMaxRetries(2);
+			$legacyRequest->setRetryInterval(5);
+			try {
+				$response = $legacyRequest->send();
+			} catch (Exception $e) {
+				self::$app->logger->error('HTTP failure querying GitHub raw', $e->getMessage());
+				return false;
+			}
 		}
 
 		// A 200 status code implies that the request was successful, but the response may still indicate an error
@@ -362,43 +380,27 @@ final class ComponentVersion extends Model {
 			}
 
 			if (isset($responseJson)) {
-				$oiu_url = 'https://raw.githubusercontent.com/Financial-Times/origami-imageset-uploader/master/imageset-map.json';
 
-				$oiu_request = new HTTPRequest($oiu_url);
-				$oiu_request->setTimeLimit(120);
-				$oiu_request->setMaxRetries(2);
-				$oiu_request->setRetryInterval(5);
+				// With the old manifest format we need additional info from the imageset map
+				if ($isLegacy) {
 
-				// Send the request
-				try {
-					$oiu_response = $oiu_request->send();
-				} catch (Exception $e) {
-					self::$app->logger->error('HTTP failure querying GitHub raw', $e->getMessage());
-					return false;
-				}
+					try {
+						$jsonPath = __DIR__ . '/../../../data/legacy-imageset-map.json';
+						$jsonContent = file_get_contents($jsonPath);
+						$imagesetMap = json_decode($jsonContent);
+					} catch (Exception $e) {
+						self::$app->logger->error('Failed to load imageset map JSON', $e->getMessage());
+					}
 
-				if ($oiu_response->getResponseStatusCode() == 200) {
-					$oui_json = json_decode($oiu_response->getBody());
+					if (property_exists($imagesetMap, $name)) {
+						$imageset_map_data = $imagesetMap->{$name};
 
-					if (property_exists($oui_json, $name)) {
-						$imageset_map_data = $oui_json->{$name};
-
-						if ($name === 'fticons' || $name === 'social-images') {
-							$scheme_version = '-v' . explode('.', $this->tag_name)[0];
-							$imageset_map_data->scheme .= $scheme_version;
-						}
+						$semver_version = new version($this->tag_name);
+						$imageset_map_data->scheme .= '-v' . $semver_version->getMajor();
 
 						$responseJson->imageset_data = $imageset_map_data;
 					}
-				} else {
-					$logdata = array(
-						'component' => $name,
-						'status_code' => $oiu_response->getResponseStatusCode(),
-					);
-					if (!in_array($oiu_response->getResponseStatusCode(), array(404,403))) {
-						$logdata['response'] = $oiu_response->getBody();
-					}
-					self::$app->logger->notice('Bad imageset uploader HTTP response', $logdata);
+
 				}
 
 				$image_list = json_encode($responseJson);
