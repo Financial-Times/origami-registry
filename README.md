@@ -75,7 +75,7 @@ docker-compose up
 Now you can access the app over HTTP on port `3000`. If you're on a Mac, you'll need to use the IP of your Docker Machine, which you can get by running `docker-machine ip dev`:
 
 ```sh
-open "http://$(docker-machine ip default):3000/"
+open "http://$(docker-machine ip dev):3000/"
 ```
 
 The MySQL database is accessible on port 3306, the settings for which are in the `.env` file.
