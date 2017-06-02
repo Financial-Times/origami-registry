@@ -154,6 +154,21 @@ This is likely because you're on a different network which doesn't allow you acc
 
 If you get an error when running `docker-compose up` the easiest solution is to kill the `docker-machine` and start the setup process again. Run `docker-machine kill dev` to stop the machine. Then make sure you're on the internal network, and start the [Running locally](#running-locally) process from the beginning.
 
+### The discovery script has stopped running hourly on production.
+
+There is a row in the `meta` table of the database (key: `cron_running_host`) that will prevent the discover script from running more than once at any given time. If the discover script has stopped running this is likely because a previous update didn't finish or failed while running and the `cron_running_host` row did not get deleted from the table. To fix this, log in to the production database (login details are in Heroku config vars: `CLEARDB_DATABASE_URL`), and delete the `cron_running_host` row from the `meta` table.
+
+### A new component is not showing up in the Registry.
+
+If a new component has been created or one has been updated to be an Origami component, the Registry might not pick it up as an Origami component on the next run of the discovery script like it does with new releases. This is due to how often the Registry scans Origami components vs. non-Origami components. The Registry scans all repositories in the Git sources hourly, but only looks at new releases of already valid Origami components, whereas non-Origami components are checked only every 48 hours.
+
+To speed up the discovery of a new Origami component, update the module in the `components` table of the database by searching the `module_name` and changing the `is_origami` column to `1`.
+
+### The Origami Sensei has stopped announcing new releases.
+
+The Origami Sensei is a Slack Webhook that announces new releases into the [FT Origami](https://financialtimes.slack.com/messages/ft-origami/) Slack channel. It's configured in the Slack Apps settings, by going to `Custom Integrations` > `Incoming Webhooks` and searching for `Origami`. If it's stopped announcing in the channel it's likely that the webhook has become disabled and will need to be re-enabled.
+
+There are also settings for which webhook to point to in the Heroku config vars: `SLACK_WEBHOOK` and `SLACK_CHANNEL`.
 
 Configuration
 -------------
