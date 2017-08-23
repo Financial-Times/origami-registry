@@ -120,7 +120,7 @@ class ComponentDetail extends BaseController {
 				}
 			}
 
-			$this->addViewData('imageset_cachebust', floor(time()/600) );
+			$this->addViewData('imageset_cachebust', $this->version->tag_name );
 		}
 
 		// Certain older versions of o-colors cannot be demoed via the /demo endpoint
