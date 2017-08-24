@@ -21,11 +21,11 @@
 }
 
 .o-forms__text {
-	@include oFormsCommonField;
+	@include oFormsCommonFieldBase;
 }
 
 .version-select {
-	@include oFormsCommonField;
+	@include oFormsCommonFieldBase;
 	@include oFormsSelect;
 	width: 140px;
 }
