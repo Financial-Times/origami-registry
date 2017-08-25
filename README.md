@@ -9,7 +9,7 @@ Table of Contents
   * [Requirements](#requirements)
   * [Running Locally](#running-locally)
   * [Configuration](#configuration)
-  * [Deployment](#deployment)
+  * [Deploying](#deploying)
   * [Trouble-Shooting](#trouble-shooting)
   * [License](#license)
 
@@ -81,10 +81,10 @@ php ./app/scripts/updateregistry
 Deploying
 ---------
 
-You need to authenticate with Heroku (this app is `origami-registry-eu`) and use the Heroku docker plugin: `heroku plugins:install heroku-docker`. Then run the following to push the lastest changes to production:
+You need to authenticate with Heroku (this app is `origami-registry-eu`) and use the Heroku container plugin: `heroku plugins:install heroku-container-tools`. Then run the following to push the lastest changes to production:
 
 ```sh
-git describe --tags > ./appversion && heroku docker:release --app origami-registry-eu && rm -f ./appversion
+git describe --tags > ./appversion && heroku container:push web --app origami-registry-eu && rm -f ./appversion
 ```
 
 ### Deploying to QA
@@ -92,7 +92,7 @@ git describe --tags > ./appversion && heroku docker:release --app origami-regist
 To update the QA version of the Registry, use the same process as above but deploy to the app `origami-registry-qa` instead:
 
 ```sh
-git describe --tags > ./appversion && heroku docker:release --app origami-registry-qa && rm -f ./appversion
+git describe --tags > ./appversion && heroku container:push web --app origami-registry-qa && rm -f ./appversion
 ```
 
 ### Architecture
