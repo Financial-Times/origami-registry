@@ -91,7 +91,7 @@ HEROKU_ORGANIZATION='financial-times' heroku login --sso
 docker login --username=_ --password=$(heroku auth:token) registry.heroku.com
 
 # Build our Docker image and tag it for the qa app on Heroku
-docker build -t registry.heroku.com/origami-registry-qa/web .
+git describe --tags > ./appversion && docker build -t registry.heroku.com/origami-registry-qa/web . && rm -f ./appversion
 
 # Push our Docker image to the qa app on Heroku
 docker push registry.heroku.com/docker-registry-qa/web
