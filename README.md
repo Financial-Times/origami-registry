@@ -105,7 +105,7 @@ Trouble-Shooting
 
 We've outlined some common issues that can occur when running the Registry locally:
 
-### What do I do if the dependencies won't install?
+### What do I do if the dependencies won't install?
 
 This is likely because you're on a different network which doesn't allow you access to the private FT repositories. Make sure you're connected to the internal network/wifi, to make sure `docker-compose` has access to the correct network.
 
