@@ -62,7 +62,7 @@ make watch-dev
 
 ### Setting up a local database
 
-To work with the Registry locally you will probably need some data in your local database. To do this you can run the update registry script on your local machine - **warning**, this will take several hours to run for the first time locally.
+To work with the Registry locally you will need some data in your local database. From a completely empty database, **the best thing to do is grab a copy from someone else**. This update script might work but errors if the tables it expects are not there.
 
 To run the update script locally, you will need to SSH into the Docker VM and the container for the Registry:
 
