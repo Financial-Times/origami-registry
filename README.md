@@ -81,18 +81,30 @@ php ./app/scripts/updateregistry
 Deploying
 ---------
 
-You need to authenticate with Heroku (this app is `origami-registry-eu`) and use the Heroku container plugin: `heroku plugins:install heroku-container-tools`. Then run the following to push the lastest changes to production:
+Follow these steps to deploy to the qa application:
 
 ```sh
-git describe --tags > ./appversion && heroku container:push web --app origami-registry-eu && rm -f ./appversion
+# Login to Heroku command line tool
+HEROKU_ORGANIZATION='financial-times' heroku login --sso
+
+# Login to Heroku's Docker registry
+docker login --username=_ --password=$(heroku auth:token) registry.heroku.com
+
+# Build our Docker image and tag it for the qa app on Heroku
+git describe --tags > ./appversion && docker build -t registry.heroku.com/origami-registry-qa/web . && rm -f ./appversion
+
+# Push our Docker image to the qa app on Heroku
+docker push registry.heroku.com/docker-registry-qa/web
 ```
 
-### Deploying to QA
-
-To update the QA version of the Registry, use the same process as above but deploy to the app `origami-registry-qa` instead:
+When ready to promote from the qa application to the production application, follow these steps:
 
 ```sh
-git describe --tags > ./appversion && heroku container:push web --app origami-registry-qa && rm -f ./appversion
+# Rename our Docker image for the eu app on Heroku
+docker tag registry.heroku.com/docker-registry-qa/web registry.heroku.com/docker-registry-eu/web
+
+# Push our Docker image to the eu app on Heroku
+docker push registry.heroku.com/docker-registry-eu/web
 ```
 
 ### Architecture
