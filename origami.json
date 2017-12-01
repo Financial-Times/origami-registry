@@ -1,0 +1,13 @@
+{
+	"description": "Origami component registry; lists modules and web services with build status details, etc.",
+	"origamiType": "service",
+	"origamiVersion": 1,
+	"keywords": [],
+	"support": "https://github.com/Financial-Times/origami-registry/issues",
+	"supportStatus": "active",
+	"supportContact": {
+		"email": "origami.support@ft.com",
+		"slack": "financialtimes/ft-origami"
+	},
+	"serviceUrl": "https://registry.origami.ft.com/components"
+}
