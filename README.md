@@ -94,17 +94,17 @@ docker login --username=_ --password=$(heroku auth:token) registry.heroku.com
 git describe --tags > ./appversion && docker build -t registry.heroku.com/origami-registry-qa/web . && rm -f ./appversion
 
 # Push our Docker image to the qa app on Heroku
-docker push registry.heroku.com/docker-registry-qa/web
+docker push registry.heroku.com/origami-registry-qa/web
 ```
 
 When ready to promote from the qa application to the production application, follow these steps:
 
 ```sh
 # Rename our Docker image for the eu app on Heroku
-docker tag registry.heroku.com/docker-registry-qa/web registry.heroku.com/docker-registry-eu/web
+docker tag registry.heroku.com/origami-registry-qa/web registry.heroku.com/origami-registry-eu/web
 
 # Push our Docker image to the eu app on Heroku
-docker push registry.heroku.com/docker-registry-eu/web
+docker push registry.heroku.com/origami-registry-eu/web
 ```
 
 ### Architecture
