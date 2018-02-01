@@ -25,7 +25,7 @@ class About extends BaseController {
 			'audience' => 'internal',
 			'primaryUrl' => 'http://registry.origami.ft.com',
 			'appVersion' => trim($version),
-			'serviceTier' => 'silver',
+			'serviceTier' => 'bronze',
 			'_hostname' => trim(shell_exec('hostname')),
 			'dateCreated' => '2013-12-09T15:16:00Z',
 			'dateDeployed' => $deploytime,
