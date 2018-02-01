@@ -5,6 +5,7 @@
 		{"type": "composer", "url": "http://composer.labs.ft.com"}
 	],
 	"require": {
+		"php": "^5.6",
 		"ftlabs/migrations": "dev-master",
 		"ftlabs/exception": "1.*",
 		"ftlabs/logger": "~1.10",

@@ -4,21 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "81f7f953d5475234a06bcebd426f57de",
-    "content-hash": "c869b1c9d36983906c8cadf10c01e764",
+    "content-hash": "03935bcfd7f4b91cbe3b7a09e356aa31",
     "packages": [
         {
             "name": "beberlei/metrics",
-            "version": "v2.0.3",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/metrics.git",
-                "reference": "f3204c0cba1f409c41eefc21fecd084b24e9ccd4"
+                "reference": "8e2ab790b5815ae0e49277649954ed18f166cb39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/metrics/zipball/f3204c0cba1f409c41eefc21fecd084b24e9ccd4",
-                "reference": "f3204c0cba1f409c41eefc21fecd084b24e9ccd4",
+                "url": "https://api.github.com/repos/beberlei/metrics/zipball/8e2ab790b5815ae0e49277649954ed18f166cb39",
+                "reference": "8e2ab790b5815ae0e49277649954ed18f166cb39",
                 "shasum": ""
             },
             "require": {
@@ -27,14 +26,16 @@
             "require-dev": {
                 "corley/influxdb-sdk": "^0.5.1",
                 "doctrine/dbal": "~2.0",
+                "jimdo/prometheus_client_php": "^0.5",
                 "kriswallsmith/buzz": "*",
                 "okitsu/zabbix-sender": "*@dev",
-                "symfony/config": "~2.3",
-                "symfony/dependency-injection": "~2.3",
-                "symfony/http-kernel": "~2.3"
+                "symfony/config": "~3.3 || ~4.0",
+                "symfony/dependency-injection": "~3.3 || ~4.0",
+                "symfony/http-kernel": "~3.3 || ~4.0"
             },
             "suggest": {
                 "corley/influxdb-sdk": "For InfluxDB integration",
+                "jimdo/prometheus_client_php": "For Prometheus integration",
                 "kriswallsmith/buzz": "For Librato integration",
                 "okitsu/zabbix-sender": "For zabbix integration"
             },
@@ -71,21 +72,27 @@
                 "Metrics",
                 "logging"
             ],
-            "time": "2015-11-05 12:36:49"
+            "time": "2018-01-23T11:01:01+00:00"
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.6.0",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7"
+                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7",
-                "reference": "3ebbd730b5c2cf5ce78bc1bf64071407fc6674b7",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/fbe3fe878f4fe69048bb8a52783a09802004f548",
+                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
             },
             "type": "library",
             "autoload": {
@@ -110,7 +117,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-10-04 16:44:32"
+            "time": "2017-11-14T20:44:03+00:00"
         },
         {
             "name": "ftlabs/exception",
@@ -127,7 +134,7 @@
                 }
             },
             "description": "A namespaced Exception with context support",
-            "time": "2014-04-25 15:18:57"
+            "time": "2014-04-25T15:18:57+00:00"
         },
         {
             "name": "ftlabs/http",
@@ -147,20 +154,20 @@
                 }
             },
             "description": "FT Labs helper for sending HTTP requests and receiving responses",
-            "time": "2014-03-07 16:39:07"
+            "time": "2014-03-07T16:39:07+00:00"
         },
         {
             "name": "ftlabs/logger",
-            "version": "1.95",
+            "version": "1.97",
             "source": {
                 "type": "git",
                 "url": "http://git.svc.ft.com/scm/log/logger.git",
-                "reference": "0d988d84e12b2e4b8f7360cb65ec752178fe1cc6"
+                "reference": "104f4906ea3ac80d9580dd0bacb5ca5d1067ed3b"
             },
             "require": {
                 "ftlabs/exception": "~1.1",
                 "psr/log": "~1.0",
-                "raven/raven": "~0.12.0"
+                "sentry/sentry": "~0.12.0"
             },
             "type": "library",
             "autoload": {
@@ -170,7 +177,7 @@
                 }
             },
             "description": "PHP Logging interface that conforms to PSR-3 standard interface",
-            "time": "2016-01-29 14:14:23"
+            "time": "2017-06-12T22:39:25+00:00"
         },
         {
             "name": "ftlabs/migrations",
@@ -199,7 +206,7 @@
                 }
             ],
             "description": "SQL Database migrations for PHP",
-            "time": "2014-05-28 14:24:56"
+            "time": "2014-05-28T14:24:56+00:00"
         },
         {
             "name": "ftlabs/mysql",
@@ -219,7 +226,7 @@
                 }
             },
             "description": "FT Labs wrapper for using MySQL in PHP",
-            "time": "2016-01-04 14:28:05"
+            "time": "2016-01-04T14:28:05+00:00"
         },
         {
             "name": "ftlabs/php-router",
@@ -239,20 +246,20 @@
                 }
             },
             "description": "FT Labs HTTP router",
-            "time": "2014-06-20 22:14:42"
+            "time": "2014-06-20T22:14:42+00:00"
         },
         {
             "name": "masterminds/html5",
-            "version": "2.2.1",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "170aa5cb35b29fccafbf5ea63487c013f396fdc9"
+                "reference": "2c37c6c520b995b761674de3be8455a381679067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/170aa5cb35b29fccafbf5ea63487c013f396fdc9",
-                "reference": "170aa5cb35b29fccafbf5ea63487c013f396fdc9",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/2c37c6c520b995b761674de3be8455a381679067",
+                "reference": "2c37c6c520b995b761674de3be8455a381679067",
                 "shasum": ""
             },
             "require": {
@@ -267,7 +274,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -304,7 +311,7 @@
                 "serializer",
                 "xml"
             ],
-            "time": "2016-05-10 14:11:45"
+            "time": "2017-09-04T12:26:28+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -352,26 +359,34 @@
             "support": {
                 "source": "https://github.com/triblondon/Pimple/tree/master"
             },
-            "time": "2014-03-07 15:01:54"
+            "time": "2014-03-07T15:01:54+00:00"
         },
         {
             "name": "psr/log",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=5.3.0"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -385,24 +400,25 @@
                 }
             ],
             "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ],
-            "time": "2012-12-21 11:40:51"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
-            "name": "raven/raven",
+            "name": "sentry/sentry",
             "version": "0.12.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/getsentry/raven-php.git",
+                "url": "https://github.com/getsentry/sentry-php.git",
                 "reference": "b325984c792ff89f985b73da9a3ad8ed8b520bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/raven-php/zipball/b325984c792ff89f985b73da9a3ad8ed8b520bca",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/b325984c792ff89f985b73da9a3ad8ed8b520bca",
                 "reference": "b325984c792ff89f985b73da9a3ad8ed8b520bca",
                 "shasum": ""
             },
@@ -444,39 +460,42 @@
                 "log",
                 "logging"
             ],
-            "abandoned": "sentry/sentry",
-            "time": "2015-08-25 22:38:46"
+            "time": "2015-08-25T22:38:46+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.0",
+            "version": "v1.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+                "reference": "daa657073e55b0a78cce8fdd22682fddecc6385f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/daa657073e55b0a78cce8fdd22682fddecc6385f",
+                "reference": "daa657073e55b0a78cce8fdd22682fddecc6385f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.7"
+                "php": ">=5.3.3"
             },
             "require-dev": {
+                "psr/container": "^1.0",
                 "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~2.7"
+                "symfony/phpunit-bridge": "~3.3@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.24-dev"
+                    "dev-master": "1.35-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -506,27 +525,27 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-01-25 21:22:18"
+            "time": "2017-09-27T18:06:46+00:00"
         },
         {
             "name": "vierbergenlars/php-semver",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vierbergenlars/php-semver.git",
-                "reference": "516bb3061577e60e9420cbecc479362d3ad8c7f1"
+                "reference": "be22b86be4c1133acc42fd1685276792024af5f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vierbergenlars/php-semver/zipball/516bb3061577e60e9420cbecc479362d3ad8c7f1",
-                "reference": "516bb3061577e60e9420cbecc479362d3ad8c7f1",
+                "url": "https://api.github.com/repos/vierbergenlars/php-semver/zipball/be22b86be4c1133acc42fd1685276792024af5f9",
+                "reference": "be22b86be4c1133acc42fd1685276792024af5f9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "simpletest/simpletest": "1.1.*"
+                "phpunit/phpunit": "~4"
             },
             "bin": [
                 "bin/semver",
@@ -558,22 +577,22 @@
                 "semver",
                 "versioning"
             ],
-            "time": "2015-05-02 19:28:54"
+            "time": "2017-07-11T09:53:59+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v99",
+            "version": "v130",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "9fa233a21466e9b0364ce7436a56e52aa4a24fbd"
+                "reference": "1bbbc45da0f80dbb75606972c26236172b7d724c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/9fa233a21466e9b0364ce7436a56e52aa4a24fbd",
-                "reference": "9fa233a21466e9b0364ce7436a56e52aa4a24fbd",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/1bbbc45da0f80dbb75606972c26236172b7d724c",
+                "reference": "1bbbc45da0f80dbb75606972c26236172b7d724c",
                 "shasum": ""
             },
             "bin": [
@@ -594,7 +613,7 @@
                 }
             ],
             "description": "Toolkit for starting a PHP application locally, with or without foreman, using the same config for PHP/HHVM and Apache2/Nginx as on Heroku",
-            "homepage": "http://github.com/heroku/heroku-buildpack-php",
+            "homepage": "https://github.com/heroku/heroku-buildpack-php",
             "keywords": [
                 "apache",
                 "apache2",
@@ -604,7 +623,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2016-03-23 17:39:59"
+            "time": "2018-01-11T17:45:21+00:00"
         }
     ],
     "aliases": [],
@@ -617,6 +636,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "php": "^5.6",
         "ext-mbstring": "*"
     },
     "platform-dev": []
