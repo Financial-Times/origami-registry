@@ -32,6 +32,12 @@ RUN echo "\n\
 Group root\n\
 " >> /app/.heroku/php/etc/apache2/httpd.conf
 
+# Try setting a longer proxy timeout
+RUN echo "\n\
+TimeOut 120\n\
+ProxyTimeout 120\n\
+" >> /app/.heroku/php/etc/apache2/httpd.conf
+
 # FPM socket permissions workaround when run as root
 RUN echo "\n\
 user nobody root;\n\
