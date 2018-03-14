@@ -1,7 +1,8 @@
 Origami registry
 ================
 
-Origami component registry; lists modules and web services with build status details, etc.
+:warning: This registry has been rewritten and is no longer available. Please reference the [Origami Registry](https://github.com/Financial-Times/origami-registry-ui/), instead.
+
 
 Table of Contents
 -----------------
